@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 13:56:53 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/05/07 14:04:37 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/01/10 14:51:53 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,3 +31,8 @@ int	ft_atoi(const char *c)
 		x = x * 10 + *c++ - '0';
 	return (nb_sign * x);
 }
+
+// double ft_atof(const char *nptr)
+// {
+
+// }

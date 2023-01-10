@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 11:20:27 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/01/09 16:49:03 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/01/10 14:51:31 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ typedef enum s_info
 	L,
 	SP,
 	PL,
-	CY
+	CY,
+	NOT
 }			t_info;
 
 //struct for the save in to rgb or coord//
@@ -124,7 +125,7 @@ typedef struct s_line
 //-------------------------------------------//
 
 t_line	*check_name(char	*file);
-
+int		norm_file(t_line *line);
 void	clear_line(t_line **l);
 
 #endif

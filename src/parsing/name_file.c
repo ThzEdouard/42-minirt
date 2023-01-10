@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 11:30:11 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/01/09 17:03:22 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/01/10 11:30:47 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ t_line	*check_name(char	*file)
 	if (ld == -1)
 		msg_name("\e[0;91mError\nfile is not open\e[0m");
 	line = set_line(ld, &line);
+	if (line)
+		norm_file(line);
 	close(ld);
 	return (line);
 }
