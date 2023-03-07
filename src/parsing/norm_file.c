@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:06:33 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/01/10 16:47:36 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/03/07 16:57:19 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,12 @@ static int	check_id(t_line *line, int i, int x)
 
 static int	check_nub_id(t_line *line)
 {
-	t_line	*line;
+	t_line	*tmp;
 
 
 	return (SUCCESS);
 }
+
 int	norm_file(t_line *line)
 {
 	t_line	*tmp;
