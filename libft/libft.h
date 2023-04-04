@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 11:24:22 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/01/09 12:03:59 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/04 17:33:10 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ char	*ft_strnstr(const char	*s1, const char *s2, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_itoa(int n);
 char	**ft_split(char const *s, char c);
+char	**ft_free2(char **tab);
 char	*ft_strdup(char *src);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char	*ft_strtrim(char const *s1, char const *set);
@@ -59,7 +60,7 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_tolower(int c);
 int		ft_strcmp(char *s1, char *s2);
 int		ft_toupper(int c);
-int		ft_atoi(const char *c);
+long	ft_atoi(const char *c);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 int		ft_lstsize(t_list *lst);
 int		ft_strlen(const char *theString);

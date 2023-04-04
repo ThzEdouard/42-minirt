@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 11:20:27 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/01/10 14:51:31 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/04 16:59:07 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,12 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+#include <stdio.h>
 
 # define FAIL 0
 # define SUCCESS 1
+# define CHAR_INT_MAX "2147483647"
+# define CHAR_INT_MIN "-2147483648"
 
 typedef enum s_info
 {
@@ -31,6 +34,7 @@ typedef enum s_info
 	SP,
 	PL,
 	CY,
+	NL,
 	NOT
 }			t_info;
 
@@ -38,9 +42,9 @@ typedef enum s_info
 
 typedef struct s_rgb
 {
-	char	*r;
-	char	*g;
-	char	*b;
+	int	r;
+	int	g;
+	int	b;
 }			t_rgb;
 
 typedef struct s_coord
@@ -56,7 +60,7 @@ typedef struct s_coord
 
 typedef struct s_la
 {
-	char	*range;
+	float	ratio;
 	t_rgb	rgb;
 }			t_la;
 
@@ -64,13 +68,13 @@ typedef struct s_ca
 {
 	t_coord	pv;
 	t_coord	axe;
-	char	*fov;
+	int		fov;
 }			t_ca;
 
 typedef struct s_l
 {
 	t_coord	pl;
-	char	*range;
+	float	ratio;
 	t_rgb	rgb;
 }			t_l;
 
@@ -124,7 +128,8 @@ typedef struct s_line
 
 //-------------------------------------------//
 
-t_line	*check_name(char	*file);
+t_line	*check_name_norm(char	*file);
+int		check_id_maj(t_line *line);
 int		norm_file(t_line *line);
 void	clear_line(t_line **l);
 

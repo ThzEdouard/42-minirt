@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:06:33 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/03/07 16:57:19 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/04 15:30:05 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,16 +65,10 @@ static int	check_id(t_line *line, int i, int x)
 			if (tmp->info == NOT)
 				return (ft_putstr_fd("NOT", 0), FAIL);
 		}
+		else
+			tmp->info = NL;
 		tmp = tmp->next;
 	}
-	return (SUCCESS);
-}
-
-static int	check_nub_id(t_line *line)
-{
-	t_line	*tmp;
-
-
 	return (SUCCESS);
 }
 
@@ -91,7 +85,7 @@ int	norm_file(t_line *line)
 	}
 	if (!check_id(line, 0, 0))
 		return (clear_line(&line), FAIL);
-	if (!check_nub_id(line))
+	if (!check_id_maj(line))
 		return (clear_line(&line), FAIL);
 	return (SUCCESS);
 }

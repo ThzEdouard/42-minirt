@@ -10,7 +10,7 @@ SRC_MINIRT	= src/
 FT_MINIRT	= main
 
 SRC_PARSING	= src/parsing/
-FT_PARSING	= name_file norm_file
+FT_PARSING	= name_file norm_file check_id_maj
 
 SRC_FILES+=$(addprefix $(SRC_MINIRT),$(FT_MINIRT))
 SRC_FILES+=$(addprefix $(SRC_PARSING),$(FT_PARSING))

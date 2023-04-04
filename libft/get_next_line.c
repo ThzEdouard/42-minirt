@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 16:09:47 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/01/09 11:12:13 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/04 16:07:48 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*get_next_line(int fd)
 	get_read_file(fd, &trash, &byte);
 	if (trash == NULL)
 		return (NULL);
-	line = ft_substr(trash, 0, ft_lenline(trash));
+	line = ft_substr(trash, 0, ft_lenline(trash) - 1);
 	trash = get_save_trash(trash, 0);
 	if (line[0] == 0 && trash == NULL)
 	{
