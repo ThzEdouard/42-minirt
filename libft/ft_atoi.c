@@ -32,7 +32,27 @@ long	ft_atoi(const char *c)
 	return (nb_sign * x);
 }
 
-// double ft_atof(const char *nptr)
-// {
+double ft_atof(const char *c)
+{
+    double  entier;
+    double  decimal;
+    int     sign;
+    int     len;
 
-// }
+    sign = 1;
+    if (*c && *c == '-')
+    {
+        sign = -1;
+        c++;
+    }
+    entier = (double)ft_atoi(c);
+    while (*c && *c != '.')
+        c++;
+    if(*c == '.')
+        c++;
+    decimal = (double) ft_atoi(c);
+    len = ft_strlen(c);
+    while (len--)
+        decimal /= 10;
+    return (sign * (entier + decimal));
+}

@@ -63,6 +63,7 @@ int	check_rgb(char *line)
 	char	*tmp;
 
 	tmp = line;
+    (void)tmp;
 	while (*line)
 	{
 		if (!ft_isdigit(*line) && *line == 46)
@@ -103,7 +104,6 @@ static int	check_A(t_line *tmp, int start, t_la *tmp_la)
 	}
 	if (start > 3 || (!check_range_float(0.0, 1.0, (float)ft_atoi(array_line[1])) && !check_rgb(array_line[2])))
 		return (ft_free2(array_line) ,FAIL);
-	printf("SUCCES\n");
 	ft_free2(array_line);
 	return (SUCCESS);
 }
