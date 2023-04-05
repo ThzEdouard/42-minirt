@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 16:09:45 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/01/09 11:07:01 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/05 10:32:22 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,12 @@ int	ft_newline(char *str)
 		i++;
 	}
 	return (0);
+}
+
+char *ft_free(char *str)
+{
+	if (!str)
+		return (NULL);
+	free(str);
+	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:06:33 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/04 15:30:05 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/05 10:32:10 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,33 +41,31 @@ static t_info	add_info(char *id)
 	return (NOT);
 }
 
-static int	check_id(t_line *line, int i, int x)
+static int	check_id(t_line *line, int i, int x, int save_i)
 {
 	char	*id;
-	t_line	*tmp;
 
-	tmp = line;
-	while (tmp)
+	while (line)
 	{
 		i = 0;
-		id = NULL;
-		while (tmp->line[i] && !ft_isalpha(tmp->line[i]))
+		while (line->line[i] && !ft_isalpha(line->line[i]))
 			i++;
-		x = i;
-		while (tmp->line[x] && ft_isalpha(tmp->line[x]))
+		x = 0;
+		save_i = i;
+		while (line->line[i] && ft_isalpha(line->line[i++]))
 			x++;
-		if (ft_isalpha(tmp->line[i]))
-			id = ft_substr(tmp->line, i, x);
+		if (ft_isalpha(line->line[save_i]))
+			id = ft_substr(line->line, save_i, x);
 		if (id)
 		{
-			tmp->info = add_info(id);
-			free(id);
-			if (tmp->info == NOT)
+			line->info = add_info(id);
+			id = ft_free(id);
+			if (line->info == NOT)
 				return (ft_putstr_fd("NOT", 0), FAIL);
 		}
 		else
-			tmp->info = NL;
-		tmp = tmp->next;
+			line->info = NL;
+		line = line->next;
 	}
 	return (SUCCESS);
 }
@@ -83,7 +81,7 @@ int	norm_file(t_line *line)
 			return (clear_line(&line), FAIL);
 		tmp = tmp->next;
 	}
-	if (!check_id(line, 0, 0))
+	if (!check_id(line, 0, 0, 0))
 		return (clear_line(&line), FAIL);
 	if (!check_id_maj(line))
 		return (clear_line(&line), FAIL);

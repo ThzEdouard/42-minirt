@@ -9,11 +9,15 @@ rm		= rm -f
 SRC_MINIRT	= src/
 FT_MINIRT	= main
 
+SRC_CHECKER = src/parsing/Checker/
+FT_CHECKER = check_coord check_vector check_range_rgb check_a check_c check_l
+
 SRC_PARSING	= src/parsing/
 FT_PARSING	= name_file norm_file check_id_maj
 
 SRC_FILES+=$(addprefix $(SRC_MINIRT),$(FT_MINIRT))
 SRC_FILES+=$(addprefix $(SRC_PARSING),$(FT_PARSING))
+SRC_FILES+=$(addprefix $(SRC_CHECKER),$(FT_CHECKER))
 
 SRC		= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ		= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
@@ -36,6 +40,7 @@ $(OBJF):
 			mkdir -p $(OBJ_DIR)
 			mkdir -p $(OBJ_DIR)$(SRC_MINIRT)
 			mkdir -p $(OBJ_DIR)$(SRC_PARSING)
+			mkdir -p $(OBJ_DIR)$(SRC_CHECKER)
 
 clean:
 			$(RM) -rf $(OBJ_DIR)

@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:16:17 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/01/09 10:47:15 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/05 16:28:57 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	**ft_free2(char **tab)
 	int	i;
 
 	i = 0;
+	if (!tab)
+		return (NULL);
 	while (tab[i])
 	{
 		free (tab[i]);
