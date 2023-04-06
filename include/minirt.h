@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 11:20:27 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/05 16:43:45 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/06 15:57:49 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@
 # define FAIL 0
 # define SUCCESS 1
 
-t_line	*check_name_norm(char	*file);
-int		check_id_maj(t_line *line);
-int		norm_file(t_line *line);
+t_line	*check_name_norm(char	*file, t_value **value);
+int		check_id_maj(t_line *line, t_value **tmp);
+int		check_id_min(t_line *line, t_value **tmp);
+int		norm_file(t_line *line, t_value **value);
 void	clear_line(t_line **l);
 
 #endif

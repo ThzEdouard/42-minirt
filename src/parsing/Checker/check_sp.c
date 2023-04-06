@@ -1,18 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_l.c                                          :+:      :+:    :+:   */
+/*   check_sp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/05 15:07:18 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/06 14:26:49 by eflaquet         ###   ########.fr       */
+/*   Created: 2023/04/06 13:59:01 by eflaquet          #+#    #+#             */
+/*   Updated: 2023/04/06 16:03:14 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static int	init_lum(t_l *tmp_lum, char **array_tmp)
+static t_sp	*new_elem_sp(char **array_tmp, char **coord, char **rgb)
+{
+	t_sp	*new;
+
+	new = malloc(sizeof(t_sp));
+	if (!new)
+		return (NULL);
+	new->ps.x = ft_atof(coord[0]);
+	new->ps.y = ft_atof(coord[1]);
+	new->ps.z = ft_atof(coord[2]);
+	new->dia = ft_atof(array_tmp[2]);
+	new->rgb.r = ft_atoi(rgb[0]);
+	new->rgb.g = ft_atoi(rgb[1]);
+	new->rgb.b = ft_atoi(rgb[2]);
+	return (new);
+}
+
+static int	init_sp(t_sp **tmp_sp, char **array_tmp)
 {
 	char	**rgb;
 	char	**coord;
@@ -21,20 +38,30 @@ static int	init_lum(t_l *tmp_lum, char **array_tmp)
 	rgb = ft_split(array_tmp[3], ',');
 	if (!coord || !rgb)
 		return (ft_free2(coord), ft_free2(rgb), FAIL);
-	tmp_lum->pl.x = ft_atof(coord[0]);
-	tmp_lum->pl.y = ft_atof(coord[1]);
-	tmp_lum->pl.z = ft_atof(coord[2]);
-	tmp_lum->rgb.r = ft_atof(rgb[0]);
-	tmp_lum->rgb.g = ft_atof(rgb[1]);
-	tmp_lum->rgb.b = ft_atof(rgb[2]);
-	tmp_lum->ratio = ft_atof(array_tmp[2]);
-	return (ft_free2(coord), ft_free2(rgb), SUCCESS);
+	if (!*tmp_sp)
+	{
+		*tmp_sp = new_elem_sp(array_tmp, coord, rgb);
+		if (!tmp_sp)
+			return (ft_free2(coord), ft_free2(rgb), FAIL);
+	}
+	else
+	{
+		while (*tmp_sp)
+			*tmp_sp = (*tmp_sp)->next;
+		if (!(*tmp_sp)->next)
+		{
+			(*tmp_sp)->next = new_elem_sp(array_tmp, coord, rgb);
+			if (!(*tmp_sp)->next)
+				return (ft_free2(coord), ft_free2(rgb), FAIL);
+		}
+	}
+	return (ft_free2(coord), ft_free2(rgb),SUCCESS);
 }
 
-int	check_l(char *line, int start, t_l *tmp_lum)
+int	check_sp(char *line, int start, t_sp **tmp_sp)
 {
 	char	**array_line;
-	
+
 	if (!line)
 		return (FAIL);
 	array_line = ft_split(line, 32);
@@ -44,10 +71,9 @@ int	check_l(char *line, int start, t_l *tmp_lum)
 		return (ft_free2(array_line), FAIL);
 	if (!check_coord(array_line[1])
 		|| !check_int_max_min(array_line[2])
-		|| !check_range_float(0.0, 1.0, ft_atof(array_line[2]))
 		|| !check_rgb(array_line[3]))
 		return (ft_free2(array_line), FAIL);
-	if (!init_lum(tmp_lum, array_line))
+	if (!init_sp(tmp_sp, array_line))
 		return (ft_free2(array_line), FAIL);
 	return (ft_free2(array_line), SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 11:30:11 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/04 15:13:15 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/06 13:03:35 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static t_line	*set_line(int ld, t_line **l)
 	return (*l);
 }
 
-t_line	*check_name_norm(char	*file)
+t_line	*check_name_norm(char	*file, t_value **value)
 {
 	int		len;
 	int		ld;
@@ -71,7 +71,7 @@ t_line	*check_name_norm(char	*file)
 	if (ld == -1)
 		msg_name("\e[0;91mError\nfile is not open\e[0m");
 	line = set_line(ld, &line);
-	if (line && !norm_file(line))
+	if (line && !norm_file(line, value))
 		return (NULL);
 	close(ld);
 	return (line);

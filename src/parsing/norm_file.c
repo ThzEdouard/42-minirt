@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:06:33 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/05 10:32:10 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/06 16:35:20 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static int	check_id(t_line *line, int i, int x, int save_i)
 	return (SUCCESS);
 }
 
-int	norm_file(t_line *line)
+int	norm_file(t_line *line, t_value **value)
 {
 	t_line	*tmp;
 
@@ -83,7 +83,11 @@ int	norm_file(t_line *line)
 	}
 	if (!check_id(line, 0, 0, 0))
 		return (clear_line(&line), FAIL);
-	if (!check_id_maj(line))
+	if (!check_id_maj(line, value))
+		return (clear_line(&line), FAIL);
+	(*value)->sphere = NULL;
+	(*value)->plan = NULL;
+	if (!check_id_min(line, value))
 		return (clear_line(&line), FAIL);
 	return (SUCCESS);
 }

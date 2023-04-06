@@ -6,11 +6,29 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 13:57:55 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/05 16:40:53 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/06 14:25:35 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+int	check_line_range(char *line)
+{
+	int	y;
+
+	y = 0;
+	while (*line)
+	{
+		if (!ft_isdigit(*line) && *line == ',')
+			return (FAIL);
+		if (*line == '.')
+			y++;
+		line++;
+	}
+	if (y > 1)
+		return (FAIL);
+	return (SUCCESS);
+}
 
 static int	check_line_coord(char *line)
 {

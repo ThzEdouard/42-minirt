@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 12:38:12 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/05 16:40:59 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/06 14:26:36 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,10 @@ static int	init_ca(t_ca *tmp_cam, char **array_tmp)
 	return (ft_free2(coord), ft_free2(vector), SUCCESS);
 }
 
-int	check_c(t_line *tmp, int start, t_ca *tmp_cam)
+int	check_c(char *line, int start, t_ca *tmp_cam)
 {
 	char	**array_line;
-	char	*line;
-
-	line = return_line(tmp, C);
+	
 	if (!line)
 		return (FAIL);
 	array_line = ft_split(line, 32);
