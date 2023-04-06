@@ -41,8 +41,8 @@ int	check_id_min(t_line *line, t_value **tmp)
 			return (/*ne pas oublier de free*/FAIL);
 		if (line && line->info == PL && !check_pl(line->line, 1, &value->plan))
 		 	return (/*ne pas oublier de free*/FAIL);
-		// if (line && line->info = SP && check_sp(line->line, 1, value->sphere))
-		// 	return (/*ne pas oublier de free*/FAIL);
+		if (line && line->info == CY && !check_cy(line->line, 1, &value->cylindre))
+		 	return (/*ne pas oublier de free*/FAIL);
 		line = line->next;
 	}
 	*tmp = value;

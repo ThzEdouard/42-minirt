@@ -87,6 +87,7 @@ int	norm_file(t_line *line, t_value **value)
 		return (clear_line(&line), FAIL);
 	(*value)->sphere = NULL;
 	(*value)->plan = NULL;
+	(*value)->cylindre = NULL;
 	if (!check_id_min(line, value))
 		return (clear_line(&line), FAIL);
 	return (SUCCESS);

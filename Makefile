@@ -10,7 +10,7 @@ SRC_MINIRT	= src/
 FT_MINIRT	= main
 
 SRC_CHECKER = src/parsing/Checker/
-FT_CHECKER = check_coord check_vector check_range_rgb check_a check_c check_l check_sp check_pl
+FT_CHECKER = check_coord check_vector check_range_rgb check_a check_c check_l check_sp check_pl check_cy
 
 SRC_PARSING	= src/parsing/
 FT_PARSING	= name_file norm_file check_id
