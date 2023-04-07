@@ -13,6 +13,9 @@
 #ifndef STRUCT_H
 # define STRUCT_H
 
+# define HEIGHT 1024
+# define WIDTH 1024
+
 typedef enum s_info
 {
 	A,

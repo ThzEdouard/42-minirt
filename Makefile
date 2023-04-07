@@ -7,7 +7,7 @@ CFLAGS	= -Wall -Werror -Wextra -I./include -I./minilibx-linux -I./libft -g
 rm		= rm -f
 
 SRC_MINIRT	= src/
-FT_MINIRT	= main
+FT_MINIRT	= main save_bmp
 
 SRC_CHECKER = src/parsing/Checker/
 FT_CHECKER = check_coord check_vector check_range_rgb check_a check_c check_l check_sp check_pl check_cy

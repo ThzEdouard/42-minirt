@@ -31,5 +31,6 @@ int		check_id_maj(t_line *line, t_value **tmp);
 int		check_id_min(t_line *line, t_value **tmp);
 int		norm_file(t_line *line, t_value **value);
 void	clear_line(t_line **l);
+void	save_bmp(const char *filename, const unsigned char *data, int w, int h);
 
 #endif

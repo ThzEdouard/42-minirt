@@ -17,6 +17,7 @@ int	main(int argc, char **argv)
 {
 	t_line	*file_line;
 	t_value	*value;
+    unsigned char img[WIDTH * HEIGHT * 3];
 
 	if (argc > 2)
 		exit(FAIL);
@@ -31,5 +32,15 @@ int	main(int argc, char **argv)
 	free(value->sphere);
 	free(value);
 	clear_line(&file_line);
+    for (int i = 0; i < HEIGHT; i++)
+    {
+        for (int y = 0; y < WIDTH; y++)
+        {
+            img[(i*WIDTH+y) * 3 + 0] = 255;
+            img[(i*WIDTH+y) * 3 + 1] = 0;
+            img[(i*WIDTH+y) * 3 + 2] = 0;
+        }
+    }
+    save_bmp("ll.bmp",&img[0], 1024,1024);
 	return (SUCCESS);
 }
