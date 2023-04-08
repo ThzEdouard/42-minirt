@@ -17,6 +17,9 @@ int	main(int argc, char **argv)
 {
 	t_line	*file_line;
 	t_value	*value;
+    void	*img;
+    void	*mlx;
+
 	if (argc > 2)
 		exit(FAIL);
 	file_line = check_name_norm(argv[1], &value);
@@ -30,5 +33,7 @@ int	main(int argc, char **argv)
 	free(value->sphere);
 	free(value);
 	clear_line(&file_line);
+    mlx = mlx_init();
+    img = mlx_new_image(mlx, WIDTH, HEIGHT);
 	return (SUCCESS);
 }
