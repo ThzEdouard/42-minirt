@@ -42,8 +42,8 @@ void	save_bmp(const char *filename, const unsigned char *data, int w, int h)
     bmpinfoheader[9] = (unsigned char)(h >> 8);
     bmpinfoheader[10] = (unsigned char)(h >> 16);
     bmpinfoheader[11] = (unsigned char)(h >> 24);
-    unsigned char bgr_pixel[w * h * 3];
-
+    unsigned char *bgr_pixel;
+    bgr_pixel  = malloc(sizeof(unsigned  char) * (WIDTH * HEIGHT * 3));
     filePointer = fopen(filename, "wb");
     fwrite(bmpfileheader, 1, 14, filePointer);
     fwrite(bmpinfoheader, 1, 40, filePointer);

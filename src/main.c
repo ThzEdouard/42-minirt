@@ -17,8 +17,8 @@ int	main(int argc, char **argv)
 {
 	t_line	*file_line;
 	t_value	*value;
-    unsigned char img[WIDTH * HEIGHT * 3];
-
+    unsigned char *img;
+    img  = malloc(sizeof(unsigned  char) * (WIDTH * HEIGHT * 3));
 	if (argc > 2)
 		exit(FAIL);
 	file_line = check_name_norm(argv[1], &value);
@@ -36,11 +36,12 @@ int	main(int argc, char **argv)
     {
         for (int y = 0; y < WIDTH; y++)
         {
-            img[(i*WIDTH+y) * 3 + 0] = 255;
+            img[(i*WIDTH+y) * 3] = 255;
             img[(i*WIDTH+y) * 3 + 1] = 0;
             img[(i*WIDTH+y) * 3 + 2] = 0;
         }
     }
-    save_bmp("ll.bmp",&img[0], 1024,1024);
+    
+    save_bmp("out.bmp",&img[0], WIDTH,HEIGHT);
 	return (SUCCESS);
 }
