@@ -14,6 +14,7 @@
 # define MINIRT_H
 
 # include "mlx.h"
+# include "mlx_int.h"
 # include "libft.h"
 # include <math.h>
 # include <sys/types.h>

@@ -17,8 +17,6 @@ int	main(int argc, char **argv)
 {
 	t_line	*file_line;
 	t_value	*value;
-    void	*img;
-    void	*mlx;
 
 	if (argc > 2)
 		exit(FAIL);
@@ -33,7 +31,12 @@ int	main(int argc, char **argv)
 	free(value->sphere);
 	free(value);
 	clear_line(&file_line);
+    void	*mlx;
+    void	*mlx_win;
+
     mlx = mlx_init();
-    img = mlx_new_image(mlx, WIDTH, HEIGHT);
+    (void)mlx_win;
+    mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
+    mlx_loop(mlx);
 	return (SUCCESS);
 }
