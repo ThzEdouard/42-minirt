@@ -7,7 +7,7 @@ CFLAGS	= -Wall -Werror -Wextra -I./include -I./minilibx-linux -I./libft -g
 rm		= rm -f
 
 SRC_MINIRT	= src/
-FT_MINIRT	= main save_bmp
+FT_MINIRT	= main
 
 SRC_CHECKER = src/parsing/Checker/
 FT_CHECKER = check_coord check_vector check_range_rgb check_a check_c check_l check_sp check_pl check_cy
@@ -27,8 +27,9 @@ all:	$(NAME)
 
 $(NAME):	$(OBJ) $(INCLUDE)
 			make -C libft/
+			make -C minilibx-linux
 			mv libft/libft.a .
-			$(CC) $(CFLAGS) -o $(NAME) $(OBJ) libft.a
+			$(CC) $(CFLAGS) -o $(NAME) $(OBJ) libft.a -lX11 -lXext minilibx-linux/libmlx_Linux.a
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 			@mkdir -p $(OBJ_DIR)
