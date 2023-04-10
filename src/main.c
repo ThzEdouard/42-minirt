@@ -33,9 +33,10 @@ int	main(int argc, char **argv)
 	clear_line(&file_line);
     void	*mlx;
     void	*mlx_win;
-
+	(void)mlx_win;
     mlx = mlx_init();
-    (void)mlx_win;
+    if (!mlx)
+	    return (printf("fail"), FAIL);
     mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
     mlx_loop(mlx);
 	return (SUCCESS);

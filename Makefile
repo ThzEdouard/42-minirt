@@ -29,7 +29,7 @@ $(NAME):	$(OBJ) $(INCLUDE)
 			make -C libft/
 			make -C minilibx-linux
 			mv libft/libft.a .
-			$(CC) $(CFLAGS) -o $(NAME) $(OBJ) libft.a -lmlx -L/usr/include/../lib -lXext -lX11 -lm -lbsd
+			$(CC) $(CFLAGS) -o $(NAME) $(OBJ) libft.a minilibx-linux/libmlx_Linux.a minilibx-linux/libmlx.a  -L/usr/include/../lib -lXext -lX11 -lm -lbsd
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 			@mkdir -p $(OBJ_DIR)
@@ -42,7 +42,9 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 clean:
 			$(RM) -rf $(OBJ_DIR)
 			make clean -C libft/
+			make clean -C minilibx-linux
 			rm -rf libft.a
+			rm -rf libmlx_Linux.a
 
 fclean:		clean
 			$(RM) -f $(NAME)
