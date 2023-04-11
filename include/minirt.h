@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 11:20:27 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/06 15:57:49 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/11 19:08:08 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <stdio.h>
-
+#include <stdbool.h>
 # include "checker.h"
 
 # define FAIL 0
@@ -33,4 +33,23 @@ int		check_id_min(t_line *line, t_value **tmp);
 int		norm_file(t_line *line, t_value **value);
 void	clear_line(t_line **l);
 
+int		create_trgb(int t, int r, int g, int b);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+int		init_window(t_mlx *tmp_mlx, t_data *tmp_img, char *name);
+void	ft_mlx_free(t_mlx *tmp_mlx, t_data *tmp_img);
+
+t_coord	op_plus(t_coord a, t_coord b);
+t_coord	op_moins(t_coord a, t_coord b);
+t_coord	op_mult(t_coord a, t_coord b);
+
+t_coord	op_div(t_coord a, t_coord b);
+t_coord	normalize(t_coord a);
+
+t_coord	cross(t_coord a, t_coord b);
+
+double	magnitude(t_coord a);
+double	dot(t_coord a, t_coord b);
+
+t_ray	init_ray(t_coord origin, int x, int y);
+bool	intersect_sphere(t_sp *sphere, t_ray *ray, double t1, double t2);
 #endif

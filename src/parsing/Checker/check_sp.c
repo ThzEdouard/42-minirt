@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 13:59:01 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/06 16:03:14 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/11 16:50:29 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	init_sp(t_sp **tmp_sp, char **array_tmp)
 				return (ft_free2(coord), ft_free2(rgb), FAIL);
 		}
 	}
-	return (ft_free2(coord), ft_free2(rgb),SUCCESS);
+	return (ft_free2(coord), ft_free2(rgb), SUCCESS);
 }
 
 int	check_sp(char *line, int start, t_sp **tmp_sp)

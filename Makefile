@@ -15,9 +15,17 @@ FT_CHECKER = check_coord check_vector check_range_rgb check_a check_c check_l ch
 SRC_PARSING	= src/parsing/
 FT_PARSING	= name_file norm_file check_id
 
+SRC_CALCUL	= src/calcul/
+FT_CALCUL	= ray plane util sphere
+
+SRC_WINDOW = src/window/
+FT_WINDOW = creat_window
+
 SRC_FILES+=$(addprefix $(SRC_MINIRT),$(FT_MINIRT))
 SRC_FILES+=$(addprefix $(SRC_PARSING),$(FT_PARSING))
 SRC_FILES+=$(addprefix $(SRC_CHECKER),$(FT_CHECKER))
+SRC_FILES+=$(addprefix $(SRC_WINDOW),$(FT_WINDOW))
+SRC_FILES+=$(addprefix $(SRC_CALCUL),$(FT_CALCUL))
 
 SRC		= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ		= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
@@ -36,6 +44,8 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 			@mkdir -p $(OBJ_DIR)$(SRC_MINIRT)
 			@mkdir -p $(OBJ_DIR)$(SRC_PARSING)
 			@mkdir -p $(OBJ_DIR)$(SRC_CHECKER)
+			@mkdir -p $(OBJ_DIR)$(SRC_WINDOW)
+			@mkdir -p $(OBJ_DIR)$(SRC_CALCUL)
 			@echo "\033[0;32m [OK] \033[0;32m" $<
 			$(CC) $(CFLAGS) -c $< -o $@
 

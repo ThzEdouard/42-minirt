@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 13:11:56 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/06 16:18:48 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/11 16:47:04 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,18 @@ static int	check_len(t_line *line, enum s_info info)
 
 int	check_id_min(t_line *line, t_value **tmp)
 {
-	t_value *value;
+	t_value	*value;
 
 	value = *tmp;
 	while (line)
 	{
-		if (line && line->info == SP && !check_sp(line->line, 1, &value->sphere))
+		if (line && line->info == SP && !check_sp(line->line, 1,
+				&value->sphere))
 			return (/*ne pas oublier de free*/FAIL);
 		if (line && line->info == PL && !check_pl(line->line, 1, &value->plan))
 		 	return (/*ne pas oublier de free*/FAIL);
-		if (line && line->info == CY && !check_cy(line->line, 1, &value->cylindre))
+		if (line && line->info == CY && !check_cy(line->line, 1,
+				&value->cylindre))
 		 	return (/*ne pas oublier de free*/FAIL);
 		line = line->next;
 	}

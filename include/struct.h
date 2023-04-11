@@ -6,16 +6,16 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 11:33:40 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/05 16:45:25 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/11 16:54:23 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-# define HEIGHT 1024
-# define WIDTH 1024
-
+# define HEIGHT 1224
+# define WIDTH 1224
+# define EPSILON 0.0001
 typedef enum s_info
 {
 	A,
@@ -117,6 +117,27 @@ typedef struct s_line
 	struct s_line	*next;
 }				t_line;
 
+typedef struct s_ray
+{
+	t_coord	origin;
+	t_coord	diection;
+}				t_ray;
+
 //-------------------------------------------//
+
+typedef struct	s_mlx
+{
+	void	*mlx;
+	void	*mlx_win;
+}				t_mlx;
+
+typedef struct	s_data
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_data;
 
 #endif

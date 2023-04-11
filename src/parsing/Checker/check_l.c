@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 15:07:18 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/06 14:26:49 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/11 16:48:34 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	init_lum(t_l *tmp_lum, char **array_tmp)
 int	check_l(char *line, int start, t_l *tmp_lum)
 {
 	char	**array_line;
-	
+
 	if (!line)
 		return (FAIL);
 	array_line = ft_split(line, 32);

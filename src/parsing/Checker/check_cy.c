@@ -6,13 +6,14 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:09:35 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/06 17:27:46 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/11 16:51:21 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static t_cy	*new_elem_cy(char **vector, char **coord, char **rgb, char **array_tmp)
+static t_cy	*new_elem_cy(char **vector, char **coord,
+						char **rgb, char **array_tmp)
 {
 	t_cy	*new;
 
@@ -63,7 +64,6 @@ static int	init_cy(t_cy **tmp_cy, char **array_tmp)
 	}
 	return (ft_free2(coord), ft_free2(rgb), ft_free2(vector), SUCCESS);
 }
-
 
 int	check_cy(char *line, int start, t_cy **tmp_cy)
 {
