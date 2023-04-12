@@ -16,7 +16,7 @@ SRC_PARSING	= src/parsing/
 FT_PARSING	= name_file norm_file check_id
 
 SRC_CALCUL	= src/calcul/
-FT_CALCUL	= ray plane util sphere
+FT_CALCUL	= ray plane util sphere cylindre
 
 SRC_WINDOW = src/window/
 FT_WINDOW = creat_window

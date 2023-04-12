@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 11:20:27 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/11 19:08:08 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/12 17:32:14 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_mlx_free(t_mlx *tmp_mlx, t_data *tmp_img);
 t_coord	op_plus(t_coord a, t_coord b);
 t_coord	op_moins(t_coord a, t_coord b);
 t_coord	op_mult(t_coord a, t_coord b);
-
+t_coord	add_vector(float x, float y, float z);
 t_coord	op_div(t_coord a, t_coord b);
 t_coord	normalize(t_coord a);
 
@@ -50,6 +50,8 @@ t_coord	cross(t_coord a, t_coord b);
 double	magnitude(t_coord a);
 double	dot(t_coord a, t_coord b);
 
-t_ray	init_ray(t_coord origin, int x, int y);
-bool	intersect_sphere(t_sp *sphere, t_ray *ray, double t1, double t2);
+t_ray	init_ray(t_coord origin, t_ca cam, int x, int y);
+bool	intersection_sphere(t_ray *ray, t_sp *sphere, double *distance);
+bool	intersection_plan(t_pl *plan, t_ray *ray, double *distance);
+bool	intersection_cylindre(t_ray *ray, t_cy *cylinde, double *distance);
 #endif

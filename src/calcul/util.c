@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 17:17:29 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/11 17:51:40 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/12 10:46:49 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,14 @@ double	magnitude(t_coord a)
 double	dot(t_coord a, t_coord b)
 {
 	return (a.x * b.x + a.y * b.y + a.z * b.z);
+}
+
+t_coord	add_vector(float x, float y, float z)
+{
+	t_coord	result;
+
+	result.x = x;
+	result.y = y;
+	result.z = z;
+	return (result);
 }
