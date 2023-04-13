@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 11:33:40 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/12 11:04:42 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/13 15:37:40 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@ typedef enum s_info
 }			t_info;
 
 //struct for the save in to rgb or coord//
+
+typedef struct s_vector
+{
+	float	x;
+	float	y;
+	float	z;
+}				t_vector;
 
 typedef struct s_rgb
 {
@@ -73,6 +80,17 @@ typedef struct s_l
 //-------------------------------------------//
 
 //struct for sphere, plan, cylindre//
+
+typedef struct s_object
+{
+	t_vector		center;
+	t_vector		axis;
+	t_rgb			rgb;
+	float			diameter;
+	float			height;
+	t_info			info;
+	struct s_object	*next;
+}				t_object;
 
 typedef struct s_sp
 {
