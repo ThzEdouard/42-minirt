@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:44:44 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/12 21:00:12 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/13 10:16:46 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,39 @@ t_coord op_m(t_coord a, double b)
 //     c = dot_product(u, u) - pow(cylinder.radius2, 2);
 //     x[0] = (-b + sqrt(pow(b, 2) - 4 * a * c)) / (2 * a);
 //     x[1] = (-b - sqrt(pow(b, 2) - 4 * a * c)) / (2 * a);
+/*float intersectCylinder(Vector3 ray_origin, Vector3 ray_direction, Vector3 cylinder_center, Vector3 cylinder_axis, float cylinder_radius, float cylinder_height) {
+    // Compute the vector from the ray origin to the cylinder center
+    Vector3 oc = subtract(ray_origin, cylinder_center);
 
+    // Compute the coefficients of the quadratic equation
+    float a = dot(ray_direction, ray_direction) - dot(ray_direction, cylinder_axis) * dot(ray_direction, cylinder_axis);
+    float b = 2.0 * (dot(ray_direction, oc) - dot(ray_direction, cylinder_axis) * dot(oc, cylinder_axis));
+    float c = dot(oc, oc) - cylinder_radius * cylinder_radius - dot(oc, cylinder_axis) * dot(oc, cylinder_axis);
+
+    // Compute the discriminant
+    float discriminant = b * b - 4 * a * c;
+
+    // If the discriminant is negative, there is no intersection
+    if (discriminant < 0.0) {
+        return -1.0;
+    }
+
+    // Compute the intersection distance using the quadratic formula
+    float sqrt_discriminant = sqrt(discriminant);
+    float t1 = (-b - sqrt_discriminant) / (2.0 * a);
+    float t2 = (-b + sqrt_discriminant) / (2.0 * a);
+
+    // Check if either intersection distance is within the height of the cylinder
+    float t = -1.0;
+    if (t1 > 0.0 && t1 < cylinder_height) {
+        t = t1;
+    } else if (t2 > 0.0 && t2 < cylinder_height) {
+        t = t2;
+    }
+
+    return t;
+}
+*/
 bool	intersection_cylindre(t_ray *ray, t_cy *cylinde, double *distance)
 {
 	t_coord oc = op_moins(ray->origin, cylinde->pf);
@@ -114,24 +146,23 @@ bool	intersection_cylindre(t_ray *ray, t_cy *cylinde, double *distance)
 		return (false);
 	double    dist;
     double    x;
-	printf("tt");
     if ((dist1 >= 0 && dist1 <= cylinde->h_cy && t1 > EPSILON) && (dist2 >= 0 && dist2 <= cylinde->h_cy && t2 > EPSILON))
     {
         dist = t1 < t2 ? dist1 : dist2;
         x = t1 < t2 ? t1 : t2;
-		return (printf("oui"), true);
+		return (true);
     }
     else if (dist1 >= 0 && dist1 <= cylinde->h_cy && t1 > EPSILON)
     {
         dist = dist1;
         x = t1;
-		return (printf("oui"), true);
+		return (true);
     }
     else
     {
         dist = dist2;
         x = t2;
-		return (printf("oui"), true);
+		return (true);
     }
     *distance = x;
 	return (false);

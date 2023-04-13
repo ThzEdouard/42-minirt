@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 11:26:01 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/12 21:23:29 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/13 10:19:46 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ int	main(int argc, char **argv)
 		{
 			t_ray ray = init_ray(value->cam.pv, value->cam, x, y);
 	double t1 = INFINITY,t2 =  INFINITY;
-			intersection_plan(value->plan, &ray, &t1);
-			intersection_sphere(&ray, value->sphere, &t2);
-			if (t1 < t2)
+			intersection_sphere(&ray, value->sphere, &t1);
+			intersection_cylindre(&ray, value->cylindre, &t2);
+			if (intersection_cylindre(&ray, value->cylindre, &t2))
 				my_mlx_pixel_put(&img, x, y, create_trgb(0, 0,255,0));
-			else if (t2 < t1)
-				my_mlx_pixel_put(&img, x, y, create_trgb(0, 255,255,255));
-			else
+			else if (intersection_sphere(&ray, value->sphere, &t1))
+			 	my_mlx_pixel_put(&img, x, y, create_trgb(0, 255,255,255));
+			else if (intersection_plan(value->plan, &ray, &t2))
 				my_mlx_pixel_put(&img, x, y, create_trgb(0, 0,0,255));
 		}
 	}
