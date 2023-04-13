@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:06:33 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/06 16:35:20 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/13 10:51:26 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,6 @@ int	norm_file(t_line *line, t_value **value)
 	(*value)->plan = NULL;
 	(*value)->cylindre = NULL;
 	if (!check_id_min(line, value))
-		return (clear_line(&line), FAIL);
+		return (clear_line(&line), free(value),FAIL);
 	return (SUCCESS);
 }

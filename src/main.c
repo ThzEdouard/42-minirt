@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 11:26:01 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/13 10:19:46 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/13 10:45:43 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,43 @@
 // 	return (result);
 // }
 
+void	ft_free_sphere(t_sp *value)
+{
+	t_sp *tmp;
+
+	while (value)
+	{
+		tmp = value;
+		value = value->next;
+		free(tmp);
+	}
+}
+void	ft_free_plane(t_pl *value)
+{
+	t_pl *tmp;
+
+	while (value)
+	{
+		tmp = value;
+		value = value->next;
+		free(tmp);
+	}
+}
+void	ft_free_cy(t_cy *value)
+{
+	t_cy *tmp;
+
+	while (value)
+	{
+		tmp = value;
+		value = value->next;
+		free(tmp);
+	}
+}
 int	main(int argc, char **argv)
 {
 	t_line	*file_line;
-	t_value	*value;
+	t_value	*value = NULL;
 	t_mlx	mlx;
 	t_data	img;
 
@@ -35,9 +68,12 @@ int	main(int argc, char **argv)
 	file_line = check_name_norm(argv[1], &value);
 	if (!file_line)
 		return (FAIL);
+	printf("A     %f      %d,%d,%d\n", value->lum_am.ratio, value->lum_am.rgb.r, value->lum_am.rgb.g, value->lum_am.rgb.b);
+	printf("C     %f,%f,%f     %f,%f,%f     %d\n", value->cam.pv.x, value->cam.pv.y, value->cam.pv.z, value->cam.axe.x, value->cam.axe.y, value->cam.axe.z, value->cam.fov);
+	printf("L     %f,%f,%f     %f     %d,%d,%d\n", value->lum.pl.x, value->lum.pl.y, value->lum.pl.z, value->lum.ratio, value->lum.rgb.r, value->lum.rgb.g, value->lum.rgb.b);
 	printf("sp     %f,%f,%f     %f     %d,%d,%d\n", value->sphere->ps.x, value->sphere->ps.y, value->sphere->ps.z, value->sphere->dia, value->sphere->rgb.r, value->sphere->rgb.g, value->sphere->rgb.b);
 	printf("pl     %f,%f,%f     %f,%f,%f     %d,%d,%d\n", value->plan->pf.x, value->plan->pf.y, value->plan->pf.z, value->plan->vod.x, value->plan->vod.y, value->plan->vod.z, value->plan->rgb.r, value->plan->rgb.g, value->plan->rgb.b);
-	//printf("cy   %f,%f,%f    %f,%f,%f    %f    %f   %d,%d,%d\n", value->cylindre->pf.x, value->cylindre->pf.y, value->cylindre->pf.z, value->cylindre->vod.x,value->cylindre->vod.y,value->cylindre->vod.z,value->cylindre->dia_cy, value->cylindre->h_cy,value->cylindre->rgb.r,value->cylindre->rgb.g,value->cylindre->rgb.b);
+	printf("cy   %f,%f,%f    %f,%f,%f    %f    %f   %d,%d,%d\n", value->cylindre->pf.x, value->cylindre->pf.y, value->cylindre->pf.z, value->cylindre->vod.x,value->cylindre->vod.y,value->cylindre->vod.z,value->cylindre->dia_cy, value->cylindre->h_cy,value->cylindre->rgb.r,value->cylindre->rgb.g,value->cylindre->rgb.b);
 
 	if (!init_window(&mlx, &img, argv[1]))
 		return (/*ne pas oublier de free*/FAIL);
