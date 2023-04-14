@@ -6,15 +6,15 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 11:33:40 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/14 09:32:10 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/14 18:58:45 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-# define HEIGHT 1224
-# define WIDTH 1224
+# define HEIGHT 1024
+# define WIDTH 1024
 # define EPSILON 0.0001
 # define ALBEDO 0.3
 

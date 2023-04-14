@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:44:44 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/14 10:55:10 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/14 17:10:01 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ bool	intersection_cylindre(t_ray *ray, t_object *cylinde, double *distance)
 {
 	t_vector oc = subtract_vector(ray->origin, cylinde->center);
 	oc = normalize(oc);
-	cylinde->axis = normalize(cylinde->axis);
 	double a, b, c;
 	t_vector v,u;
 
@@ -124,19 +123,19 @@ bool	intersection_cylindre(t_ray *ray, t_object *cylinde, double *distance)
     if ((dist1 >= 0 && dist1 <= cylinde->height && t1 > EPSILON) && (dist2 >= 0 && dist2 <= cylinde->height && t2 > EPSILON))
     {
         dist = t1 < t2 ? dist1 : dist2;
-        x = t1 < t2 ? t1 : t2;
+        *distance = t1 < t2 ? t1 : t2;
 		return (true);
     }
     else if (dist1 >= 0 && dist1 <= cylinde->height && t1 > EPSILON)
     {
         dist = dist1;
-        x = t1;
+        *distance = t1;
 		return (true);
     }
     else
     {
         dist = dist2;
-        x = t2;
+        *distance = t2;
 		return (true);
     }
     *distance = x;

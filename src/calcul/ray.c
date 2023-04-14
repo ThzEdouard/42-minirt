@@ -6,21 +6,22 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:11:51 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/14 09:32:31 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/14 19:05:41 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_ray	init_ray(t_vector origin, t_ca cam, int x, int y)
+t_ray	init_ray(t_ca cam, int x, int y)
 {
 	t_ray	result;
+
 	double	fov_adjustment;
 	double	aspect_ratio;
 
 	aspect_ratio = (WIDTH) / (HEIGHT);
 	fov_adjustment = tan((cam.fov * (180 / M_PI) / 2.0));
-	result.origin = origin;
+	result.origin = cam.pv;
 	result.diection.x = ((((x + 0.5) / WIDTH) * 2.0 - 1.0)
 			* aspect_ratio) * fov_adjustment;
 	result.diection.y = (1.0 - ((y + 0.5) / HEIGHT) * 2.0) * fov_adjustment;
@@ -37,3 +38,29 @@ t_ray	init_ray(t_vector origin, t_ca cam, int x, int y)
 // 	result.diection.y = 0 * a + 1 * b + 0 * c;
 // 	result.diection.z = 0 * a + 0 * b + 1 * c;
 // result.diection = normalize(result.diection);
+
+
+// double	fov_adjustment;
+// 	double	aspect_ratio;
+
+// 	aspect_ratio = (WIDTH) / (HEIGHT);
+// 	fov_adjustment = tan((cam.fov * (180 / M_PI) / 2.0));
+// 	result.origin = cam.pv;
+// 	result.diection.x = ((((x + 0.5) / WIDTH) * 2.0 - 1.0)
+// 			* aspect_ratio) * fov_adjustment;
+// 	result.diection.y = (1.0 - ((y + 0.5) / HEIGHT) * 2.0) * fov_adjustment;
+// 	result.diection.z = -1.0;
+// 	result.diection = normalize(result.diection);
+
+// float fovrad = cam.fov *  (M_PI / 180);
+//
+	// t_vector up = normalize(cross(cam.axe, new_vector(0,0,0)));
+//
+	// float normX = (x + 0.5) / WIDTH * 2 - 1;
+	// float normY = (y + 0.5) / HEIGHT * 2 - 1;
+	// result.diection = new_vector(cam.axe.x + 0 * normX * tan(fovrad / 2) + up.x * normY * tan(fovrad / 2),
+	// cam.axe.y + 0 * normX * tan(fovrad / 2) + up.y * normY * tan(fovrad / 2),
+	// cam.axe.z + 0 * normX * tan(fovrad / 2) + up.z * normY * tan(fovrad / 2));
+	// result.origin = cam.pv;
+	// result.diection = normalize(result.diection);
+
