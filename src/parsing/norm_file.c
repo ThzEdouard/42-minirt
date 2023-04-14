@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:06:33 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/14 11:39:59 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/14 14:32:32 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,6 @@ int	norm_file(t_line *line, t_value **value)
 		return (clear_line(&line), FAIL);
 	(*value)->object = NULL;
 	if (!check_id_min(line, value))
-		return (clear_line(&line), free(value), FAIL);
+		return (clear_line(&line), free(*value), FAIL);
 	return (SUCCESS);
 }

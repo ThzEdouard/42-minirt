@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:20:16 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/14 13:40:57 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/14 14:11:23 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,36 +37,24 @@ static void	recup_pl(char ***coord, char ***vector,
 	*rgb = ft_split(array_tmp[3], ',');
 }
 
-static int	init_sp(t_object **tmp_pl, char **array_tmp)
+static t_object	*init_sp(char **array_tmp)
 {
 	char	**rgb;
 	char	**coord;
 	char	**vector;
-
+	t_object	*tmp;
+	
 	recup_pl(&coord, &vector, &rgb, array_tmp);
 	if (!coord || !rgb || !vector)
-		return (ft_free2(coord), ft_free2(rgb), ft_free2(vector), FAIL);
-	if (!*tmp_pl)
-	{
-		*tmp_pl = new_elem_pl(vector, coord, rgb);
-		if (!tmp_pl)
-			return (ft_free2(coord), ft_free2(rgb), ft_free2(vector), FAIL);
-	}
-	else
-	{
-		if (!(*tmp_pl)->next)
-		{
-			(*tmp_pl)->next = new_elem_pl(vector, coord, rgb);
-			if (!(*tmp_pl)->next)
-				return (ft_free2(coord), ft_free2(rgb), ft_free2(vector), FAIL);
-		}
-	}
-	return (ft_free2(coord), ft_free2(rgb), ft_free2(vector), SUCCESS);
+		return (ft_free2(coord), ft_free2(rgb), ft_free2(vector), NULL);
+	tmp = new_elem_pl(vector, coord, rgb);
+	return (ft_free2(coord), ft_free2(rgb), ft_free2(vector), tmp);
 }
 
-int	check_pl(char *line, int start, t_object **tmp_pl)
+t_object	*check_pl(char *line, int start)
 {
 	char	**array_line;
+	t_object	*tmp;
 
 	if (!line)
 		return (FAIL);
@@ -74,12 +62,11 @@ int	check_pl(char *line, int start, t_object **tmp_pl)
 	if (!array_line)
 		return (FAIL);
 	if (!check_value(array_line, &start) || start != 4)
-		return (ft_free2(array_line), FAIL);
+		return (ft_free2(array_line), NULL);
 	if (!check_coord(array_line[1])
 		|| !check_vector(array_line[2])
 		|| !check_rgb(array_line[3]))
-		return (ft_free2(array_line), FAIL);
-	if (!init_sp(tmp_pl, array_line))
-		return (ft_free2(array_line), FAIL);
-	return (ft_free2(array_line), SUCCESS);
+		return (ft_free2(array_line), NULL);
+	tmp = init_sp(array_line);
+	return (ft_free2(array_line), tmp);
 }

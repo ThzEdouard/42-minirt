@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 13:59:01 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/14 13:41:01 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/14 14:13:26 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,36 +28,24 @@ static t_object	*new_elem_sp(char **array_tmp, char **coord, char **rgb)
 	return (new);
 }
 
-static int	init_sp(t_object **tmp_sp, char **array_tmp)
+static t_object	*init_sp(char **array_tmp)
 {
 	char	**rgb;
 	char	**coord;
-
+	t_object *tmp;
+	
 	coord = ft_split(array_tmp[1], ',');
 	rgb = ft_split(array_tmp[3], ',');
 	if (!coord || !rgb)
-		return (ft_free2(coord), ft_free2(rgb), FAIL);
-	if (!*tmp_sp)
-	{
-		*tmp_sp = new_elem_sp(array_tmp, coord, rgb);
-		if (!tmp_sp)
-			return (ft_free2(coord), ft_free2(rgb), FAIL);
-	}
-	else
-	{
-		if (!(*tmp_sp)->next)
-		{
-			(*tmp_sp)->next = new_elem_sp(array_tmp, coord, rgb);
-			if (!(*tmp_sp)->next)
-				return (ft_free2(coord), ft_free2(rgb), FAIL);
-		}
-	}
-	return (ft_free2(coord), ft_free2(rgb), SUCCESS);
+		return (ft_free2(coord), ft_free2(rgb), NULL);
+	tmp = new_elem_sp(array_tmp, coord, rgb);
+	return (ft_free2(coord), ft_free2(rgb), tmp);
 }
 
-int	check_sp(char *line, int start, t_object **tmp_sp)
+t_object	*check_sp(char *line, int start)
 {
 	char	**array_line;
+	t_object	*tmp;
 
 	if (!line)
 		return (FAIL);
@@ -65,12 +53,11 @@ int	check_sp(char *line, int start, t_object **tmp_sp)
 	if (!array_line)
 		return (FAIL);
 	if (!check_value(array_line, &start) || start != 4)
-		return (ft_free2(array_line), FAIL);
+		return (ft_free2(array_line), NULL);
 	if (!check_coord(array_line[1])
 		|| !check_int_max_min(array_line[2])
 		|| !check_rgb(array_line[3]))
-		return (ft_free2(array_line), FAIL);
-	if (!init_sp(tmp_sp, array_line))
-		return (ft_free2(array_line), FAIL);
-	return (ft_free2(array_line), SUCCESS);
+		return (ft_free2(array_line), NULL);
+	tmp = init_sp(array_line);
+	return (ft_free2(array_line), tmp);
 }

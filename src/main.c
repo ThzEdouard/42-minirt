@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 11:26:01 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/14 11:52:52 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/14 14:37:25 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int	main(int argc, char **argv)
 		printf("%d,%d,%d\n",value->object->rgb.r, value->object->rgb.g, value->object->rgb.b);
 		value->object = value->object->next;
 	}
+	ft_free_object(value->object);
+	free(value);
 	// if (!init_window(&mlx, &img, argv[1]))
 	// 	return (/*ne pas oublier de free*/FAIL);
 
@@ -67,6 +69,6 @@ int	main(int argc, char **argv)
 	// mlx_loop(mlx.mlx);
 	// ft_free_object(value->object);
 	// free(value);
-	// clear_line(&file_line);
+	 clear_line(&file_line);
 	return (SUCCESS);
 }

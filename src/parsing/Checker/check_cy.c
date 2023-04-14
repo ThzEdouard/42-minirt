@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:09:35 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/14 13:40:53 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/14 14:20:16 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,51 +40,36 @@ static void	recup_cy(char ***coord, char ***vector,
 	*rgb = ft_split(array_tmp[5], ',');
 }
 
-static int	init_cy(t_object **tmp_cy, char **array_tmp)
+static t_object	*init_cy(char **array_tmp)
 {
 	char	**rgb;
 	char	**coord;
 	char	**vector;
-
+	t_object	*tmp;
 	recup_cy(&coord, &vector, &rgb, array_tmp);
 	if (!coord || !rgb || !vector)
-		return (ft_free2(coord), ft_free2(rgb), ft_free2(vector), FAIL);
-	if (!*tmp_cy)
-	{
-		*tmp_cy = new_elem_cy(vector, coord, rgb, array_tmp);
-		if (!tmp_cy)
-			return (ft_free2(coord), ft_free2(rgb), ft_free2(vector), FAIL);
-	}
-	else
-	{
-		if (!(*tmp_cy)->next)
-		{
-			(*tmp_cy)->next = new_elem_cy(vector, coord, rgb, array_tmp);
-			if (!(*tmp_cy)->next)
-				return (ft_free2(coord), ft_free2(rgb), ft_free2(vector), FAIL);
-		}
-	}
-	return (ft_free2(coord), ft_free2(rgb), ft_free2(vector), SUCCESS);
+		return (ft_free2(coord), ft_free2(rgb), ft_free2(vector), NULL);
+	tmp = new_elem_cy(vector, coord, rgb, array_tmp);
+	return (ft_free2(coord), ft_free2(rgb), ft_free2(vector), tmp);
 }
 
-int	check_cy(char *line, int start, t_object **tmp_cy)
+t_object	*check_cy(char *line, int start)
 {
-	char	**array_line;
-
+	char		**array_line;
+	t_object	*tmp;
 	if (!line)
 		return (FAIL);
 	array_line = ft_split(line, 32);
 	if (!array_line)
 		return (FAIL);
 	if (!check_value(array_line, &start) || start != 6)
-		return (ft_free2(array_line), FAIL);
+		return (ft_free2(array_line), NULL);
 	if (!check_coord(array_line[1])
 		|| !check_vector(array_line[2])
 		|| !check_int_max_min(array_line[3])
 		|| !check_int_max_min(array_line[4])
 		|| !check_rgb(array_line[5]))
-		return (ft_free2(array_line), FAIL);
-	if (!init_cy(tmp_cy, array_line))
-		return (ft_free2(array_line), FAIL);
-	return (ft_free2(array_line), SUCCESS);
+		return (ft_free2(array_line), NULL);
+	tmp = init_cy(array_line);
+	return (ft_free2(array_line), tmp);
 }

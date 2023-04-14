@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 10:34:05 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/14 13:40:20 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/14 14:03:39 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int		check_vector(char *line);
 int		check_a(char *tmp, int start, t_la *tmp_la);
 int		check_c(char *tmp, int start, t_ca *tmp_cam);
 int		check_l(char *tmp, int start, t_l *tmp_lum);
-int		check_sp(char *tmp, int start, t_object **tmp_sp);
-int		check_pl(char *tmp, int start, t_object **tmp_pl);
-int		check_cy(char *tmp, int start, t_object **tmp_cy);
+t_object	*check_sp(char *tmp, int start);
+t_object	*check_pl(char *tmp, int start);
+t_object	*check_cy(char *tmp, int start);
 
 #endif
