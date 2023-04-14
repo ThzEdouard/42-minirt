@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 13:56:53 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/04 17:32:35 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/14 14:56:03 by julmuntz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 long	ft_atoi(const char *c)
 {
 	long	x;
-	int	nb_sign;
+	int		nb_sign;
 
 	x = 0;
 	nb_sign = 1;
@@ -32,27 +32,27 @@ long	ft_atoi(const char *c)
 	return (nb_sign * x);
 }
 
-double ft_atof(const char *c)
+double	ft_atof(const char *c)
 {
-    double  entier;
-    double  decimal;
-    int     sign;
-    int     len;
+	double	entier;
+	double	decimal;
+	int		sign;
+	int		len;
 
-    sign = 1;
-    if (*c && *c == '-')
-    {
-        sign = -1;
-        c++;
-    }
-    entier = (double)ft_atoi(c);
-    while (*c && *c != '.')
-        c++;
-    if(*c == '.')
-        c++;
-    decimal = (double) ft_atoi(c);
-    len = ft_strlen(c);
-    while (len--)
-        decimal /= 10;
-    return (sign * (entier + decimal));
+	sign = 1;
+	if (*c && *c == '-')
+	{
+		sign = -1;
+		c++;
+	}
+	entier = (double)ft_atoi(c);
+	while (*c && *c != '.')
+		c++;
+	if (*c == '.')
+		c++;
+	decimal = (double)ft_atoi(c);
+	len = ft_strlen(c);
+	while (len--)
+		decimal /= 10;
+	return (sign * (entier + decimal));
 }

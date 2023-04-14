@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 11:24:22 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/04 17:33:10 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/14 15:01:57 by julmuntz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include "get_next_line.h"
+
 typedef struct s_list
 {
 	void			*content;
@@ -61,7 +62,7 @@ int		ft_tolower(int c);
 int		ft_strcmp(char *s1, char *s2);
 int		ft_toupper(int c);
 long	ft_atoi(const char *c);
-double  ft_atof(const char *c);
+double	ft_atof(const char *c);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 int		ft_lstsize(t_list *lst);
 int		ft_strlen(const char *theString);

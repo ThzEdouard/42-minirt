@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 16:09:45 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/05 10:32:22 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/14 15:01:23 by julmuntz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	ft_newline(char *str)
 	return (0);
 }
 
-char *ft_free(char *str)
+char	*ft_free(char *str)
 {
 	if (!str)
 		return (NULL);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 16:09:47 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/04 16:07:48 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/14 15:02:37 by julmuntz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ char	*get_next_line(int fd)
 	static char	*trash;
 	char		*line;
 	int			byte;
+	int			i;
 
 	if (fd < 0 || BUFFER_SIZE < 1 || read(fd, &line, 0) < 0)
 		return (NULL);
@@ -25,13 +26,17 @@ char	*get_next_line(int fd)
 	get_read_file(fd, &trash, &byte);
 	if (trash == NULL)
 		return (NULL);
-	line = ft_substr(trash, 0, ft_lenline(trash) - 1);
+	line = ft_substr(trash, 0, ft_lenline(trash));
 	trash = get_save_trash(trash, 0);
 	if (line[0] == 0 && trash == NULL)
 	{
 		free(line);
 		return (NULL);
 	}
+	i = -1;
+	while (line[++i])
+		if (line[i] == '\n')
+			line[i] = '\0';
 	return (line);
 }
 
