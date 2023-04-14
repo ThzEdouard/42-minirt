@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:20:16 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/14 11:07:37 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/14 12:28:02 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ static t_object	*new_elem_pl(char **vector, char **coord, char **rgb)
 	return (new);
 }
 
-static void	recup_pl(char ***coord, char ***vector, char ***rgb, char **array_tmp)
+static void	recup_pl(char ***coord, char ***vector,
+			char ***rgb, char **array_tmp)
 {
 	*coord = ft_split(array_tmp[1], ',');
 	*vector = ft_split(array_tmp[2], ',');
@@ -53,8 +54,6 @@ static int	init_sp(t_object **tmp_pl, char **array_tmp)
 	}
 	else
 	{
-		while (*tmp_pl)
-			*tmp_pl = (*tmp_pl)->next;
 		if (!(*tmp_pl)->next)
 		{
 			(*tmp_pl)->next = new_elem_pl(vector, coord, rgb);

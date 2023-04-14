@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:09:35 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/14 11:07:41 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/14 12:28:05 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ static t_object	*new_elem_cy(char **vector, char **coord,
 	return (new);
 }
 
-void	recup_cy(char ***coord, char ***vector, char ***rgb, char **array_tmp)
+static void	recup_cy(char ***coord, char ***vector,
+			char ***rgb, char **array_tmp)
 {
 	*coord = ft_split(array_tmp[1], ',');
 	*vector = ft_split(array_tmp[2], ',');
@@ -56,8 +57,6 @@ static int	init_cy(t_object **tmp_cy, char **array_tmp)
 	}
 	else
 	{
-		while (*tmp_cy)
-			*tmp_cy = (*tmp_cy)->next;
 		if (!(*tmp_cy)->next)
 		{
 			(*tmp_cy)->next = new_elem_cy(vector, coord, rgb, array_tmp);

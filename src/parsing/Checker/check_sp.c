@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 13:59:01 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/14 11:07:30 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/14 12:27:55 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ static int	init_sp(t_object **tmp_sp, char **array_tmp)
 	}
 	else
 	{
-		while (*tmp_sp)
-			*tmp_sp = (*tmp_sp)->next;
 		if (!(*tmp_sp)->next)
 		{
 			(*tmp_sp)->next = new_elem_sp(array_tmp, coord, rgb);
