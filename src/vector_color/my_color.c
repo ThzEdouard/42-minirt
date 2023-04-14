@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 16:00:15 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/13 16:53:34 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/14 08:46:33 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_rgb	new_rgb(int r, int g, int b)
 {
 	t_rgb	result;
-	
+
 	result.r = r;
 	result.g = g;
 	result.b = b;

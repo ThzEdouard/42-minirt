@@ -6,40 +6,43 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:20:16 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/11 16:50:45 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/14 11:07:37 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static t_pl	*new_elem_pl(char **vector, char **coord, char **rgb)
+static t_object	*new_elem_pl(char **vector, char **coord, char **rgb)
 {
-	t_pl	*new;
+	t_object	*new;
 
-	new = malloc(sizeof(t_pl));
+	new = malloc(sizeof(t_object));
 	if (!new)
 		return (NULL);
-	new->pf.x = ft_atof(coord[0]);
-	new->pf.y = ft_atof(coord[1]);
-	new->pf.z = ft_atof(coord[2]);
-	new->vod.x = ft_atof(vector[0]);
-	new->vod.y = ft_atof(vector[1]);
-	new->vod.z = ft_atof(vector[2]);
-	new->rgb.r = ft_atof(rgb[0]);
-	new->rgb.g = ft_atof(rgb[1]);
-	new->rgb.b = ft_atof(rgb[2]);
+	new->center = new_vector(ft_atof(coord[0]),
+			ft_atof(coord[1]), ft_atof(coord[2]));
+	new->axis = new_vector(ft_atof(vector[0]),
+			ft_atof(vector[1]), ft_atof(vector[2]));
+	new->rgb = new_rgb(ft_atof(rgb[0]), ft_atof(rgb[1]), ft_atof(rgb[2]));
+	new->info = PL;
+	new->next = NULL;
 	return (new);
 }
 
-static int	init_sp(t_pl **tmp_pl, char **array_tmp)
+static void	recup_pl(char ***coord, char ***vector, char ***rgb, char **array_tmp)
+{
+	*coord = ft_split(array_tmp[1], ',');
+	*vector = ft_split(array_tmp[2], ',');
+	*rgb = ft_split(array_tmp[3], ',');
+}
+
+static int	init_sp(t_object **tmp_pl, char **array_tmp)
 {
 	char	**rgb;
 	char	**coord;
 	char	**vector;
 
-	coord = ft_split(array_tmp[1], ',');
-	vector = ft_split(array_tmp[2], ',');
-	rgb = ft_split(array_tmp[3], ',');
+	recup_pl(&coord, &vector, &rgb, array_tmp);
 	if (!coord || !rgb || !vector)
 		return (ft_free2(coord), ft_free2(rgb), ft_free2(vector), FAIL);
 	if (!*tmp_pl)
@@ -62,7 +65,7 @@ static int	init_sp(t_pl **tmp_pl, char **array_tmp)
 	return (ft_free2(coord), ft_free2(rgb), ft_free2(vector), SUCCESS);
 }
 
-int	check_pl(char *line, int start, t_pl **tmp_pl)
+int	check_pl(char *line, int start, t_object **tmp_pl)
 {
 	char	**array_line;
 

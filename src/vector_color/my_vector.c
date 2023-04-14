@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 15:41:23 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/13 15:57:09 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/14 08:46:38 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_vector	new_vector(float x, float y, float z)
 {
 	t_vector	result;
-	
+
 	result.x = x;
 	result.y = y;
 	result.z = z;

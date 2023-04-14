@@ -6,36 +6,11 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:44:44 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/13 10:16:46 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/14 10:55:10 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-t_coord op(t_coord a, double b)
-{
-	t_coord	result;
-	result.x = a.x - b;
-	result.y = a.y - b;
-	result.z = a.z - b;
-	return (result);
-}
-
-t_coord op_p(t_coord a, double b)
-{
-	t_coord	result;
-	result.x = a.x + b;
-	result.y = a.y + b;
-	result.z = a.z + b;
-	return (result);
-}
-t_coord op_m(t_coord a, double b)
-{
-	t_coord	result;
-	result.x = a.x * b;
-	result.y = a.y * b;
-	result.z = a.z * b;
-	return (result);
-}
 
 //  Vector3 oc = subtract(ray_origin, cylinder_center);
 
@@ -118,21 +93,21 @@ t_coord op_m(t_coord a, double b)
     return t;
 }
 */
-bool	intersection_cylindre(t_ray *ray, t_cy *cylinde, double *distance)
+bool	intersection_cylindre(t_ray *ray, t_object *cylinde, double *distance)
 {
-	t_coord oc = op_moins(ray->origin, cylinde->pf);
+	t_vector oc = subtract_vector(ray->origin, cylinde->center);
 	oc = normalize(oc);
-	cylinde->vod = normalize(cylinde->vod);
+	cylinde->axis = normalize(cylinde->axis);
 	double a, b, c;
-	t_coord v,u;
+	t_vector v,u;
 
-	v = op_m(cylinde->vod, dot(ray->diection, cylinde->vod));
-	v = op_moins(ray->diection, v);
-	u = op_m(cylinde->vod, dot(op_moins(ray->origin, cylinde->pf), cylinde->vod));
-	u = op_moins(op_moins(ray->origin, cylinde->pf), u);
+	v = vector_multipli(cylinde->axis, dot(ray->diection, cylinde->axis));
+	v = subtract_vector(ray->diection, v);
+	u = vector_multipli(cylinde->axis, dot(subtract_vector(ray->origin, cylinde->center), cylinde->axis));
+	u = subtract_vector(subtract_vector(ray->origin, cylinde->center), u);
 	a = dot(v,v);
 	b = 2 * dot(v,u);
-	c = dot(u,u) - pow(cylinde->dia_cy / 2, 2);double discriminant = b * b - 4 * a * c;
+	c = dot(u,u) - pow(cylinde->diameter / 2, 2);double discriminant = b * b - 4 * a * c;
 	if (discriminant < 0)
 		return (false);
     double t1 = (-b - sqrt(discriminant)) / (2.0 * a);
@@ -140,19 +115,19 @@ bool	intersection_cylindre(t_ray *ray, t_cy *cylinde, double *distance)
 
 	if (t1 < 0 && t2 < 0)
 		return (false);
-	double dist1 = dot(cylinde->vod, op_moins(op_m(ray->diection, t1), op_moins(cylinde->pf, ray->origin)));
-	double dist2 = dot(cylinde->vod, op_moins(op_m(ray->diection, t2), op_moins(cylinde->pf, ray->origin)));
-	if (!((dist1 >= 0 && dist1 <= cylinde->h_cy && t1 > EPSILON) || (dist2 >= 0 && dist2 <= cylinde->h_cy && t1 > EPSILON)))
+	double dist1 = dot(cylinde->axis, subtract_vector(vector_multipli(ray->diection, t1), subtract_vector(cylinde->center, ray->origin)));
+	double dist2 = dot(cylinde->axis, subtract_vector(vector_multipli(ray->diection, t2), subtract_vector(cylinde->center, ray->origin)));
+	if (!((dist1 >= 0 && dist1 <= cylinde->height && t1 > EPSILON) || (dist2 >= 0 && dist2 <= cylinde->height && t1 > EPSILON)))
 		return (false);
 	double    dist;
     double    x;
-    if ((dist1 >= 0 && dist1 <= cylinde->h_cy && t1 > EPSILON) && (dist2 >= 0 && dist2 <= cylinde->h_cy && t2 > EPSILON))
+    if ((dist1 >= 0 && dist1 <= cylinde->height && t1 > EPSILON) && (dist2 >= 0 && dist2 <= cylinde->height && t2 > EPSILON))
     {
         dist = t1 < t2 ? dist1 : dist2;
         x = t1 < t2 ? t1 : t2;
 		return (true);
     }
-    else if (dist1 >= 0 && dist1 <= cylinde->h_cy && t1 > EPSILON)
+    else if (dist1 >= 0 && dist1 <= cylinde->height && t1 > EPSILON)
     {
         dist = dist1;
         x = t1;

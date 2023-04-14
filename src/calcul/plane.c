@@ -6,31 +6,26 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 15:36:23 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/13 11:01:23 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/14 09:36:21 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-bool	intersection_plan(t_pl *plan, t_ray *ray, double *distance)
+bool	intersection_plan(t_object *plan, t_ray *ray, double *distance)
 {
-	double	demon;
-	t_coord	b2;
+	double		demon;
+	t_vector	b2;
 
-	demon = dot(plan->vod, ray->diection);
+	demon = dot(plan->axis, ray->diection);
 	if (demon > EPSILON)
 	{
-		b2 = op_moins(plan->pf, ray->origin);
-		if (dot(b2, plan->vod) / demon >= 0)
+		b2 = subtract_vector(plan->center, ray->origin);
+		if (dot(b2, plan->axis) / demon >= 0)
 		{
-			*distance = dot(b2, plan->vod) / demon;
+			*distance = dot(b2, plan->axis) / demon;
 			return (true);
 		}
 	}
 	return (false);
 }
-
-// void	ray_plane()
-// {
-
-// }

@@ -18,6 +18,9 @@ FT_PARSING	= name_file norm_file check_id
 SRC_CALCUL	= src/calcul/
 FT_CALCUL	= ray plane util sphere cylindre
 
+SRC_VECTOR = src/vector_color/
+FT_VECTOR = my_color my_color2 my_vector my_vector2
+
 SRC_WINDOW = src/window/
 FT_WINDOW = creat_window
 
@@ -26,6 +29,7 @@ SRC_FILES+=$(addprefix $(SRC_PARSING),$(FT_PARSING))
 SRC_FILES+=$(addprefix $(SRC_CHECKER),$(FT_CHECKER))
 SRC_FILES+=$(addprefix $(SRC_WINDOW),$(FT_WINDOW))
 SRC_FILES+=$(addprefix $(SRC_CALCUL),$(FT_CALCUL))
+SRC_FILES+=$(addprefix $(SRC_VECTOR),$(FT_VECTOR))
 
 SRC		= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ		= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
@@ -46,6 +50,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 			@mkdir -p $(OBJ_DIR)$(SRC_CHECKER)
 			@mkdir -p $(OBJ_DIR)$(SRC_WINDOW)
 			@mkdir -p $(OBJ_DIR)$(SRC_CALCUL)
+			@mkdir -p $(OBJ_DIR)$(SRC_VECTOR)
 			@echo "\033[0;32m [OK] \033[0;32m" $<
 			$(CC) $(CFLAGS) -c $< -o $@
 

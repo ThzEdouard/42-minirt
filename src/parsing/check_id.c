@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 13:11:56 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/13 10:50:02 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/14 09:33:20 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,14 @@ int	check_id_min(t_line *line, t_value **tmp)
 	while (line)
 	{
 		if (line && line->info == SP && !check_sp(line->line, 1,
-				&value->sphere))
-			return (ft_free_sphere(value->sphere), FAIL);
-		if (line && line->info == PL && !check_pl(line->line, 1, &value->plan))
-			return (ft_free_plane(value->plan), FAIL);
+				&value->object))
+			return (ft_free_object(value->object), FAIL);
+		if (line && line->info == PL && !check_pl(line->line, 1,
+				&value->object))
+			return (ft_free_object(value->object), FAIL);
 		if (line && line->info == CY && !check_cy(line->line, 1,
-				&value->cylindre))
-			return (ft_free_cy(value->cylindre), FAIL);
+				&value->object))
+			return (ft_free_object(value->object), FAIL);
 		line = line->next;
 	}
 	*tmp = value;

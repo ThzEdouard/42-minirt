@@ -6,30 +6,29 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 13:59:01 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/11 16:50:29 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/14 11:07:30 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static t_sp	*new_elem_sp(char **array_tmp, char **coord, char **rgb)
+static t_object	*new_elem_sp(char **array_tmp, char **coord, char **rgb)
 {
-	t_sp	*new;
+	t_object	*new;
 
-	new = malloc(sizeof(t_sp));
+	new = malloc(sizeof(t_object));
 	if (!new)
 		return (NULL);
-	new->ps.x = ft_atof(coord[0]);
-	new->ps.y = ft_atof(coord[1]);
-	new->ps.z = ft_atof(coord[2]);
-	new->dia = ft_atof(array_tmp[2]);
-	new->rgb.r = ft_atoi(rgb[0]);
-	new->rgb.g = ft_atoi(rgb[1]);
-	new->rgb.b = ft_atoi(rgb[2]);
+	new->center = new_vector(ft_atof(coord[0]),
+			ft_atof(coord[1]), ft_atof(coord[2]));
+	new->diameter = ft_atof(array_tmp[2]);
+	new->rgb = new_rgb(ft_atoi(rgb[0]), ft_atoi(rgb[1]), ft_atoi(rgb[2]));
+	new->info = SP;
+	new->next = NULL;
 	return (new);
 }
 
-static int	init_sp(t_sp **tmp_sp, char **array_tmp)
+static int	init_sp(t_object **tmp_sp, char **array_tmp)
 {
 	char	**rgb;
 	char	**coord;
@@ -58,7 +57,7 @@ static int	init_sp(t_sp **tmp_sp, char **array_tmp)
 	return (ft_free2(coord), ft_free2(rgb), SUCCESS);
 }
 
-int	check_sp(char *line, int start, t_sp **tmp_sp)
+int	check_sp(char *line, int start, t_object **tmp_sp)
 {
 	char	**array_line;
 

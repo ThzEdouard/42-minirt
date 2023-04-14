@@ -6,13 +6,13 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:11:51 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/13 11:04:00 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/14 09:32:31 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_ray	init_ray(t_coord origin, t_ca cam, int x, int y)
+t_ray	init_ray(t_vector origin, t_ca cam, int x, int y)
 {
 	t_ray	result;
 	double	fov_adjustment;

@@ -6,43 +6,46 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:09:35 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/11 16:51:21 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/14 11:07:41 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static t_cy	*new_elem_cy(char **vector, char **coord,
+static t_object	*new_elem_cy(char **vector, char **coord,
 						char **rgb, char **array_tmp)
 {
-	t_cy	*new;
+	t_object	*new;
 
-	new = malloc(sizeof(t_cy));
+	new = malloc(sizeof(t_object));
 	if (!new)
 		return (NULL);
-	new->pf.x = ft_atof(coord[0]);
-	new->pf.y = ft_atof(coord[1]);
-	new->pf.z = ft_atof(coord[2]);
-	new->vod.x = ft_atof(vector[0]);
-	new->vod.y = ft_atof(vector[1]);
-	new->vod.z = ft_atof(vector[2]);
-	new->dia_cy = ft_atof(array_tmp[3]);
-	new->h_cy = ft_atof(array_tmp[4]);
-	new->rgb.r = ft_atoi(rgb[0]);
-	new->rgb.g = ft_atoi(rgb[1]);
-	new->rgb.b = ft_atoi(rgb[2]);
+	new->center = new_vector(ft_atof(coord[0]),
+			ft_atof(coord[1]), ft_atof(coord[2]));
+	new->axis = new_vector(ft_atof(vector[0]),
+			ft_atof(vector[1]), ft_atof(vector[2]));
+	new->diameter = ft_atof(array_tmp[3]);
+	new->height = ft_atof(array_tmp[4]);
+	new->rgb = new_rgb(ft_atoi(rgb[0]), ft_atoi(rgb[1]), ft_atoi(rgb[2]));
+	new->info = CY;
+	new->next = NULL;
 	return (new);
 }
 
-static int	init_cy(t_cy **tmp_cy, char **array_tmp)
+void	recup_cy(char ***coord, char ***vector, char ***rgb, char **array_tmp)
+{
+	*coord = ft_split(array_tmp[1], ',');
+	*vector = ft_split(array_tmp[2], ',');
+	*rgb = ft_split(array_tmp[5], ',');
+}
+
+static int	init_cy(t_object **tmp_cy, char **array_tmp)
 {
 	char	**rgb;
 	char	**coord;
 	char	**vector;
 
-	coord = ft_split(array_tmp[1], ',');
-	vector = ft_split(array_tmp[2], ',');
-	rgb = ft_split(array_tmp[5], ',');
+	recup_cy(&coord, &vector, &rgb, array_tmp);
 	if (!coord || !rgb || !vector)
 		return (ft_free2(coord), ft_free2(rgb), ft_free2(vector), FAIL);
 	if (!*tmp_cy)
@@ -65,7 +68,7 @@ static int	init_cy(t_cy **tmp_cy, char **array_tmp)
 	return (ft_free2(coord), ft_free2(rgb), ft_free2(vector), SUCCESS);
 }
 
-int	check_cy(char *line, int start, t_cy **tmp_cy)
+int	check_cy(char *line, int start, t_object **tmp_cy)
 {
 	char	**array_line;
 

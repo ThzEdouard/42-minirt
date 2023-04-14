@@ -6,28 +6,38 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:20:39 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/12 21:26:08 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/14 10:30:52 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-bool	intersection_sphere(t_ray *ray, t_sp *sphere, double *distance)
+static	bool	solver_quot(t_ray *ray, t_object *sphere,
+			double *t0, double *t1)
 {
-	t_coord oc = op_moins(ray->origin, sphere->ps);
-	double a, b, c;
+	t_vector	oc;
+	double		a;
+	double		b;
+	double		c;
 
+	oc = subtract_vector(ray->origin, sphere->center);
 	a = dot(ray->diection, ray->diection);
 	b = 2 * dot(oc, ray->diection);
-	c = dot(oc,oc) - (sphere->dia / 2 * sphere->dia / 2);
-
-	double discrimimant = b*b - 4 *a*c;
-
-	if (discrimimant < 0)
+	c = dot(oc, oc) - (sphere->diameter / 2 * sphere->diameter / 2);
+	if (b * b - 4 * a * c < 0)
 		return (false);
-	double t0, t1;
-	t0 = (-b + sqrt(discrimimant)) / (2*a);
-	t1 = (-b - sqrt(discrimimant)) / (2*a);
+	*t0 = (-b + sqrt(b * b - 4 * a * c)) / (2 * a);
+	*t1 = (-b - sqrt(b * b - 4 * a * c)) / (2 * a);
+	return (true);
+}
+
+bool	intersection_sphere(t_ray *ray, t_object *sphere, double *distance)
+{
+	double	t0;
+	double	t1;
+
+	if (!solver_quot(ray, sphere, &t0, &t1))
+		return (false);
 	if (t0 < 0 && t1 < 0)
 		return (false);
 	if (t0 < t1)
@@ -36,8 +46,3 @@ bool	intersection_sphere(t_ray *ray, t_sp *sphere, double *distance)
 		*distance = t1;
 	return (true);
 }
-
-// void	ray_sphere()
-// {
-
-// }

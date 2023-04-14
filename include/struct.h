@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 11:33:40 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/13 15:37:40 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/14 09:32:10 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,6 @@ typedef struct s_rgb
 	int	b;
 }			t_rgb;
 
-typedef struct s_coord
-{
-	float	x;
-	float	y;
-	float	z;
-}			t_coord;
-
 //-------------------------------------------//
 
 //struct for lumiere ambiante, camera, lumiere//
@@ -65,14 +58,14 @@ typedef struct s_la
 
 typedef struct s_ca
 {
-	t_coord	pv;
-	t_coord	axe;
+	t_vector	pv;
+	t_vector	axe;
 	int		fov;
 }			t_ca;
 
 typedef struct s_l
 {
-	t_coord	pl;
+	t_vector	pl;
 	float	ratio;
 	t_rgb	rgb;
 }			t_l;
@@ -92,42 +85,19 @@ typedef struct s_object
 	struct s_object	*next;
 }				t_object;
 
-typedef struct s_sp
+typedef struct s_impact
 {
-	t_coord		ps;
-	float		dia;
-	t_rgb		rgb;
-	struct s_sp	*next;
-}			t_sp;
-
-typedef struct s_pl
-{
-	t_coord		pf;
-	t_coord		vod;
-	t_rgb		rgb;
-	struct s_pl	*next;
-}			t_pl;
-
-typedef struct s_cy
-{
-	t_coord		pf;
-	t_coord		vod;
-	float		dia_cy;
-	float		h_cy;
-	t_rgb		rgb;
-	struct s_cy	*next;
-}			t_cy;
+	t_rgb	rgb;
+}				t_impact;
 
 //-------------------------------------------//
 
 typedef struct s_value
 {
-	t_la	lum_am;
-	t_ca	cam;
-	t_l		lum;
-	t_sp	*sphere;
-	t_pl	*plan;
-	t_cy	*cylindre;
+	t_la		lum_am;
+	t_ca		cam;
+	t_l			lum;
+	t_object	*object;
 }			t_value;
 
 typedef struct s_line
@@ -139,8 +109,8 @@ typedef struct s_line
 
 typedef struct s_ray
 {
-	t_coord	origin;
-	t_coord	diection;
+	t_vector	origin;
+	t_vector	diection;
 }				t_ray;
 
 //-------------------------------------------//
