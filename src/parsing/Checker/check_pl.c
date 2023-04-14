@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_pl.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:20:16 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/14 14:11:23 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/14 17:04:05 by julmuntz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static t_object	*new_elem_pl(char **vector, char **coord, char **rgb)
 			ft_atof(coord[1]), ft_atof(coord[2]));
 	new->axis = new_vector(ft_atof(vector[0]),
 			ft_atof(vector[1]), ft_atof(vector[2]));
+	new->axis = normalize(new->axis);
 	new->rgb = new_rgb(ft_atof(rgb[0]), ft_atof(rgb[1]), ft_atof(rgb[2]));
 	new->info = PL;
 	new->next = NULL;
@@ -39,11 +40,11 @@ static void	recup_pl(char ***coord, char ***vector,
 
 static t_object	*init_sp(char **array_tmp)
 {
-	char	**rgb;
-	char	**coord;
-	char	**vector;
+	char		**rgb;
+	char		**coord;
+	char		**vector;
 	t_object	*tmp;
-	
+
 	recup_pl(&coord, &vector, &rgb, array_tmp);
 	if (!coord || !rgb || !vector)
 		return (ft_free2(coord), ft_free2(rgb), ft_free2(vector), NULL);
@@ -53,7 +54,7 @@ static t_object	*init_sp(char **array_tmp)
 
 t_object	*check_pl(char *line, int start)
 {
-	char	**array_line;
+	char		**array_line;
 	t_object	*tmp;
 
 	if (!line)

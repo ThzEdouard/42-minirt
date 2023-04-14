@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_c.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 12:38:12 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/11 16:48:41 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/14 15:58:30 by julmuntz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static int	init_ca(t_ca *tmp_cam, char **array_tmp)
 	tmp_cam->axe.x = ft_atof(vector[0]);
 	tmp_cam->axe.y = ft_atof(vector[1]);
 	tmp_cam->axe.z = ft_atof(vector[2]);
+	tmp_cam->axe = normalize(tmp_cam->axe);
 	tmp_cam->fov = ft_atoi(array_tmp[3]);
 	return (ft_free2(coord), ft_free2(vector), SUCCESS);
 }

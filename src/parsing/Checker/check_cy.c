@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_cy.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:09:35 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/14 14:20:16 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/14 17:02:42 by julmuntz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static t_object	*new_elem_cy(char **vector, char **coord,
 			ft_atof(coord[1]), ft_atof(coord[2]));
 	new->axis = new_vector(ft_atof(vector[0]),
 			ft_atof(vector[1]), ft_atof(vector[2]));
+	new->axis = normalize(new->axis);
 	new->diameter = ft_atof(array_tmp[3]);
 	new->height = ft_atof(array_tmp[4]);
 	new->rgb = new_rgb(ft_atoi(rgb[0]), ft_atoi(rgb[1]), ft_atoi(rgb[2]));
@@ -42,10 +43,11 @@ static void	recup_cy(char ***coord, char ***vector,
 
 static t_object	*init_cy(char **array_tmp)
 {
-	char	**rgb;
-	char	**coord;
-	char	**vector;
+	char		**rgb;
+	char		**coord;
+	char		**vector;
 	t_object	*tmp;
+
 	recup_cy(&coord, &vector, &rgb, array_tmp);
 	if (!coord || !rgb || !vector)
 		return (ft_free2(coord), ft_free2(rgb), ft_free2(vector), NULL);
@@ -57,6 +59,7 @@ t_object	*check_cy(char *line, int start)
 {
 	char		**array_line;
 	t_object	*tmp;
+
 	if (!line)
 		return (FAIL);
 	array_line = ft_split(line, 32);

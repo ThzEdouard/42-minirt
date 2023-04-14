@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_id.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 13:11:56 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/14 14:42:34 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/14 16:58:12 by julmuntz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,61 +30,65 @@ static int	check_len(t_line *line, enum s_info info)
 	return (SUCCESS);
 }
 
-int	check_id_min(t_line *line, t_value **tmps)
+static t_object	*get_check(enum s_info type, t_line *line, t_object *value,
+t_value **tmps)
+{
+	if (type == SP)
+	{
+		value = check_sp(line->line, 1);
+		if (!value)
+			ft_free_object((*tmps)->object);
+	}
+	if (type == PL)
+	{
+		value = check_pl(line->line, 1);
+		if (!value)
+			ft_free_object((*tmps)->object);
+	}
+	if (type == CY)
+	{
+		value = check_cy(line->line, 1);
+		if (!value)
+			ft_free_object((*tmps)->object);
+	}
+	return (value);
+}
+
+static int	check_id_min2(t_line *line, t_value **tmps)
 {
 	t_object	*value;
 
 	while (line)
 	{
 		if (line && line->info == SP)
-		{
-			(*tmps)->object = check_sp(line->line, 1);
-			if (!(*tmps)->object)
-				return (ft_free_object((*tmps)->object), FAIL);
-		}
+			value->next = get_check(SP, line, value->next, tmps);
 		if (line && line->info == PL)
-		{
-			(*tmps)->object = check_pl(line->line, 1);
-			if (!(*tmps)->object)
-				return (ft_free_object((*tmps)->object), FAIL);
-		}
+			value->next = get_check(PL, line, value->next, tmps);
 		if (line && line->info == CY)
-		{
-			(*tmps)->object = check_cy(line->line, 1);
-			if (!(*tmps)->object)
-				return (ft_free_object((*tmps)->object), FAIL);
-		}
-		line = line->next;
-		if ((*tmps)->object)
-			break ;
-
-	}
-	value = (*tmps)->object;
-	while (line)
-	{
-		if (line && line->info == SP)
-		{
-			value->next = check_sp(line->line, 1);
-			if (!value->next)
-				return (ft_free_object((*tmps)->object), FAIL);
-		}
-		if (line && line->info == PL)
-		{
-			value->next = check_pl(line->line, 1);
-			if (!value->next)
-				return (ft_free_object((*tmps)->object), FAIL);
-		}
-		if (line && line->info == CY)
-		{
-			value->next = check_cy(line->line, 1);
-			if (!value->next)
-				return (ft_free_object((*tmps)->object), FAIL);
-		}
+			value->next = get_check(CY, line, value->next, tmps);
 		if (value->next)
 			value = value->next;
 		line = line->next;
 	}
-	//(*tmp)->object = value;
+	return (SUCCESS);
+}
+
+int	check_id_min(t_line *line, t_value **tmps)
+{
+	while (line)
+	{
+		if (line && line->info == SP)
+			(*tmps)->object = get_check(SP, line, (*tmps)->object, tmps);
+		if (line && line->info == PL)
+			(*tmps)->object = get_check(PL, line, (*tmps)->object, tmps);
+		if (line && line->info == CY)
+			(*tmps)->object = get_check(CY, line, (*tmps)->object, tmps);
+		line = line->next;
+		if ((*tmps)->object)
+			break ;
+	}
+	if (check_id_min2(line, tmps) == FAIL)
+		return (FAIL);
 	return (SUCCESS);
 }
 

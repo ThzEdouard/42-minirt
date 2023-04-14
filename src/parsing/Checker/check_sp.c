@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_sp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 13:59:01 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/14 14:13:26 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/14 17:03:28 by julmuntz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ static t_object	*new_elem_sp(char **array_tmp, char **coord, char **rgb)
 
 static t_object	*init_sp(char **array_tmp)
 {
-	char	**rgb;
-	char	**coord;
-	t_object *tmp;
-	
+	char		**rgb;
+	char		**coord;
+	t_object	*tmp;
+
 	coord = ft_split(array_tmp[1], ',');
 	rgb = ft_split(array_tmp[3], ',');
 	if (!coord || !rgb)
@@ -44,7 +44,7 @@ static t_object	*init_sp(char **array_tmp)
 
 t_object	*check_sp(char *line, int start)
 {
-	char	**array_line;
+	char		**array_line;
 	t_object	*tmp;
 
 	if (!line)
