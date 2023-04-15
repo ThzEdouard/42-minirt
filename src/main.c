@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 11:26:01 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/14 18:58:36 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/15 12:51:09 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int	main(int argc, char **argv)
 			my_mlx_pixel_put(&img, x, y, create_trgb(0, impact.rgb.r,impact.rgb.g,impact.rgb.b));
 		}
 	}
-
 	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, img.img, 0, 0);
 	mlx_loop(mlx.mlx);
 	ft_free_object(value->object);

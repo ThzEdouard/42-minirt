@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:11:51 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/14 19:05:41 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/15 13:25:26 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_ray	init_ray(t_ca cam, int x, int y)
 {
 	t_ray	result;
 
-	double	fov_adjustment;
+double	fov_adjustment;
 	double	aspect_ratio;
 
 	aspect_ratio = (WIDTH) / (HEIGHT);
@@ -53,14 +53,15 @@ t_ray	init_ray(t_ca cam, int x, int y)
 // 	result.diection = normalize(result.diection);
 
 // float fovrad = cam.fov *  (M_PI / 180);
-//
-	// t_vector up = normalize(cross(cam.axe, new_vector(0,0,0)));
-//
-	// float normX = (x + 0.5) / WIDTH * 2 - 1;
-	// float normY = (y + 0.5) / HEIGHT * 2 - 1;
-	// result.diection = new_vector(cam.axe.x + 0 * normX * tan(fovrad / 2) + up.x * normY * tan(fovrad / 2),
-	// cam.axe.y + 0 * normX * tan(fovrad / 2) + up.y * normY * tan(fovrad / 2),
-	// cam.axe.z + 0 * normX * tan(fovrad / 2) + up.z * normY * tan(fovrad / 2));
-	// result.origin = cam.pv;
-	// result.diection = normalize(result.diection);
+// 	t_vector right = new_vector(0,0,0);
+// 	t_vector up = cross(cam.axe, right);
+// 	up = normalize(up);
+// 	right = normalize(right);
+// 	float normX = (x + 0.5) / WIDTH * 2 - 1;
+// 	float normY = (y + 0.5) / HEIGHT * 2 - 1;
+// 	result.diection = new_vector(cam.axe.x + right.x * normX * tan(fovrad / 2) + up.x * normY * tan(fovrad / 2),
+// 	cam.axe.y + right.y * normX * tan(fovrad / 2) + up.y * normY * tan(fovrad / 2),
+// 	cam.axe.z + right.z * normX * tan(fovrad / 2) + up.z * normY * tan(fovrad / 2));
+// 	result.origin = cam.pv;
+// 	result.diection = normalize(result.diection);
 
