@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 11:26:01 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/15 12:51:09 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/16 13:55:43 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	main(int argc, char **argv)
 		{
 			t_ray ray = init_ray(value->cam, x, y);
 			t_impact	impact;
-			ray_scene(&ray, value->object,&impact);
+			ray_scene(&ray, value->object,&impact, value);
 			my_mlx_pixel_put(&img, x, y, create_trgb(0, impact.rgb.r,impact.rgb.g,impact.rgb.b));
 		}
 	}

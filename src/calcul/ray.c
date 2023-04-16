@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:11:51 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/15 13:25:26 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/16 14:31:24 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_ray	init_ray(t_ca cam, int x, int y)
 {
 	t_ray	result;
 
-double	fov_adjustment;
+	double	fov_adjustment;
 	double	aspect_ratio;
 
 	aspect_ratio = (WIDTH) / (HEIGHT);
