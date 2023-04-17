@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 11:33:40 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/17 10:39:53 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/17 18:55:36 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # define HEIGHT 1024
 # define WIDTH 1024
 # define EPSILON 0.0001
-# define ALBEDO 0.3
+# define ALBEDO 0.003
 
 typedef enum s_info
 {

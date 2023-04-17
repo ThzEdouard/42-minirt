@@ -6,12 +6,86 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 14:39:20 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/17 12:46:26 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/17 19:07:39 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+
+bool calisShadowed(t_object *object, t_impact *impact, t_value *v)
+{
+	t_object	*tmp;
+	t_ray	ray;
+	double d;
+	ray.origin = addition_vector(vector_multipli(impact->normal, ALBEDO), impact->p_inter);
+	ray.diection = normalize(subtract_vector(v->lum.pl, impact->p_inter));
+	//double dis = magnitude(subtract_vector( v->lum.pl, impact->p_inter));
+	tmp = object;
+	while (tmp)
+	{
+		if (tmp->info == SP && intersection_sphere(&ray, tmp, &d))
+		{
+				return (true);
+		}
+		if (tmp->info == PL && intersection_plan(tmp, &ray, &d))
+		{
+				return (true);
+		}
+		if (tmp->info == CY && intersection_cylindre(&ray, tmp, &d))
+		{
+				return (true);
+		}
+		tmp = tmp->next;
+	}
+
+	return (false);
+}
+
+t_rgb	calculAmbient(t_value *v)
+{
+	return (rgb_multipli(v->lum_am.rgb, v->lum_am.ratio));
+}
+
+t_rgb	calculdiffuselight(t_impact *impact, t_value *v)
+{
+	t_vector light_direction = normalize(v->lum.pl);
+	double	diffusefactuer = dot(impact->normal, light_direction);
+	diffusefactuer = fmax(0.0, diffusefactuer);
+	t_rgb diffuse = new_rgb((int)impact->rgb.r * v->lum.ratio * diffusefactuer,
+		 (int)impact->rgb.g * v->lum.ratio *diffusefactuer,
+		 (int)impact->rgb.b * v->lum.ratio *diffusefactuer);
+	diffuse.r  = fmin(fmax(diffuse.r, 0), 255);
+	diffuse.g = fmin(fmax(diffuse.g, 0), 255);
+	diffuse.b = fmin(fmax(diffuse.b, 0), 255);
+	return (diffuse);
+}
+
+t_rgb	calculateShadowedLight(t_impact *impact, t_value *value, t_object *obj)
+{
+	t_rgb	result;
+
+	bool	isShadowed;
+
+	isShadowed = calisShadowed(obj, impact, value);
+result = addition_rgb (calculAmbient(value), calculdiffuselight(impact, value));
+		result.r  = fmin(fmax(result.r, 0), 255);
+		result.g = fmin(fmax(result.g, 0), 255);
+		result.b = fmin(fmax(result.b, 0), 255);
+		(void)isShadowed;
+	// if (isShadowed)
+	// {
+	// 	result = calculAmbient(value);
+	// 	result.r  = fmin(fmax(result.r, 0), 255);
+	// 	result.g = fmin(fmax(result.g, 0), 255);
+	// 	result.b = fmin(fmax(result.b, 0), 255);
+	// }
+	// else
+	// {
+
+	// }
+	return (result);
+}
 
 t_rgb	get_color(t_object *tmp, t_impact *impact, t_value *v)
 {
@@ -34,42 +108,9 @@ t_rgb	get_color(t_object *tmp, t_impact *impact, t_value *v)
 	return (result);
 }
 
-t_rgb	check_ombre(t_impact *impact,t_object *object, t_value *v)
-{
-
-	t_object *tmp;
-	t_ray	ray;
-	ray.origin = impact->p_inter;
-	ray.diection = normalize(v->lum.pl);
-	double d1;
-	tmp = object;
-	while (tmp)
-	{
-		if (tmp->info == SP && intersection_sphere(&ray, tmp, &d1))
-		{
-			if (d1 < magnitude(v->lum.pl))
-				return (new_rgb(0,0,0));
-			break ;
-		}
-		if (tmp->info == PL && intersection_plan(tmp, &ray, &d1))
-		{
-			if (d1 < magnitude(v->lum.pl))
-				return (new_rgb(0,0,0));
-			break ;
-		}
-		if (tmp->info == CY && intersection_cylindre(&ray, tmp, &d1))
-		{
-			if (d1 < magnitude(v->lum.pl))
-				return (new_rgb(0,0,0));
-			break ;
-		}
-		tmp = tmp->next;
-	}
-	return (impact->rgb);
-}
-
 void	ray_scene(t_ray *ray, t_object *object, t_impact *impact, t_value *v)
 {
+	(void)v;
 
 	t_object	*tmp;
 	double	d1 = INFINITY;
@@ -93,7 +134,7 @@ void	ray_scene(t_ray *ray, t_object *object, t_impact *impact, t_value *v)
 				impact->rgb = tmp->rgb;
 				impact->info = SP;
 				impact->distance = d1;
-				impact->rgb = get_color(tmp, impact, v);
+				impact->rgb = calculateShadowedLight(impact, v, object);
 
 				d1 = INFINITY;
 			}
@@ -111,7 +152,7 @@ void	ray_scene(t_ray *ray, t_object *object, t_impact *impact, t_value *v)
 				impact->rgb = tmp->rgb;
 				impact->info = PL;
 				impact->distance = d2;
-				impact->rgb = get_color(tmp, impact, v);
+				impact->rgb = calculateShadowedLight(impact, v, object);
 
 				d2 = INFINITY;
 			}
@@ -128,17 +169,14 @@ void	ray_scene(t_ray *ray, t_object *object, t_impact *impact, t_value *v)
 				impact->rgb = tmp->rgb;
 				impact->info = CY;
 				impact->distance = d3;
-				impact->rgb = get_color(tmp, impact, v);
+				impact->rgb = calculateShadowedLight(impact, v, object);
 
 				d3 = INFINITY;
 			}
 		}
 		tmp = tmp->next;
 	}
-	if (impact->info != NOT)
-	{
-		impact->rgb = check_ombre(impact, object, v);
-	}
+
 }
 
 	// printf("avant : %d %d %d\n", impact->rgb.r,impact->rgb.g,impact->rgb.b);
