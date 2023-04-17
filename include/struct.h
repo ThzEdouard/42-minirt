@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 11:33:40 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/16 13:40:57 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/17 10:39:53 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ typedef struct s_impact
 	t_vector	p_inter;
 	t_vector	normal;
 	t_rgb	rgb;
+	t_info	info;
 	double	distance;
 }				t_impact;
 

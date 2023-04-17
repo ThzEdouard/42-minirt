@@ -6,12 +6,16 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:11:51 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/16 14:31:24 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/17 10:32:26 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+// t_ray	generay_ray(t_vector origin, t_vector direction)
+// {
+
+// }
 t_ray	init_ray(t_ca cam, int x, int y)
 {
 	t_ray	result;
