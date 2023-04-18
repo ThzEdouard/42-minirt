@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:11:51 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/17 18:25:09 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/18 11:02:42 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,3 +71,29 @@ t_ray	init_ray(t_ca cam, int x, int y)
 // 	result.origin = cam.pv;
 // 	result.diection = normalize(result.diection);
 
+/*
+float fovRad = cam.fov * M_PI / 180.0f;
+    float aspectRatio = WIDTH / (float)HEIGHT;
+    float screenPosX = ((2.0f * ((float)x + 0.5f) / (float)WIDTH) - 1.0f) * tanf(fovRad * 0.5f) * aspectRatio;
+    float screenPosY = (1.0f - 2.0f * ((float)y + 0.5f) / (float)HEIGHT) * tanf(fovRad * 0.5f);
+    t_vector screenPos = {screenPosX, screenPosY, -1.0f};
+    float cosTheta = cosf(fovRad);
+    float sinTheta = sinf(fovRad);
+    float rotationMatrix[3][3] = {
+        {cosTheta + (1 - cosTheta) * cam.axe.x * cam.axe.x,
+         (1 - cosTheta) * cam.axe.x * cam.axe.y - cam.axe.z * sinTheta,
+         (1 - cosTheta) * cam.axe.x * cam.axe.z + cam.axe.y * sinTheta},
+        {(1 - cosTheta) * cam.axe.x * cam.axe.y + cam.axe.z * sinTheta,
+         cosTheta + (1 - cosTheta) * cam.axe.y * cam.axe.y,
+         (1 - cosTheta) * cam.axe.y * cam.axe.z - cam.axe.x * sinTheta},
+        {(1 - cosTheta) * cam.axe.x * cam.axe.z - cam.axe.y * sinTheta,
+         (1 - cosTheta) * cam.axe.y * cam.axe.z + cam.axe.x * sinTheta,
+         cosTheta + (1 - cosTheta) * cam.axe.z * cam.axe.z}
+    };
+    screenPos.x = rotationMatrix[0][0] * screenPos.x + rotationMatrix[0][1] * screenPos.y + rotationMatrix[0][2] * screenPos.z;
+    screenPos.y = rotationMatrix[1][0] * screenPos.x + rotationMatrix[1][1] * screenPos.y + rotationMatrix[1][2] * screenPos.z;
+    screenPos.z = rotationMatrix[2][0] * screenPos.x + rotationMatrix[2][1] * screenPos.y + rotationMatrix[2][2] * screenPos.z;
+    result.diection = new_vector(screenPos.x - cam.pv.x, screenPos.y - cam.pv.y, screenPos.z - cam.pv.z);
+    result.diection = normalize(result.diection); // Normalisation de la direction du rayon
+    result.origin = cam.pv;
+*/

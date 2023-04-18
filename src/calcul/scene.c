@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 14:39:20 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/17 19:07:39 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/18 11:15:58 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,16 @@ t_rgb	calculAmbient(t_value *v)
 
 t_rgb	calculdiffuselight(t_impact *impact, t_value *v)
 {
-	t_vector light_direction = normalize(v->lum.pl);
-	double	diffusefactuer = dot(impact->normal, light_direction);
-	diffusefactuer = fmax(0.0, diffusefactuer);
-	t_rgb diffuse = new_rgb((int)impact->rgb.r * v->lum.ratio * diffusefactuer,
-		 (int)impact->rgb.g * v->lum.ratio *diffusefactuer,
-		 (int)impact->rgb.b * v->lum.ratio *diffusefactuer);
-	diffuse.r  = fmin(fmax(diffuse.r, 0), 255);
-	diffuse.g = fmin(fmax(diffuse.g, 0), 255);
-	diffuse.b = fmin(fmax(diffuse.b, 0), 255);
+	// t_vector light_direction = normalize(v->lum.pl);
+	// double	diffusefactuer = dot(impact->normal, light_direction);
+	// diffusefactuer = fmax(0.0, diffusefactuer);
+	// t_rgb diffuse = new_rgb((int)impact->rgb.r * v->lum.ratio * diffusefactuer,
+	// 	 (int)impact->rgb.g * v->lum.ratio *diffusefactuer,
+	// 	 (int)impact->rgb.b * v->lum.ratio *diffusefactuer);
+	t_rgb	diffuse;
+	diffuse.r  = fmin(fmax((int)(impact->rgb.r * v->lum_am.rgb.r * v->lum.ratio), 0), 255);
+	diffuse.g = fmin(fmax((int)(impact->rgb.g * v->lum_am.rgb.g * v->lum.ratio), 0), 255);
+	diffuse.b = fmin(fmax((int)(impact->rgb.b * v->lum_am.rgb.b * v->lum.ratio), 0), 255);
 	return (diffuse);
 }
 
@@ -68,10 +69,9 @@ t_rgb	calculateShadowedLight(t_impact *impact, t_value *value, t_object *obj)
 	bool	isShadowed;
 
 	isShadowed = calisShadowed(obj, impact, value);
-result = addition_rgb (calculAmbient(value), calculdiffuselight(impact, value));
-		result.r  = fmin(fmax(result.r, 0), 255);
-		result.g = fmin(fmax(result.g, 0), 255);
-		result.b = fmin(fmax(result.b, 0), 255);
+		result.r  = fmin(fmax((int)(impact->rgb.r * value->lum.ratio), 0), 255);
+		result.g = fmin(fmax((int)(impact->rgb.g * value->lum.ratio), 0), 255);
+		result.b = fmin(fmax((int)(impact->rgb.b * value->lum.ratio), 0), 255);
 		(void)isShadowed;
 	// if (isShadowed)
 	// {
