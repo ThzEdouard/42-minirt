@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 11:26:01 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/16 13:55:43 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/28 15:53:42 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	main(int argc, char **argv)
 	// free(value);
 	if (!init_window(&mlx, &img, argv[1]))
 		return (/*ne pas oublier de free*/FAIL);
-
 
 	for (int y = 0; y < HEIGHT; y++)
 	{

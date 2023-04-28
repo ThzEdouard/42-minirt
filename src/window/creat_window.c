@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 09:10:45 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/11 16:39:00 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/28 16:19:55 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,16 @@ int	create_trgb(int t, int r, int g, int b)
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
+void	ft_free_mlx(t_mlx *tmp_mlx, t_data *tmp_img)
+{
+	if (tmp_mlx->mlx)
+	{
+		mlx_destroy_display(tmp_mlx->mlx);
+		free(tmp_mlx->mlx);
+	}
+
+}
+
 int	init_window(t_mlx *tmp_mlx, t_data *tmp_img, char *name)
 {
 	tmp_mlx->mlx = mlx_init();
@@ -32,14 +42,14 @@ int	init_window(t_mlx *tmp_mlx, t_data *tmp_img, char *name)
 		return (FAIL);
 	tmp_mlx->mlx_win = mlx_new_window(tmp_mlx->mlx, WIDTH, HEIGHT, name);
 	if (!tmp_mlx->mlx_win)
-		return (FAIL);
+		return (mlx_destroy_display(tmp_mlx->mlx), free(tmp_mlx->mlx), FAIL);
 	tmp_img->img = mlx_new_image(tmp_mlx->mlx, WIDTH, HEIGHT);
 	if (!tmp_img->img)
-		return (FAIL);
+		return (mlx_destroy_window(tmp_mlx->mlx, tmp_mlx->mlx_win), mlx_destroy_display(tmp_mlx->mlx), free(tmp_mlx->mlx), FAIL);
 	tmp_img->addr = mlx_get_data_addr(tmp_img->img,
 			&tmp_img->bits_per_pixel, &tmp_img->line_length,
 			&tmp_img->endian);
 	if (!tmp_img->addr)
-		return (FAIL);
+		return (mlx_destroy_image(tmp_mlx->mlx, tmp_img->img), mlx_destroy_window(tmp_mlx->mlx, tmp_mlx->mlx_win), mlx_destroy_display(tmp_mlx->mlx), free(tmp_mlx->mlx),FAIL);
 	return (SUCCESS);
 }
