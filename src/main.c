@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 11:26:01 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/28 18:33:52 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/28 18:45:48 by julmuntz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,15 @@ void	ft_free_object(t_object *value)
 	}
 }
 
-int	key_end(t_end *end)
+int	key_end(int key, t_end *end)
 {
-	ft_free_mlx(&(end->mlx), &(end->data));
-	ft_free_object(end->value->object);
-	free(end->value);
-	exit(0);
+	if (key == XK_Escape)
+	{
+		ft_free_mlx(&(end->mlx), &(end->data));
+		ft_free_object(end->value->object);
+		free(end->value);
+		exit(0);
+	}
 	return (0);
 }
 
