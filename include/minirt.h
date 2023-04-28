@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 11:20:27 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/16 13:55:34 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/28 17:52:23 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,7 @@ t_vector	vector_subtract(t_vector a, double b);
 t_vector	vector_addition(t_vector a, double b);
 t_vector	vector_multipli(t_vector a, double b);
 t_vector	vector_division(t_vector a, double b);
+
+void	ft_free_mlx(t_mlx *tmp_mlx, t_data *tmp_img);
 
 #endif

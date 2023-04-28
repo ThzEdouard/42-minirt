@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 11:33:40 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/18 10:59:44 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/28 17:52:18 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,5 +133,12 @@ typedef struct	s_data
 	int		line_length;
 	int		endian;
 }				t_data;
+
+typedef struct s_end
+{
+	t_mlx	mlx;
+	t_data	data;
+	t_value	*value;
+}				t_end;
 
 #endif
