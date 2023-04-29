@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 14:39:20 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/29 12:31:51 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/29 14:27:00 by julmuntz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static void	calculate(t_impact *impact, float *coeff, t_value *v, int type)
 {
 	impact->info = type;
 	*coeff = -dot(v->lum.pl, impact->normal);
-	impact->rgb = rgb_multiply(impact->rgb, *coeff);
 	impact->rgb = rgb_multiply(impact->rgb,v->lum.ratio);
+	impact->rgb = rgb_multiply(impact->rgb, *coeff);
 	impact->rgb = addition_rgb(rgb_multiply(v->lum_am.rgb, v->lum_am.ratio),
 		impact->rgb);
 }
