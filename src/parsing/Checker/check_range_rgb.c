@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 10:33:32 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/05 11:22:57 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/29 17:30:35 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	check_int_max_min(char *line)
 	return (SUCCESS);
 }
 
-int	check_range_float(float min, float max, float nb)
+int	check_range_double(double min, double max, double nb)
 {
 	if (nb < min || nb > max)
 		return (FAIL);

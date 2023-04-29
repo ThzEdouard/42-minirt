@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 14:18:25 by julmuntz          #+#    #+#             */
-/*   Updated: 2023/04/29 14:21:03 by julmuntz         ###   ########.fr       */
+/*   Updated: 2023/04/29 17:30:35 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_vector	rotate_x(t_vector vector, float angle)
+t_vector	rotate_x(t_vector vector, double angle)
 {
 	t_vector	result;
 
@@ -22,7 +22,7 @@ t_vector	rotate_x(t_vector vector, float angle)
 	return (result);
 }
 
-t_vector	rotate_y(t_vector vector, float angle)
+t_vector	rotate_y(t_vector vector, double angle)
 {
 	t_vector	result;
 
@@ -32,7 +32,7 @@ t_vector	rotate_y(t_vector vector, float angle)
 	return (result);
 }
 
-t_vector	rotate_z(t_vector vector, float angle)
+t_vector	rotate_z(t_vector vector, double angle)
 {
 	t_vector	result;
 

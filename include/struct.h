@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 11:33:40 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/29 12:22:18 by julmuntz         ###   ########.fr       */
+/*   Updated: 2023/04/29 18:29:51 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define WIDTH 800
 # define EPSILON 0.0001
 # define ALBEDO 0.003
+#define MAX_DEPTH 3
 
 typedef enum s_info
 {
@@ -34,9 +35,9 @@ typedef enum s_info
 
 typedef struct s_vector
 {
-	float	x;
-	float	y;
-	float	z;
+	double	x;
+	double	y;
+	double	z;
 }				t_vector;
 
 typedef struct s_rgb
@@ -52,7 +53,7 @@ typedef struct s_rgb
 
 typedef struct s_la
 {
-	float	ratio;
+	double	ratio;
 	t_rgb	rgb;
 }			t_la;
 
@@ -66,7 +67,7 @@ typedef struct s_ca
 typedef struct s_l
 {
 	t_vector	pl;
-	float	ratio;
+	double	ratio;
 	t_rgb	rgb;
 }			t_l;
 
@@ -79,8 +80,8 @@ typedef struct s_object
 	t_vector		center;
 	t_vector		axis;
 	t_rgb			rgb;
-	float			diameter;
-	float			height;
+	double			diameter;
+	double			height;
 	t_info			info;
 	struct s_object	*next;
 }				t_object;

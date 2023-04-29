@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   my_vector.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 15:41:23 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/29 11:50:02 by julmuntz         ###   ########.fr       */
+/*   Updated: 2023/04/29 17:30:35 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_vector	new_vector(float x, float y, float z)
+t_vector	new_vector(double x, double y, double z)
 {
 	t_vector	result;
 

@@ -3,24 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 14:39:20 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/29 14:27:00 by julmuntz         ###   ########.fr       */
+/*   Updated: 2023/04/29 18:59:23 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static void	calculate(t_impact *impact, float *coeff, t_value *v, int type)
-{
-	impact->info = type;
-	*coeff = -dot(v->lum.pl, impact->normal);
-	impact->rgb = rgb_multiply(impact->rgb,v->lum.ratio);
-	impact->rgb = rgb_multiply(impact->rgb, *coeff);
-	impact->rgb = addition_rgb(rgb_multiply(v->lum_am.rgb, v->lum_am.ratio),
-		impact->rgb);
-}
 
 static int	rays(t_ray *ray, t_object *tmp, t_impact *impact, double *d)
 {
@@ -47,7 +38,7 @@ void	ray_scene(t_ray *ray, t_object *object, t_impact *impact, t_value *v)
 	double		d1;
 	double		d2;
 	double		d3;
-	float		coeff;
+	(void)v;
 
 	impact->distance = INFINITY;
 	impact->rgb = new_rgb(0, 0, 0);
@@ -55,15 +46,12 @@ void	ray_scene(t_ray *ray, t_object *object, t_impact *impact, t_value *v)
 	tmp = object;
 	while (tmp)
 	{
-		if (tmp->info == SP && intersection_sphere(ray, tmp, &d1)
-			&& rays(ray, tmp, impact, &d1))
-			calculate(impact, &coeff, v, SP);
-		if (tmp->info == PL && intersection_plan(tmp, ray, &d2)
-			&& rays(ray, tmp, impact, &d2))
-			calculate(impact, &coeff, v, PL);
-		if (tmp->info == CY && intersection_cylindre(ray, tmp, &d3)
-			&& rays(ray, tmp, impact, &d3))
-			calculate(impact, &coeff, v, CY);
+		if (tmp->info == SP && intersection_sphere(ray, tmp, &d1))
+			rays(ray, tmp, impact, &d1);
+		if (tmp->info == PL && intersection_plan(tmp, ray, &d2))
+			rays(ray, tmp, impact, &d2);
+		if (tmp->info == CY && intersection_cylindre(ray, tmp, &d3))
+			rays(ray, tmp, impact, &d3);
 		tmp = tmp->next;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 11:20:27 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/29 14:21:07 by julmuntz         ###   ########.fr       */
+/*   Updated: 2023/04/29 17:31:20 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ bool		intersection_cylindre(t_ray *ray, t_object *cylinde, double *distance);
 void		ray_scene(t_ray *ray, t_object *object, t_impact *impact, t_value *v);
 void		ft_free_object(t_object *value);
 
-t_vector	rotate_x(t_vector vector, float angle);
-t_vector	rotate_y(t_vector vector, float angle);
-t_vector	rotate_z(t_vector vector, float angle);
+t_vector	rotate_x(t_vector vector, double angle);
+t_vector	rotate_y(t_vector vector, double angle);
+t_vector	rotate_z(t_vector vector, double angle);
 t_vector	rotate(t_vector vector, t_vector angle);
 
 t_rgb		new_rgb(int r, int g, int b);
@@ -66,7 +66,7 @@ t_rgb		rgb_addition(t_rgb a, double b);
 t_rgb		rgb_multiply(t_rgb a, double b);
 t_rgb		rgb_division(t_rgb a, double b);
 
-t_vector	new_vector(float x, float y, float z);
+t_vector	new_vector(double x, double y, double z);
 t_vector	subtract_vector(t_vector a, t_vector b);
 t_vector	addition_vector(t_vector a, t_vector b);
 t_vector	multiply_vector(t_vector a, t_vector b);
