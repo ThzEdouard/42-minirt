@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:11:51 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/18 11:02:42 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/29 12:22:18 by julmuntz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ t_ray	init_ray(t_ca cam, int x, int y)
 	aspect_ratio = (WIDTH) / (HEIGHT);
 	fov_adjustment = tan((cam.fov * (180 / M_PI))/ 2.0);
 	result.origin = cam.pv;
-	result.diection.x = ((((x + 0.5) / WIDTH) * 2.0 - 1.0)
+	result.direction.x = ((((x + 0.5) / WIDTH) * 2.0 - 1.0)
 			* aspect_ratio) * fov_adjustment;
-	result.diection.y = (1.0 - ((y + 0.5) / HEIGHT) * 2.0) * fov_adjustment;
-	result.diection.z = -1.0;
-	result.diection = normalize(result.diection);
+	result.direction.y = (1.0 - ((y + 0.5) / HEIGHT) * 2.0) * fov_adjustment;
+	result.direction.z = -1.0;
+	result.direction = normalize(result.direction);
 	return (result);
 }
 
@@ -38,13 +38,13 @@ t_ray	init_ray(t_ca cam, int x, int y)
 // 	double b = x + 0.5 - (HEIGHT) * 0.5;
 // 	double c = WIDTH / (2 * tan(cam.fov * M_PI * 0.5) / 180.0);
 // 	result.origin = origin;
-// 	result.diection.x = 1 * a + 0 * b + 0 * c;
-// 	result.diection.y = 0 * a + 1 * b + 0 * c;
-// 	result.diection.z = 0 * a + 0 * b + 1 * c;
-// result.diection = normalize(result.diection);
+// 	result.direction.x = 1 * a + 0 * b + 0 * c;
+// 	result.direction.y = 0 * a + 1 * b + 0 * c;
+// 	result.direction.z = 0 * a + 0 * b + 1 * c;
+// result.direction = normalize(result.direction);
 /*result.origin = cam.pv;
-	result.diection = new_vector(x - WIDTH / 2, y - HEIGHT / 2, -WIDTH / (2 * tan((cam.fov * M_PI / 180) / 2)));
-	result.diection = normalize(result.diection);*/
+	result.direction = new_vector(x - WIDTH / 2, y - HEIGHT / 2, -WIDTH / (2 * tan((cam.fov * M_PI / 180) / 2)));
+	result.direction = normalize(result.direction);*/
 
 // double	fov_adjustment;
 // 	double	aspect_ratio;
@@ -52,11 +52,11 @@ t_ray	init_ray(t_ca cam, int x, int y)
 // 	aspect_ratio = (WIDTH) / (HEIGHT);
 // 	fov_adjustment = tan((cam.fov * (180 / M_PI) / 2.0));
 // 	result.origin = cam.pv;
-// 	result.diection.x = ((((x + 0.5) / WIDTH) * 2.0 - 1.0)
+// 	result.direction.x = ((((x + 0.5) / WIDTH) * 2.0 - 1.0)
 // 			* aspect_ratio) * fov_adjustment;
-// 	result.diection.y = (1.0 - ((y + 0.5) / HEIGHT) * 2.0) * fov_adjustment;
-// 	result.diection.z = -1.0;
-// 	result.diection = normalize(result.diection);
+// 	result.direction.y = (1.0 - ((y + 0.5) / HEIGHT) * 2.0) * fov_adjustment;
+// 	result.direction.z = -1.0;
+// 	result.direction = normalize(result.direction);
 
 // float fovrad = cam.fov *  (M_PI / 180);
 // 	t_vector right = new_vector(0,0,0);
@@ -65,11 +65,11 @@ t_ray	init_ray(t_ca cam, int x, int y)
 // 	right = normalize(right);
 // 	float normX = (x + 0.5) / WIDTH * 2 - 1;
 // 	float normY = (y + 0.5) / HEIGHT * 2 - 1;
-// 	result.diection = new_vector(cam.axe.x + right.x * normX * tan(fovrad / 2) + up.x * normY * tan(fovrad / 2),
+// 	result.direction = new_vector(cam.axe.x + right.x * normX * tan(fovrad / 2) + up.x * normY * tan(fovrad / 2),
 // 	cam.axe.y + right.y * normX * tan(fovrad / 2) + up.y * normY * tan(fovrad / 2),
 // 	cam.axe.z + right.z * normX * tan(fovrad / 2) + up.z * normY * tan(fovrad / 2));
 // 	result.origin = cam.pv;
-// 	result.diection = normalize(result.diection);
+// 	result.direction = normalize(result.direction);
 
 /*
 float fovRad = cam.fov * M_PI / 180.0f;
@@ -93,7 +93,7 @@ float fovRad = cam.fov * M_PI / 180.0f;
     screenPos.x = rotationMatrix[0][0] * screenPos.x + rotationMatrix[0][1] * screenPos.y + rotationMatrix[0][2] * screenPos.z;
     screenPos.y = rotationMatrix[1][0] * screenPos.x + rotationMatrix[1][1] * screenPos.y + rotationMatrix[1][2] * screenPos.z;
     screenPos.z = rotationMatrix[2][0] * screenPos.x + rotationMatrix[2][1] * screenPos.y + rotationMatrix[2][2] * screenPos.z;
-    result.diection = new_vector(screenPos.x - cam.pv.x, screenPos.y - cam.pv.y, screenPos.z - cam.pv.z);
-    result.diection = normalize(result.diection); // Normalisation de la direction du rayon
+    result.direction = new_vector(screenPos.x - cam.pv.x, screenPos.y - cam.pv.y, screenPos.z - cam.pv.z);
+    result.direction = normalize(result.direction); // Normalisation de la direction du rayon
     result.origin = cam.pv;
 */

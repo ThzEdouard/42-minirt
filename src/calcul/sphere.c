@@ -6,7 +6,7 @@
 /*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:20:39 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/29 12:03:04 by julmuntz         ###   ########.fr       */
+/*   Updated: 2023/04/29 12:22:18 by julmuntz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static	bool	solver_quot(t_ray *ray, t_object *sphere,
 	double		c;
 
 	oc = subtract_vector(ray->origin, sphere->center);
-	a = dot(ray->diection, ray->diection);
-	b = 2 * dot(oc, ray->diection);
+	a = dot(ray->direction, ray->direction);
+	b = 2 * dot(oc, ray->direction);
 	c = dot(oc, oc) - (sphere->diameter / 2 * sphere->diameter / 2);
 	if (b * b - 4 * a * c < 0)
 		return (false);

@@ -6,7 +6,7 @@
 /*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:44:44 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/29 12:13:33 by julmuntz         ###   ########.fr       */
+/*   Updated: 2023/04/29 12:22:18 by julmuntz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@
 
 // t_coord v,u;
 
-// 	v = op_m(cylinde->vod, dot(ray->diection, cylinde->vod));
-// 	v = op_moins(ray->diection, v);
+// 	v = op_m(cylinde->vod, dot(ray->direction, cylinde->vod));
+// 	v = op_moins(ray->direction, v);
 // 	u = op_m(cylinde->vod, dot(op_moins(ray->origin, cylinde->pf), cylinde->vod));
 // 	u = op_moins(op_moins(ray->origin, cylinde->pf), u);
 // 	a = dot(v,v);
@@ -101,8 +101,8 @@ bool	intersection_cylindre(t_ray *ray, t_object *cylinde, double *distance)
 	t_vector v,u;
 
 	*distance = INFINITY;
-	v = vector_multiply(cylinde->axis, dot(ray->diection, cylinde->axis));
-	v = subtract_vector(ray->diection, v);
+	v = vector_multiply(cylinde->axis, dot(ray->direction, cylinde->axis));
+	v = subtract_vector(ray->direction, v);
 	u = vector_multiply(cylinde->axis, dot(subtract_vector(ray->origin, cylinde->center), cylinde->axis));
 	u = subtract_vector(subtract_vector(ray->origin, cylinde->center), u);
 	a = dot(v,v);
@@ -115,8 +115,8 @@ bool	intersection_cylindre(t_ray *ray, t_object *cylinde, double *distance)
 
 	if (t1 < 0 && t2 < 0)
 		return (false);
-	double dist1 = dot(cylinde->axis, subtract_vector(vector_multiply(ray->diection, t1), subtract_vector(cylinde->center, ray->origin)));
-	double dist2 = dot(cylinde->axis, subtract_vector(vector_multiply(ray->diection, t2), subtract_vector(cylinde->center, ray->origin)));
+	double dist1 = dot(cylinde->axis, subtract_vector(vector_multiply(ray->direction, t1), subtract_vector(cylinde->center, ray->origin)));
+	double dist2 = dot(cylinde->axis, subtract_vector(vector_multiply(ray->direction, t2), subtract_vector(cylinde->center, ray->origin)));
 	if (!((dist1 >= 0 && dist1 <= cylinde->height && t1 > EPSILON) || (dist2 >= 0 && dist2 <= cylinde->height && t1 > EPSILON)))
 		return (false);
 	double    dist;

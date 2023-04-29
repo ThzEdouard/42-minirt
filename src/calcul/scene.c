@@ -6,7 +6,7 @@
 /*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 14:39:20 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/29 12:11:55 by julmuntz         ###   ########.fr       */
+/*   Updated: 2023/04/29 12:22:18 by julmuntz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ static int	rays(t_ray *ray, t_object *tmp, t_impact *impact, double *d)
 {
 	if ((*d) < impact->distance)
 	{
-		impact->p_inter = new_vector(ray->origin.x + ray->diection.x * (*d),
-				ray->origin.y + ray->diection.y * (*d),
-				ray->origin.z + ray->diection.z * (*d));
+		impact->p_inter = new_vector(ray->origin.x + ray->direction.x * (*d),
+				ray->origin.y + ray->direction.y * (*d),
+				ray->origin.z + ray->direction.z * (*d));
 		impact->normal = new_vector(impact->p_inter.x - tmp->center.x,
 				impact->p_inter.y - tmp->center.y, impact->p_inter.z
 				- tmp->center.z);
