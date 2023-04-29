@@ -6,7 +6,7 @@
 /*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:44:44 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/29 11:50:02 by julmuntz         ###   ########.fr       */
+/*   Updated: 2023/04/29 12:13:33 by julmuntz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ bool	intersection_cylindre(t_ray *ray, t_object *cylinde, double *distance)
 	double a, b, c;
 	t_vector v,u;
 
+	*distance = INFINITY;
 	v = vector_multiply(cylinde->axis, dot(ray->diection, cylinde->axis));
 	v = subtract_vector(ray->diection, v);
 	u = vector_multiply(cylinde->axis, dot(subtract_vector(ray->origin, cylinde->center), cylinde->axis));

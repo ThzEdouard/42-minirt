@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plane.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 15:36:23 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/17 17:35:22 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/29 12:13:07 by julmuntz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ bool	intersection_plan(t_object *plan, t_ray *ray, double *distance)
 	double		demon;
 	t_vector	b2;
 
+	*distance = INFINITY;
 	demon = dot(plan->axis, ray->diection);
 	if (demon > EPSILON)
 	{
