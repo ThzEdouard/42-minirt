@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_vector.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 15:41:23 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/14 08:46:38 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/29 11:50:02 by julmuntz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_vector	addition_vector(t_vector a, t_vector b)
 	return (new_vector(a.x + b.x, a.y + b.y, a.z + b.z));
 }
 
-t_vector	multipli_vector(t_vector a, t_vector b)
+t_vector	multiply_vector(t_vector a, t_vector b)
 {
 	return (new_vector(a.x * b.x, a.y * b.y, a.z * b.z));
 }

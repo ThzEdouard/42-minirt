@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_color.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 16:00:15 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/28 19:01:35 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/29 11:50:02 by julmuntz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_rgb	addition_rgb(t_rgb a, t_rgb b)
 			(int)fmin(255, fmax(0, a.b + b.b))));
 }
 
-t_rgb	multipli_rgb(t_rgb a, t_rgb b)
+t_rgb	multiply_rgb(t_rgb a, t_rgb b)
 {
 	return (new_rgb((int)fmin(255, fmax(0, a.r * b.r)),
 			(int)fmin(255, fmax(0, a.g * b.g)),

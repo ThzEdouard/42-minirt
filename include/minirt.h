@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 11:20:27 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/28 17:52:23 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/29 11:50:02 by julmuntz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,21 +55,21 @@ void	ft_free_object(t_object *value);
 t_rgb	new_rgb(int r, int g, int b);
 t_rgb	subtract_rgb(t_rgb a, t_rgb b);
 t_rgb	addition_rgb(t_rgb a, t_rgb b);
-t_rgb	multipli_rgb(t_rgb a, t_rgb b);
+t_rgb	multiply_rgb(t_rgb a, t_rgb b);
 t_rgb	division_rgb(t_rgb a, t_rgb b);
 t_rgb	rgb_subtract(t_rgb a, double b);
 t_rgb	rgb_addition(t_rgb a, double b);
-t_rgb	rgb_multipli(t_rgb a, double b);
+t_rgb	rgb_multiply(t_rgb a, double b);
 t_rgb	rgb_division(t_rgb a, double b);
 
 t_vector	new_vector(float x, float y, float z);
 t_vector	subtract_vector(t_vector a, t_vector b);
 t_vector	addition_vector(t_vector a, t_vector b);
-t_vector	multipli_vector(t_vector a, t_vector b);
+t_vector	multiply_vector(t_vector a, t_vector b);
 t_vector	division_vector(t_vector a, t_vector b);
 t_vector	vector_subtract(t_vector a, double b);
 t_vector	vector_addition(t_vector a, double b);
-t_vector	vector_multipli(t_vector a, double b);
+t_vector	vector_multiply(t_vector a, double b);
 t_vector	vector_division(t_vector a, double b);
 
 void	ft_free_mlx(t_mlx *tmp_mlx, t_data *tmp_img);
