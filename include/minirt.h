@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 11:20:27 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/29 17:31:20 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/04/30 11:02:35 by julmuntz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ double		dot(t_vector a, t_vector b);
 t_ray		init_ray(t_ca cam, int x, int y);
 bool		intersection_sphere(t_ray *ray, t_object *sphere, double *distance);
 bool		intersection_plan(t_object *plan, t_ray *ray, double *distance);
-bool		intersection_cylindre(t_ray *ray, t_object *cylinde, double *distance);
+bool		intersection_cylindre(t_ray *ray, t_object *cylindre, double *distance);
 void		ray_scene(t_ray *ray, t_object *object, t_impact *impact, t_value *v);
 void		ft_free_object(t_object *value);
 
