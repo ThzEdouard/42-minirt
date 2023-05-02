@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 14:39:20 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/02 08:55:33 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/02 10:48:11 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int	rays(t_ray *ray, t_object *tmp, t_impact *impact, double *d)
 }
 
 
-bool	ray_scene(t_ray *ray, t_object *object, t_impact *impact, t_value *v)
+bool	ray_scene(t_ray *ray, t_object *object, t_impact *impact,t_impact *tmp_impact, t_value *v)
 {
 	t_object	*tmp;
 	double		d1;
@@ -66,8 +66,15 @@ bool	ray_scene(t_ray *ray, t_object *object, t_impact *impact, t_value *v)
 	impact->rgb = new_rgb(0, 0, 0);
 	impact->info = NOT;
 	tmp = object;
+	(void)tmp_impact;
+
 	while (tmp)
 	{
+		if (!v && tmp_impact->obj == tmp && tmp_impact->info == tmp->info)
+		{
+			tmp = tmp->next;
+			continue;
+		}
 		if (tmp->info == SP && intersection_sphere(ray, tmp, &d1))
 		{
 			if (rays(ray, tmp, impact, &d1))

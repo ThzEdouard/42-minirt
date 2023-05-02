@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 11:20:27 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/02 08:56:15 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/02 10:43:07 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_ray		init_ray(t_ca cam, int x, int y);
 bool		intersection_sphere(t_ray *ray, t_object *sphere, double *distance);
 bool		intersection_plan(t_object *plan, t_ray *ray, double *distance);
 bool		intersection_cylindre(t_ray *ray, t_object *cylindre, double *distance);
-bool	ray_scene(t_ray *ray, t_object *object, t_impact *impact, t_value *v);
+bool	ray_scene(t_ray *ray, t_object *object, t_impact *impact,t_impact *tmp_impact, t_value *v);
 void		ft_free_object(t_object *value);
 
 t_vector	rotate_x(t_vector vector, double angle);

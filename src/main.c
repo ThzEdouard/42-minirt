@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 11:26:01 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/02 10:13:23 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/02 10:43:22 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	make_img(t_end *end, t_data *img, t_value *value)
 		while (x < WIDTH)
 		{
 			ray = init_ray(value->cam, x, y);
-			ray_scene(&ray, value->object, &impact, value);
+			ray_scene(&ray, value->object, &impact, NULL, value);
 			if (impact.info != NOT)
 			{
 				impact.rgb = get_color(value, &impact);
@@ -99,10 +99,10 @@ void	make_img(t_end *end, t_data *img, t_value *value)
     			ray_light.origin = addition_vector(impact.p_inter, vector_multiply(impact.normal, offset));
     			ray_light.direction = lightDir;
 
-    			if (ray_scene(&ray_light, value->object, &impact_light, NULL))
+    			if (ray_scene(&ray_light, value->object, &impact_light, &impact,NULL))
     			{
     			    if (impact_light.distance * impact_light.distance < lightDistance)
-    			        impact.rgb = new_rgb(0, 0, 0);
+    			        impact.rgb = rgb_multiply(impact.rgb, value->lum_am.ratio);;
     			}
 			}
 
