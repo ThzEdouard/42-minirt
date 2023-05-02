@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 11:26:01 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/02 10:43:22 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/02 15:56:57 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,24 +88,8 @@ void	make_img(t_end *end, t_data *img, t_value *value)
 			if (impact.info != NOT)
 			{
 				impact.rgb = get_color(value, &impact);
-    			t_vector lighVector = subtract_vector(impact.p_inter, value->lum.pl);
-    			t_vector lightDir = normalize(lighVector);
-    			double lightDistance = magnitude(lighVector);
-    			t_ray ray_light;
-    			t_impact impact_light;
-
-    			// Add a small offset to the shadow ray's origin to avoid self-intersection issues
-    			double offset = 1e-4;
-    			ray_light.origin = addition_vector(impact.p_inter, vector_multiply(impact.normal, offset));
-    			ray_light.direction = lightDir;
-
-    			if (ray_scene(&ray_light, value->object, &impact_light, &impact,NULL))
-    			{
-    			    if (impact_light.distance * impact_light.distance < lightDistance)
-    			        impact.rgb = rgb_multiply(impact.rgb, value->lum_am.ratio);;
-    			}
+				
 			}
-
 			my_mlx_pixel_put(img, x, y,
 				create_trgb(0, impact.rgb.r, impact.rgb.g, impact.rgb.b));
 			x++;

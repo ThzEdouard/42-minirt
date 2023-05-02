@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:09:35 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/02 10:04:45 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/02 14:41:12 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static t_object	*new_elem_cy(char **vector, char **coord,
 			ft_atof(coord[1]), ft_atof(coord[2]));
 	new->axis = new_vector(ft_atof(vector[0]),
 			ft_atof(vector[1]), ft_atof(vector[2]));
-	new->axis = normalize(new->axis);
+	//new->axis = normalize(new->axis);
 	new->diameter = ft_atof(array_tmp[3]);
 	new->height = ft_atof(array_tmp[4]);
 	new->rgb = new_rgb(ft_atoi(rgb[0]), ft_atoi(rgb[1]), ft_atoi(rgb[2]));

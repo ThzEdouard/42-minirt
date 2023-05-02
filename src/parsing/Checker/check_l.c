@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 15:07:18 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/29 17:30:35 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/02 14:32:35 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	init_lum(t_l *tmp_lum, char **array_tmp)
 	tmp_lum->pl.x = ft_atof(coord[0]);
 	tmp_lum->pl.y = ft_atof(coord[1]);
 	tmp_lum->pl.z = ft_atof(coord[2]);
-	tmp_lum->pl = normalize(tmp_lum->pl);
+	//tmp_lum->pl = normalize(tmp_lum->pl);
 	tmp_lum->rgb.r = ft_atof(rgb[0]);
 	tmp_lum->rgb.g = ft_atof(rgb[1]);
 	tmp_lum->rgb.b = ft_atof(rgb[2]);
