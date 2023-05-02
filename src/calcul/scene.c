@@ -6,33 +6,13 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 14:39:20 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/30 20:13:47 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/02 08:55:33 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-// vec3 getLitColor(in vec3 viewDir, in vec3 surfacePointPosition, in vec3 objectColor, in PointLight pointLight, in vec3 surfaceNormal)
-// {
-//     vec3 lightVector = surfacePointPosition - pointLight.position;
-//     vec3 lightDir = normalize(lightVector);
-
-//    	float lightIntensity = (pow(0.1, 2.) / pow(sqrt(dot(lightVector, lightVector)), 2.)) * pointLight.intensity;
-
-//     float coeff = -dot(lightDir, surfaceNormal);
-
-//     vec3 ambient = material.ambience * objectColor;
-
-//     vec3 diffuse = material.diffuse * max(coeff, 0.) * objectColor * lightIntensity;
-
-//     vec3 color = ambient + diffuse;
-
-//     return color;
-// }
-
-
-
-t_rgb get_color(t_value *v, t_impact *impact, t_object *obj)
+t_rgb get_color(t_value *v, t_impact *impact)
 {
     t_vector lighVector = subtract_vector(impact->p_inter, v->lum.pl);
     t_vector lightDir = normalize(lighVector);
@@ -41,8 +21,8 @@ t_rgb get_color(t_value *v, t_impact *impact, t_object *obj)
     float coeff = dot(lightDir, impact->normal);
     if (coeff < 0.0f) coeff = 0.0f;
 	// printf ("%f,     %f\n", coeff, lightIntensity);
-    t_rgb ambient = rgb_multiply(addition_rgb(obj->rgb, v->lum_am.rgb), v->lum_am.ratio);
-    t_rgb diffuse = rgb_multiply(obj->rgb, coeff * lightIntensity);
+    t_rgb ambient = rgb_multiply(addition_rgb(impact->rgb, v->lum_am.rgb), v->lum_am.ratio);
+    t_rgb diffuse = rgb_multiply(impact->rgb, coeff * lightIntensity);
 
     final_color = addition_rgb(ambient, diffuse);
 
@@ -74,14 +54,14 @@ static int	rays(t_ray *ray, t_object *tmp, t_impact *impact, double *d)
 }
 
 
-void	ray_scene(t_ray *ray, t_object *object, t_impact *impact, t_value *v)
+bool	ray_scene(t_ray *ray, t_object *object, t_impact *impact, t_value *v)
 {
 	t_object	*tmp;
 	double		d1;
 	double		d2;
 	double		d3;
 	(void)v;
-
+	bool j = false;
 	impact->distance = INFINITY;
 	impact->rgb = new_rgb(0, 0, 0);
 	impact->info = NOT;
@@ -94,7 +74,7 @@ void	ray_scene(t_ray *ray, t_object *object, t_impact *impact, t_value *v)
 			{
 				impact->obj = tmp;
 				impact->info = SP;
-				impact->rgb = get_color(v, impact, tmp);
+				j = true;
 			}
 		}
 		if (tmp->info == PL && intersection_plan(tmp, ray, &d2))
@@ -104,7 +84,7 @@ void	ray_scene(t_ray *ray, t_object *object, t_impact *impact, t_value *v)
 				impact->normal = tmp->axis;
 				impact->obj = tmp;
 				impact->info = PL;
-				impact->rgb = get_color(v, impact, tmp);
+				j = true;
 			}
 
 		}
@@ -114,10 +94,11 @@ void	ray_scene(t_ray *ray, t_object *object, t_impact *impact, t_value *v)
 			{
 				impact->obj = tmp;
 				impact->info = CY;
-				impact->rgb = get_color(v, impact, tmp);
+				j = true;
 			}
 
 		}
 		tmp = tmp->next;
 	}
+	return j;
 }

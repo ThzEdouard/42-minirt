@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:20:39 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/29 12:22:18 by julmuntz         ###   ########.fr       */
+/*   Updated: 2023/05/02 10:00:04 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,14 @@ static	bool	solver_quot(t_ray *ray, t_object *sphere,
 	oc = subtract_vector(ray->origin, sphere->center);
 	a = dot(ray->direction, ray->direction);
 	b = 2 * dot(oc, ray->direction);
-	c = dot(oc, oc) - (sphere->diameter / 2 * sphere->diameter / 2);
+	c = dot(oc, oc) - ((sphere->diameter / 2) * (sphere->diameter / 2));
 	if (b * b - 4 * a * c < 0)
 		return (false);
 	*t0 = (-b + sqrt(b * b - 4 * a * c)) / (2 * a);
 	*t1 = (-b - sqrt(b * b - 4 * a * c)) / (2 * a);
 	return (true);
 }
+
 
 bool	intersection_sphere(t_ray *ray, t_object *sphere, double *distance)
 {
