@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 11:20:27 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/03 10:37:46 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/03 15:56:32 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,33 +26,34 @@
 
 # define FAIL 0
 # define SUCCESS 1
+t_ray	new_ray(t_vector origin, t_vector direction);
+bool	intersection_plan(t_ray *ray, t_object *plan, double *distance);
 
 
-//mlx make img
-int			init_window(t_mlx *tmp_mlx, t_data *tmp_img, char *name);
-int			create_trgb(int t, int r, int g, int b);
-void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
-
-// bool	intersection_plan(t_ray *ray, t_object *plan, double *distance)
-
-
-
+t_rgb	color_pixel(t_value *v, t_impact *impact);
 
 void		clear_line(t_line **l);
 
 void		ft_mlx_free(t_mlx *tmp_mlx, t_data *tmp_img);
 
-//intersection object
-
+//intersections object and scene
+bool		ray_scene(t_ray *ray, t_object *obj, t_impact *impact);
 bool		intersection_sphere(t_ray *ray, t_object *sphere, double *distance);
-bool		intersection_plan(t_object *plan, t_ray *ray, double *distance);
+// bool		intersection_plan(t_object *plan, t_ray *ray, double *distance);
 bool		intersection_cylindre(t_ray *ray, t_object *cylindre, double *distance);
 
 t_ray		init_ray(t_ca cam, int x, int y);
 
-bool	ray_scene(t_ray *ray, t_object *object, t_impact *impact,t_impact *tmp_impact, t_value *v);
+// bool	ray_scene(t_ray *ray, t_object *object, t_impact *impact,t_impact *tmp_impact, t_value *v);
 void		ft_free_object(t_object *value);
 t_rgb get_color(t_value *v, t_impact *impact);
+
+//mlx make img
+int			init_window(t_mlx *tmp_mlx, t_data *tmp_img, char *name);
+void		mlx_make_img(t_end *end, t_data *img);
+int			key_end(int key, t_end *end);
+int			click_end(t_end *end);
+void		ft_free_mlx(t_mlx *tmp_mlx, t_data *tmp_img);
 
 //rgb vector calcul
 t_rgb		new_rgb(int r, int g, int b);
@@ -82,7 +83,5 @@ t_vector	normalize(t_vector a);
 t_vector	cross(t_vector a, t_vector b);
 double		magnitude(t_vector a);
 double		dot(t_vector a, t_vector b);
-
-void		ft_free_mlx(t_mlx *tmp_mlx, t_data *tmp_img);
 
 #endif

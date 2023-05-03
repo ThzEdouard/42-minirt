@@ -47,8 +47,10 @@ BONUS = ft_lstnew.c \
         ft_lstiter.c \
         ft_lstmap.c
 
-OBJS = ${SRCS:.c=.o}
-BONUS_OBJS = ${BONUS:.c=.o}
+SRC_FILES = $(SRCS) $(BONUS)
+
+OBJ_DIR = obj/
+OBJS = $(addprefix $(OBJ_DIR), $(SRC_FILES:.c=.o))
 
 NAME = libft.a
 
@@ -57,24 +59,34 @@ RM = rm -f
 
 CFLAGS = -Wall -Wextra -Werror -I.
 
-#.c.o:
-#		${CC}  ${CFLAGS} -c $< -o ${<:.c=.o}
+NUM_FILES = $(words $(SRC_FILES))
+CURRENT_FILE = 1
+
+define show_progress
+	@echo -n "\033[0;34m [$(CURRENT_FILE)/$(NUM_FILES)] \033[0m"
+	@$(eval CURRENT_FILE=$(shell echo $$(($(CURRENT_FILE)+1))))
+endef
+
+$(OBJ_DIR)%.o: %.c
+		@mkdir -p $(OBJ_DIR)
+		@echo "\033[0;32m [OK] \033[0m" $<
+		$(show_progress)
+		@${CC}  ${CFLAGS} -c $< -o $@
 
 ${NAME}:	${OBJS}
-		ar rcs ${NAME} ${OBJS}
+		@ar rcs ${NAME} ${OBJS}
+		@echo "\033[0;32m [OK] \033[0m       \033[0;33m Compiling: \033[0m" ${NAME}
 
-bonus: ${BONUS_OBJS}
-		ar rcs ${NAME} ${BONUS_OBJS}
+bonus: ${OBJS}
+		ar rcs ${NAME} ${OBJS}
 all:		${NAME}
 
 clean:
 		${RM} ${OBJS}
-		${RM} ${BONUS_OBJS}
 
 fclean:		clean
 		${RM} ${NAME}
 
 re:		fclean all
-
 
 .PHONY:		all clean fclean re bonus

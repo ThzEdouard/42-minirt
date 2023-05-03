@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 11:33:40 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/30 19:16:16 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/03 15:31:42 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define WIDTH 800
 # define EPSILON 0.0001
 # define ALBEDO 0.003
-#define MAX_DEPTH 3
+# define MAX_DEPTH 3
 
 typedef enum s_info
 {
@@ -61,14 +61,14 @@ typedef struct s_ca
 {
 	t_vector	pv;
 	t_vector	axe;
-	int		fov;
+	int			fov;
 }			t_ca;
 
 typedef struct s_l
 {
 	t_vector	pl;
-	double	ratio;
-	t_rgb	rgb;
+	double		ratio;
+	t_rgb		rgb;
 }			t_l;
 
 //-------------------------------------------//
@@ -88,12 +88,10 @@ typedef struct s_object
 
 typedef struct s_impact
 {
-	t_vector	p_inter;
+	t_vector	p_hit;
 	t_vector	normal;
-	t_rgb	rgb;
-	t_info	info;
-	t_object	*obj;
-	double	distance;
+	t_rgb		rgb;
+	double		distance;
 }				t_impact;
 
 //-------------------------------------------//
@@ -121,13 +119,13 @@ typedef struct s_ray
 
 //-------------------------------------------//
 
-typedef struct	s_mlx
+typedef struct s_mlx
 {
 	void	*mlx;
 	void	*mlx_win;
 }				t_mlx;
 
-typedef struct	s_data
+typedef struct s_data
 {
 	void	*img;
 	char	*addr;
@@ -140,6 +138,7 @@ typedef struct s_end
 {
 	t_mlx	mlx;
 	t_data	data;
+	t_rgb	f_color;
 	t_value	*value;
 }				t_end;
 

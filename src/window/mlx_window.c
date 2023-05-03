@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   creat_window.c                                     :+:      :+:    :+:   */
+/*   mlx_window.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 09:10:45 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/28 18:34:34 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/03 14:44:40 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,6 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 int	create_trgb(int t, int r, int g, int b)
 {
 	return (t << 24 | r << 16 | g << 8 | b);
-}
-
-void	ft_free_mlx(t_mlx *tmp_mlx, t_data *tmp_img)
-{
-	mlx_destroy_image(tmp_mlx->mlx, tmp_img->img);
-	mlx_destroy_window(tmp_mlx->mlx, tmp_mlx->mlx_win);
-	mlx_destroy_display(tmp_mlx->mlx);
-	free(tmp_mlx->mlx);
 }
 
 int	init_window(t_mlx *tmp_mlx, t_data *tmp_img, char *name)
@@ -53,4 +45,12 @@ int	init_window(t_mlx *tmp_mlx, t_data *tmp_img, char *name)
 			mlx_destroy_window(tmp_mlx->mlx, tmp_mlx->mlx_win),
 			mlx_destroy_display(tmp_mlx->mlx), free(tmp_mlx->mlx), FAIL);
 	return (SUCCESS);
+}
+
+void	ft_free_mlx(t_mlx *tmp_mlx, t_data *tmp_img)
+{
+	mlx_destroy_image(tmp_mlx->mlx, tmp_img->img);
+	mlx_destroy_window(tmp_mlx->mlx, tmp_mlx->mlx_win);
+	mlx_destroy_display(tmp_mlx->mlx);
+	free(tmp_mlx->mlx);
 }

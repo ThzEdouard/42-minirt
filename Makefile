@@ -4,7 +4,7 @@ SRC_DIR	= ./
 OBJ_DIR	= obj/
 CC		= cc
 CFLAGS	= -Wall -Werror -Wextra -I./include -I./minilibx-linux -I./libft -g
-rm		= rm -f
+RM		= rm -f
 
 SRC_MINIRT	= src/
 FT_MINIRT	= main
@@ -16,13 +16,13 @@ SRC_PARSING	= src/parsing/
 FT_PARSING	= name_file norm_file check_id
 
 SRC_CALCUL	= src/calcul/
-FT_CALCUL	= ray plane util sphere cylindre scene
+FT_CALCUL	= ray plane util sphere cylindre scene color
 
 SRC_VECTOR = src/vector_color/
 FT_VECTOR = my_color my_color2 my_vector my_vector2 rotate
 
 SRC_WINDOW = src/window/
-FT_WINDOW = creat_window
+FT_WINDOW = mlx_window mlx_img mlx_event
 
 SRC_FILES+=$(addprefix $(SRC_MINIRT),$(FT_MINIRT))
 SRC_FILES+=$(addprefix $(SRC_PARSING),$(FT_PARSING))
@@ -34,38 +34,46 @@ SRC_FILES+=$(addprefix $(SRC_VECTOR),$(FT_VECTOR))
 SRC		= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ		= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
 
+NUM_FILES = $(words $(SRC_FILES))
+CURRENT_FILE = 1
+
+define show_progress
+	@echo -n "\033[0;34m [$(CURRENT_FILE)/$(NUM_FILES)] \033[0m"
+	@$(eval CURRENT_FILE=$(shell echo $$(($(CURRENT_FILE)+1))))
+endef
+
 all:	$(NAME)
-	@echo "\033[0;32m [OK] \033[0m       \033[0;33m Compiling:\033[0m" $<
 
 $(NAME):	$(OBJ) $(INCLUDE)
-			make -C libft/
-			make -C minilibx-linux
-			mv libft/libft.a .
-			$(CC) $(CFLAGS) -o $(NAME) $(OBJ) libft.a minilibx-linux/libmlx_Linux.a minilibx-linux/libmlx.a  -L/usr/include/../lib -lXext -lX11 -lm -lbsd
-
+	make -C libft/
+	@make -C minilibx-linux
+	mv libft/libft.a .
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) libft.a minilibx-linux/libmlx_Linux.a minilibx-linux/libmlx.a  -L/usr/include/../lib -lXext -lX11 -lm -lbsd
+	@echo "\033[0;32m [OK] \033[0m       \033[0;33m Compiling:\033[0m" $(NAME)
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-			@mkdir -p $(OBJ_DIR)
-			@mkdir -p $(OBJ_DIR)$(SRC_MINIRT)
-			@mkdir -p $(OBJ_DIR)$(SRC_PARSING)
-			@mkdir -p $(OBJ_DIR)$(SRC_CHECKER)
-			@mkdir -p $(OBJ_DIR)$(SRC_WINDOW)
-			@mkdir -p $(OBJ_DIR)$(SRC_CALCUL)
-			@mkdir -p $(OBJ_DIR)$(SRC_VECTOR)
-			@echo "\033[0;32m [OK] \033[0;32m" $<
-			$(CC) $(CFLAGS) -c $< -o $@
+	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)$(SRC_MINIRT)
+	@mkdir -p $(OBJ_DIR)$(SRC_PARSING)
+	@mkdir -p $(OBJ_DIR)$(SRC_CHECKER)
+	@mkdir -p $(OBJ_DIR)$(SRC_WINDOW)
+	@mkdir -p $(OBJ_DIR)$(SRC_CALCUL)
+	@mkdir -p $(OBJ_DIR)$(SRC_VECTOR)
+	@echo "\033[0;32m [OK] \033[0m" $<
+	$(show_progress)
+	@($(CC) $(CFLAGS) -c $< -o $@) 2> /dev/null || (echo "\033[0;31m [ERROR] \033[0m" $< && $(CC) $(CFLAGS) -c $< -o $@ && exit@) || (echo "\033[0;31m [ERROR] \033[0m" $< && exit 1)
 
 clean:
-			$(RM) -rf $(OBJ_DIR)
-			make clean -C libft/
-			make clean -C minilibx-linux
-			rm -rf libft.a
-			rm -rf libmlx_Linux.a
+	$(RM) -rf $(OBJ_DIR)
+	@make clean -C libft/
+	@make clean -C minilibx-linux
+	rm -rf libft.a
+	rm -rf libmlx_Linux.a
 
 fclean:		clean
-			$(RM) -f $(NAME)
+	$(RM) -f $(NAME)
 
 val:		$(NAME)
-			valgrind --leak-check=full --show-leak-kinds=all ./minirt map.rt
+	valgrind --leak-check=full --show-leak-kinds=all ./minirt map.rt
 
 re:		fclean all
 

@@ -6,11 +6,11 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:30:15 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/03 13:57:32 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/03 16:02:55 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minirt.h"
+#include "minirt.h"
 
 static t_rgb	color_ambient(t_value *v, t_impact *impact)
 {
@@ -23,25 +23,26 @@ static t_rgb	color_diffuse(t_value *v, t_impact *impact, bool is_shadowing)
 	double	diffuce_shadowing;
 	t_rgb	result;
 
-	diffuse_coeff = dot(normalize(subtract_vector(impact->p_inter, v->lum.pl)),
+	diffuse_coeff = dot(normalize(subtract_vector(impact->p_hit, v->lum.pl)),
 			impact->normal);
 	if (diffuse_coeff < 0.0f)
 		diffuse_coeff = 0.0f;
 	diffuce_shadowing = v->lum.ratio - v->lum_am.ratio;
 	if (diffuce_shadowing < 0.0f)
 		diffuce_shadowing = 0.0f;
-	result = rgb_multiply(impact->rgb, coeff * v->lum.pl);
+	result = rgb_multiply(impact->rgb, diffuse_coeff * v->lum.ratio);
 	if (is_shadowing)
-		result = rgb_multiply(diffuse, diffuce_shadowing);
+		result = rgb_multiply(result, diffuce_shadowing);
 	return (result);
 }
 
-static double	light(t_ray *ray, t_impact *impact, double distance)
+static double	light(t_ray *ray, t_impact *impact, t_value *v, double distance)
 {
 	double	light_distance;
 
-	light_distance = magnitude(subtract_vector(addition_vector(impact->p_inter,
-					vector_multiply(ray->direction, distance)), v->lum.pl));
+	light_distance = magnitude(subtract_vector(addition_vector(impact->p_hit,
+						vector_multiply(ray->direction, distance)),
+					v->lum.pl));
 	return (light_distance);
 }
 
@@ -51,20 +52,21 @@ static bool	is_shadowing(t_value *v, t_impact *impact)
 	double		distance;
 	t_ray		ray_light;
 
-	ray_light = new_ray(addition_vector(impact->p_inter,
+	ray_light = new_ray(addition_vector(impact->p_hit,
 				vector_multiply(impact->normal, EPSILON)),
-			normalize(subtract_vector(v->lum.pl, impact->p_inter)));
+			normalize(subtract_vector(v->lum.pl, impact->p_hit)));
+	tmp = v->object;
 	while (tmp)
 	{
 		distance = INFINITY;
 		if (tmp->info == SP && intersection_sphere(&ray_light, tmp, &distance)
-			&& pow(distance + 1, 2.0) < light(&ray_light, impact, distance))
+			&& pow(distance + 1, 2.0) < light(&ray_light, impact, v, distance))
 			return (true);
-		if (tmp->info == PL && intersection_plan(tmp, &ray_light, &distance)
-			&& pow(distance + 1, 2.0) < light(&ray_light, impact, distance))
-			return (false);
+		if (tmp->info == PL && intersection_plan(&ray_light, tmp, &distance)
+			&& pow(distance + 1, 2.0) < light(&ray_light, impact, v, distance))
+			return (true);
 		if (tmp->info == CY && intersection_cylindre(&ray_light, tmp, &distance)
-			&& pow(distance + 1, 2.0) < light(&ray_light, impact, distance))
+			&& pow(distance + 1, 2.0) < light(&ray_light, impact, v,  distance))
 			return (true);
 		tmp = tmp->next;
 	}
@@ -76,6 +78,6 @@ t_rgb	color_pixel(t_value *v, t_impact *impact)
 	t_rgb	final_color;
 
 	final_color = color_ambient(v, impact);
-	final_color = color_diffuse(c, impact, is_shadowing(v, impact));
+	final_color = color_diffuse(v, impact, is_shadowing(v, impact));
 	return (final_color);
 }
