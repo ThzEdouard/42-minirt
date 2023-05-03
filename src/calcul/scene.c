@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 14:39:20 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/03 16:44:20 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/03 17:13:16 by julmuntz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,12 @@ static int	rays(t_ray *ray, t_object *tmp, t_impact *impact, double *d)
 		impact->normal = subtract_vector(impact->p_hit, tmp->center);
 		impact->normal = normalize(impact->normal);
 		if (tmp->info == PL)
-			impact->normal = tmp->axis;
+		{
+			if (dot(ray->direction, tmp->axis) > 0.0)
+				impact->normal = vector_multiply(tmp->axis, -1.0);
+			else
+				impact->normal = tmp->axis;
+		}
 		impact->rgb = tmp->rgb;
 		impact->distance = (*d);
 		(*d) = INFINITY;

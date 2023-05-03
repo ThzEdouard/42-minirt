@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:30:15 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/03 16:42:50 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/03 17:12:52 by julmuntz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static t_rgb	color_diffuse(t_value *v, t_impact *impact, bool is_shadowing)
 	double	diffuce_shadowing;
 	t_rgb	result;
 
-	diffuse_coeff = dot(normalize(subtract_vector(impact->p_hit, v->lum.pl)),
+	diffuse_coeff = -dot(normalize(subtract_vector(impact->p_hit, v->lum.pl)),
 			impact->normal);
 	if (diffuse_coeff < 0.0f)
 		diffuse_coeff = 0.0f;
@@ -75,9 +75,12 @@ static bool	is_shadowing(t_value *v, t_impact *impact)
 
 t_rgb	color_pixel(t_value *v, t_impact *impact)
 {
+	t_rgb	ambient_color;
+	t_rgb	diffuse_color;
 	t_rgb	final_color;
 
-	final_color = color_ambient(v, impact);
-	final_color = color_diffuse(v, impact, is_shadowing(v, impact));
+	ambient_color = color_ambient(v, impact);
+	diffuse_color = color_diffuse(v, impact, is_shadowing(v, impact));
+	final_color = addition_rgb(ambient_color, diffuse_color);
 	return (final_color);
 }

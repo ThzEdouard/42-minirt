@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 17:17:29 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/14 10:52:06 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/03 17:09:09 by julmuntz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,6 @@ t_vector	normalize(t_vector a)
 	result.x = a.x / sqrt(magnitude(a));
 	result.y = a.y / sqrt(magnitude(a));
 	result.z = a.z / sqrt(magnitude(a));
-	return (result);
-}
-
-t_vector	cross(t_vector a, t_vector b)
-{
-	t_vector	result;
-
-	result.x = a.y * b.z - a.z + b.y;
-	result.y = a.z * b.x - a.x + b.z;
-	result.z = a.x * b.y - a.y * b.x;
 	return (result);
 }
 

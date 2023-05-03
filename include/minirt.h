@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 11:20:27 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/03 15:56:32 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/03 17:09:27 by julmuntz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ t_vector	rotate_y(t_vector vector, double angle);
 t_vector	rotate_z(t_vector vector, double angle);
 t_vector	rotate(t_vector vector, t_vector angle);
 t_vector	normalize(t_vector a);
-t_vector	cross(t_vector a, t_vector b);
 double		magnitude(t_vector a);
 double		dot(t_vector a, t_vector b);
 
