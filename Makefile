@@ -16,10 +16,10 @@ SRC_PARSING	= src/parsing/
 FT_PARSING	= name_file norm_file check_id
 
 SRC_CALCUL	= src/calcul/
-FT_CALCUL	= ray plane util sphere cylindre scene rotate
+FT_CALCUL	= ray plane util sphere cylindre scene
 
 SRC_VECTOR = src/vector_color/
-FT_VECTOR = my_color my_color2 my_vector my_vector2
+FT_VECTOR = my_color my_color2 my_vector my_vector2 rotate
 
 SRC_WINDOW = src/window/
 FT_WINDOW = creat_window

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 14:39:20 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/02 21:11:46 by julmuntz         ###   ########.fr       */
+/*   Updated: 2023/05/03 13:59:44 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ t_rgb	get_color(t_value *v, t_impact *impact)
 					v->lum.pl)))
 		{
 			is_shadowing = false;
-			break ;
 		}
 		if (tmp->info == CY && intersection_cylindre(&ray_light, tmp, &distance)
 			&& pow(distance + 1,
@@ -106,6 +105,25 @@ static int	rays(t_ray *ray, t_object *tmp, t_impact *impact, double *d)
 									impact->p_inter.y - tmp->center.y,
 									impact->p_inter.z - tmp->center.z);
 		impact->normal = normalize(impact->normal);
+		if (tmp->info == PL)
+			impact->normal = tmp->axis;
+		impact->rgb = tmp->rgb;
+		impact->distance = (*d);
+		(*d) = INFINITY;
+		return (SUCCESS);
+	}
+	return (FAIL);
+}
+
+static int	rays(t_ray *ray, t_object *tmp, t_impact *impact, double *d)
+{
+	if ((*d) < impact->distance)
+	{
+		impact->p_inter = addition_vector(ray->origin, vector_multiply(ray->direction, (*d)));
+		impact->normal = subtract_vector(impact->p_inter, tmp->center);
+		impact->normal = normalize(impact->normal);
+		if (tmp->info == PL)
+			impact->normal = tmp->axis;
 		impact->rgb = tmp->rgb;
 		impact->distance = (*d);
 		(*d) = INFINITY;
@@ -132,11 +150,11 @@ bool	ray_scene(t_ray *ray, t_object *object, t_impact *impact,
 	(void)tmp_impact;
 	while (tmp)
 	{
-		if (!v && tmp_impact->obj == tmp && tmp_impact->info == tmp->info)
-		{
-			tmp = tmp->next;
-			continue ;
-		}
+		// if (!v && tmp_impact->obj == tmp && tmp_impact->info == tmp->info)
+		// {
+		// 	tmp = tmp->next;
+		// 	continue ;
+		// }
 		if (tmp->info == SP && intersection_sphere(ray, tmp, &d1))
 		{
 			if (rays(ray, tmp, impact, &d1))
@@ -169,3 +187,34 @@ bool	ray_scene(t_ray *ray, t_object *object, t_impact *impact,
 	}
 	return (j);
 }
+
+// bool	ray_scene(t_ray *ray, t_object *obj, t_impact *impact)
+// {
+// 	t_object	*tmp;
+// 	double		distance;
+// 	bool		scene;
+
+// 	tmp = obj;
+// 	impact->distance = INFINITY;
+// 	impact->rgb = new_rgb(0, 0, 0);
+// 	scene = false;
+// 	while (tmp)
+// 	{
+// 		if (tmp->info == SP && intersection_sphere(ray, tmp, &distance))
+// 		{
+// 			if (rays(ray, tmp, impact, &distance))
+// 				scene = true;
+// 		}
+// 		if (tmp->info == PL && intersection_plan(ray, tmp, &distance))
+// 		{
+// 			if (rays(ray, tmp, impact, &distance))
+// 				scene = true;
+// 		}
+// 		if (tmp->info == CY && intersection_cylindre(ray, tmp, &distance))
+// 		{
+// 			if (rays(ray, tmp, impact, &distance))
+// 				scene = true;
+// 		}
+// 	}
+// 	return (scene);
+// }

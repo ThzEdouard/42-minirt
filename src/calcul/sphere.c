@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:20:39 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/02 10:00:04 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/03 08:32:47 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static	bool	solver_quot(t_ray *ray, t_object *sphere,
 	*t1 = (-b - sqrt(b * b - 4 * a * c)) / (2 * a);
 	return (true);
 }
-
 
 bool	intersection_sphere(t_ray *ray, t_object *sphere, double *distance)
 {
