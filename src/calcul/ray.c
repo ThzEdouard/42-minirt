@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:11:51 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/03 08:33:20 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/03 17:22:54 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_ray	init_ray(t_ca cam, int x, int y)
 	double			aspect_ratio;
 	t_vector		rot_rad;
 
-	aspect_ratio = (WIDTH) / (HEIGHT);
+	aspect_ratio = (double)(WIDTH) / (double)(HEIGHT);
 	fov_adjustment = tan((cam.fov * (M_PI / 180)) / 2.0);
 	result.x = ((((x + 0.5) / WIDTH) * 2.0 - 1.0)
 			* aspect_ratio) * fov_adjustment;

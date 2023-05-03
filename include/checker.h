@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 10:34:05 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/03 16:34:03 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/03 18:21:23 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@
 # include "struct.h"
 # define CHAR_INT_MAX "2147483647"
 # define CHAR_INT_MIN "-2147483648"
+
+//Error code ligne;
+# define ERROR_RGB "\033[1;31mError\n color problem\033[0m\n"
+# define ERROR_VEC3 "\033[1;31mError\n problem vector\033[0m\n"
+# define ERROR_COORD "\033[1;31mError\n coordinated problem\033[0m\n"
+# define ERROR_AMB "\033[1;31mAmbient light problem\n\033[0m"
 
 
 t_line		*check_name_norm(char	*file, t_value **value);
