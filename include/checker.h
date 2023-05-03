@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 10:34:05 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/03 10:37:37 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/03 16:34:03 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "struct.h"
 # define CHAR_INT_MAX "2147483647"
 # define CHAR_INT_MIN "-2147483648"
+
 
 t_line		*check_name_norm(char	*file, t_value **value);
 int			check_id_maj(t_line *line, t_value **tmp);

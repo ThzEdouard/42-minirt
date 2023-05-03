@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 11:26:01 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/03 15:52:09 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/03 16:41:50 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	ft_free_object(t_object *value)
 		free(tmp);
 	}
 }
-
 
 int	main(int argc, char **argv)
 {

@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:30:15 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/03 16:02:55 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/03 16:42:50 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ static double	light(t_ray *ray, t_impact *impact, t_value *v, double distance)
 	double	light_distance;
 
 	light_distance = magnitude(subtract_vector(addition_vector(impact->p_hit,
-						vector_multiply(ray->direction, distance)),
-					v->lum.pl));
+					vector_multiply(ray->direction, distance)),
+				v->lum.pl));
 	return (light_distance);
 }
 
@@ -66,7 +66,7 @@ static bool	is_shadowing(t_value *v, t_impact *impact)
 			&& pow(distance + 1, 2.0) < light(&ray_light, impact, v, distance))
 			return (true);
 		if (tmp->info == CY && intersection_cylindre(&ray_light, tmp, &distance)
-			&& pow(distance + 1, 2.0) < light(&ray_light, impact, v,  distance))
+			&& pow(distance + 1, 2.0) < light(&ray_light, impact, v, distance))
 			return (true);
 		tmp = tmp->next;
 	}
