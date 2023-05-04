@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 13:11:56 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/04 11:31:25 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/04 14:12:14 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,11 @@ static t_object	*get_check(enum s_info type, t_line *line,
 static int	process_line(t_line *line, t_object **object, t_value **tmps)
 {
 	if (line->info == SP || line->info == PL || line->info == CY)
+	{
 		*object = get_check(line->info, line, *object, tmps);
-	if (!*object)
-		return (FAIL);
+		if (!*object)
+			return (FAIL);
+	}
 	return (SUCCESS);
 }
 
@@ -73,13 +75,14 @@ int	check_id_min(t_line *line, t_value **tmps)
 {
 	while (line)
 	{
-		process_line(line, &((*tmps)->object), tmps);
+		if (!process_line(line, &((*tmps)->object), tmps))
+			return (ft_free_object(((*tmps)->object)), FAIL);
 		line = line->next;
 		if ((*tmps)->object)
 			break ;
 	}
 	if (check_id_min2(line, tmps) == FAIL)
-		return (ft_free_object(((*tmps)->object)),FAIL);
+		return (ft_free_object(((*tmps)->object)), FAIL);
 	return (SUCCESS);
 }
 
