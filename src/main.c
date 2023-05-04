@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 11:26:01 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/03 16:41:50 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/04 15:47:27 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ int	main(int argc, char **argv)
 		return (FAIL);
 	clear_line(&file_line);
 	if (!init_window(&(end.mlx), &(end.data), argv[1]))
-		return (ft_free_object(end.value->object), free(end.value), FAIL);
+		return (ft_free_object(end.value->object), free(end.value)
+			, ft_putstr_fd(ERROR_MLX, 0), FAIL);
 	mlx_make_img(&end, &(end.data));
 	return (SUCCESS);
 }

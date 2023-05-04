@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 10:34:05 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/04 15:18:12 by julmuntz         ###   ########.fr       */
+/*   Updated: 2023/05/04 15:43:35 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,8 @@ Malloc Plan problem\033[0m\n"
 # define ERROR_M_CYLINDRE "\033[1;31mError\n\
 Malloc Cylindre problem\033[0m\n"
 
-# define ERROR_MLX_1 "\033[1;31mError\n\
-ECRIRE ERREUR\033[0m\n"
-
-# define ERROR_MLX_2 "\033[1;31mError\n\
-ECRIRE ERREUR\033[0m\n"
-
-# define ERROR_MLX_3 "\033[1;31mError\n\
-ECRIRE ERREUR\033[0m\n"
+# define ERROR_MLX "\033[1;31mError\n\
+mxl initialization problem\033[0m\n"
 
 t_line		*check_name_norm(char	*file, t_value **value);
 int			check_id_maj(t_line *line, t_value **tmp);
