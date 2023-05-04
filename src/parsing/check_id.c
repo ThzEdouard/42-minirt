@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_id.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 13:11:56 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/04 14:12:14 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/04 15:06:55 by julmuntz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,18 +94,18 @@ int	check_id_maj(t_line *line, t_value **tmp)
 	if (!value)
 		return (FAIL);
 	if (!check_len(line, A) || !check_len(line, C) || !check_len(line, L))
-		return (FAIL);
+		return (free(value), FAIL);
 	while (line)
 	{
 		if (line->info == A)
 			if (!check_a(line->line, 1, &value->lum_am))
-				return (printf("FAIL"), free(value), FAIL);
+				return (free(value), FAIL);
 		if (line->info == C)
 			if (!check_c(line->line, 1, &value->cam))
-				return (printf("FAIL"), free(value), FAIL);
+				return (free(value), FAIL);
 		if (line->info == L)
 			if (!check_l(line->line, 1, &value->lum))
-				return (printf("FAIL"), free(value), FAIL);
+				return (free(value), FAIL);
 		line = line->next;
 	}
 	*tmp = value;

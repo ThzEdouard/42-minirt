@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_c.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 12:38:12 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/04 11:23:18 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/04 14:55:10 by julmuntz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	check_c(char *line, int start, t_ca *tmp_cam)
 	if (!array_line)
 		return (FAIL);
 	if (!check_value(array_line, &start) || start != 4)
-		return (ft_free2(array_line), FAIL);
+		return (ft_free2(array_line), ft_putstr_fd(ERROR_CAM, 0), FAIL);
 	if (!check_coord(array_line[1])
 		|| !check_vector(array_line[2])
 		|| !check_int_max_min(array_line[3])

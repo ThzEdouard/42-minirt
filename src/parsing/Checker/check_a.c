@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_a.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 11:31:13 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/04 11:23:03 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/04 14:54:31 by julmuntz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	check_a(char *line, int start, t_la *tmp_la)
 	if (!array_line)
 		return (FAIL);
 	if (!check_value(array_line, &start) || start != 3)
-		return (ft_free2(array_line), FAIL);
+		return (ft_free2(array_line), ft_putstr_fd(ERROR_AMB, 0), FAIL);
 	if (!check_line_range(array_line[1])
 		|| !check_int_max_min(array_line[1])
 		|| !check_range_double(0.0, 1.0, ft_atof(array_line[1]))

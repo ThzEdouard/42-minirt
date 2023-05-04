@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_pl.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:20:16 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/04 11:25:30 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/04 14:54:41 by julmuntz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_object	*check_pl(char *line, int start)
 	if (!array_line)
 		return (FAIL);
 	if (!check_value(array_line, &start) || start != 4)
-		return (ft_free2(array_line), NULL);
+		return (ft_free2(array_line), ft_putstr_fd(ERROR_PLAN, 0), NULL);
 	if (!check_coord(array_line[1])
 		|| !check_vector(array_line[2])
 		|| !check_rgb(array_line[3]))

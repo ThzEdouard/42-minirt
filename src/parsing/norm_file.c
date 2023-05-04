@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   norm_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:06:33 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/04/14 14:32:32 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/04 15:02:01 by julmuntz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static int	check_id(t_line *line, int i, int x, int save_i)
 {
 	char	*id;
 
+	id = NULL;
 	while (line)
 	{
 		i = 0;

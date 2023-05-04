@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_sp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 13:59:01 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/04 11:25:02 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/04 14:55:53 by julmuntz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_object	*check_sp(char *line, int start)
 	if (!array_line)
 		return (FAIL);
 	if (!check_value(array_line, &start) || start != 4)
-		return (ft_free2(array_line), NULL);
+		return (ft_free2(array_line), ft_putstr_fd(ERROR_SPHERE, 0), NULL);
 	if (!check_coord(array_line[1])
 		|| !check_int_max_min(array_line[2])
 		|| !check_rgb(array_line[3]))
