@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 11:20:27 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/03 17:09:27 by julmuntz         ###   ########.fr       */
+/*   Updated: 2023/05/04 08:29:16 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,32 +21,21 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <stdio.h>
-#include <stdbool.h>
+# include <stdbool.h>
 # include "checker.h"
 
 # define FAIL 0
 # define SUCCESS 1
-t_ray	new_ray(t_vector origin, t_vector direction);
-bool	intersection_plan(t_ray *ray, t_object *plan, double *distance);
-
-
-t_rgb	color_pixel(t_value *v, t_impact *impact);
-
-void		clear_line(t_line **l);
-
-void		ft_mlx_free(t_mlx *tmp_mlx, t_data *tmp_img);
 
 //intersections object and scene
-bool		ray_scene(t_ray *ray, t_object *obj, t_impact *impact);
-bool		intersection_sphere(t_ray *ray, t_object *sphere, double *distance);
-// bool		intersection_plan(t_object *plan, t_ray *ray, double *distance);
-bool		intersection_cylindre(t_ray *ray, t_object *cylindre, double *distance);
-
+t_ray		new_ray(t_vector origin, t_vector direction);
 t_ray		init_ray(t_ca cam, int x, int y);
-
-// bool	ray_scene(t_ray *ray, t_object *object, t_impact *impact,t_impact *tmp_impact, t_value *v);
+bool		ray_scene(t_ray *ray, t_object *obj, t_impact *impact);
+bool		intersection_sphere(t_ray *ray, t_object *sphere, double *dist);
+bool		intersection_plan(t_ray *ray, t_object *plan, double *dist);
+bool		intersection_cylindre(t_ray *ray, t_object *cylindre, double *dist);
+t_rgb		color_pixel(t_value *v, t_impact *impact);
 void		ft_free_object(t_object *value);
-t_rgb get_color(t_value *v, t_impact *impact);
 
 //mlx make img
 int			init_window(t_mlx *tmp_mlx, t_data *tmp_img, char *name);

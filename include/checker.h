@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 10:34:05 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/03 18:21:23 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/04 11:22:30 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,19 @@
 # define CHAR_INT_MIN "-2147483648"
 
 //Error code ligne;
-# define ERROR_RGB "\033[1;31mError\n color problem\033[0m\n"
-# define ERROR_VEC3 "\033[1;31mError\n problem vector\033[0m\n"
-# define ERROR_COORD "\033[1;31mError\n coordinated problem\033[0m\n"
-# define ERROR_AMB "\033[1;31mAmbient light problem\n\033[0m"
-
+# define ERROR_AMB "\033[1;31mError\nAmbient light problem\n\033[0m"
+# define ERROR_LIGHT "\033[1;31mError\nLight problem\n\033[0m"
+# define ERROR_CAM "\033[1;31mError\nCamera problem\033[0m\n"
+# define ERROR_SPHERE "\033[1;31mError\nSphere problem\033[0m\n"
+# define ERROR_PLAN "\033[1;31mError\nPlan problem\033[0m\n"
+# define ERROR_CYLINDRE "\033[1;31mError\nCylindre problem\033[0m\n"
+//faire les msg ERROR malloc
+# define ERROR_M_AMB "\033[1;31mError\nAmbient light problem\n\033[0m"
+# define ERROR_M_LIGHT "\033[1;31mError\nLight problem\n\033[0m"
+# define ERROR_M_CAM "\033[1;31mError\nCamera problem\033[0m\n"
+# define ERROR_M_SPHERE "\033[1;31mError\nSphere problem\033[0m\n"
+# define ERROR_M_PLAN "\033[1;31mError\nPlan problem\033[0m\n"
+# define ERROR_M_CYLINDRE "\033[1;31mError\nCylindre problem\033[0m\n"
 
 t_line		*check_name_norm(char	*file, t_value **value);
 int			check_id_maj(t_line *line, t_value **tmp);
@@ -42,5 +50,5 @@ int			check_l(char *tmp, int start, t_l *tmp_lum);
 t_object	*check_sp(char *tmp, int start);
 t_object	*check_pl(char *tmp, int start);
 t_object	*check_cy(char *tmp, int start);
-
+void		clear_line(t_line **l);
 #endif

@@ -1,15 +1,14 @@
 ##
 ## Makefile for MiniLibX in /home/boulon/work/c/raytraceur/minilibx
-## 
+##
 ## Made by Olivier Crouzet
 ## Login   <ol@epitech.net>
-## 
+##
 ## Started on  Tue Oct  5 15:56:43 2004 Olivier Crouzet
 ## Last update Tue May 15 15:41:20 2007 Olivier Crouzet
 ##
 
 ## Please use configure script
-
 
 INC	=%%%%
 
@@ -38,16 +37,26 @@ OBJ_DIR = obj
 OBJ	= $(addprefix $(OBJ_DIR)/,$(SRC:%.c=%.o))
 CFLAGS	= -O3 -I$(INC)
 
+NUM_FILES = $(words $(SRC))
+CURRENT_FILE = 1
+
+define show_progress
+	@echo -n "\033[0;34m [$(CURRENT_FILE)/$(NUM_FILES)] \033[0m"
+	@$(eval CURRENT_FILE=$(shell echo $$(($(CURRENT_FILE)+1))))
+endef
+
 all	: $(NAME)
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
+	$(show_progress)
 
 $(NAME)	: $(OBJ)
 	ar -r $(NAME) $(OBJ)
 	ranlib $(NAME)
 	cp $(NAME) $(NAME_UNAME)
+	@echo "\033[0;32m [OK] \033[0m       \033[0;33m Compiling:\033[0m" $<
 
 check: all
 	@test/run_tests.sh

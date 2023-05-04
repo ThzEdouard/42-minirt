@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 15:07:18 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/03 16:28:02 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/04 11:23:36 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int	check_l(char *line, int start, t_l *tmp_lum)
 		|| !check_int_max_min(array_line[2])
 		|| !check_range_double(0.0, 1.0, ft_atof(array_line[2]))
 		|| !check_rgb(array_line[3]))
-		return (ft_free2(array_line), FAIL);
+		return (ft_free2(array_line), ft_putstr_fd(ERROR_LIGHT, 0), FAIL);
 	if (!init_lum(tmp_lum, array_line))
-		return (ft_free2(array_line), FAIL);
+		return (ft_free2(array_line), ft_putstr_fd(ERROR_M_LIGHT, 0), FAIL);
 	return (ft_free2(array_line), SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 13:11:56 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/03 16:35:05 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/04 11:31:25 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,13 @@ static t_object	*get_check(enum s_info type, t_line *line,
 	return (value);
 }
 
-static void	process_line(t_line *line, t_object **object, t_value **tmps)
+static int	process_line(t_line *line, t_object **object, t_value **tmps)
 {
 	if (line->info == SP || line->info == PL || line->info == CY)
 		*object = get_check(line->info, line, *object, tmps);
+	if (!*object)
+		return (FAIL);
+	return (SUCCESS);
 }
 
 static int	check_id_min2(t_line *line, t_value **tmps)
@@ -57,7 +60,8 @@ static int	check_id_min2(t_line *line, t_value **tmps)
 	value = (*tmps)->object;
 	while (line)
 	{
-		process_line(line, &value->next, tmps);
+		if (!process_line(line, &value->next, tmps))
+			return (FAIL);
 		if (value->next)
 			value = value->next;
 		line = line->next;
@@ -75,7 +79,7 @@ int	check_id_min(t_line *line, t_value **tmps)
 			break ;
 	}
 	if (check_id_min2(line, tmps) == FAIL)
-		return (FAIL);
+		return (ft_free_object(((*tmps)->object)),FAIL);
 	return (SUCCESS);
 }
 

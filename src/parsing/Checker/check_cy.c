@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:09:35 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/03 16:28:24 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/04 11:25:53 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,9 @@ t_object	*check_cy(char *line, int start)
 		|| !check_int_max_min(array_line[3])
 		|| !check_int_max_min(array_line[4])
 		|| !check_rgb(array_line[5]))
-		return (ft_free2(array_line), NULL);
+		return (ft_free2(array_line), ft_putstr_fd(ERROR_CYLINDRE, 0), NULL);
 	tmp = init_cy(array_line);
+	if (!tmp)
+		return (ft_free2(array_line), ft_putstr_fd(ERROR_M_CYLINDRE, 0), tmp);
 	return (ft_free2(array_line), tmp);
 }

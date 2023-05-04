@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:20:16 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/03 16:28:11 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/04 11:25:30 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,9 @@ t_object	*check_pl(char *line, int start)
 	if (!check_coord(array_line[1])
 		|| !check_vector(array_line[2])
 		|| !check_rgb(array_line[3]))
-		return (ft_free2(array_line), NULL);
+		return (ft_free2(array_line), ft_putstr_fd(ERROR_PLAN, 0), NULL);
 	tmp = init_sp(array_line);
+	if (!tmp)
+		return (ft_free2(array_line), ft_putstr_fd(ERROR_M_PLAN, 0), tmp);
 	return (ft_free2(array_line), tmp);
 }
