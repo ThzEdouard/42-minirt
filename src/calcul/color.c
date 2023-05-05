@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:30:15 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/05 13:22:49 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/05 15:06:18 by julmuntz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,7 @@ static t_rgb	color_diffuse(t_value *v, t_impact *impact, bool is_shadowing)
 			impact->normal);
 	if (diffuse_coeff < 0.0f)
 		diffuse_coeff = 0.0f;
-	if (v->lum.ratio == 1 && v->lum_am.ratio == 1)
-		diffuce_shadowing = 1;
-	else
-		diffuce_shadowing = v->lum.ratio - v->lum_am.ratio;
-	if (diffuce_shadowing < 0.0f)
-		diffuce_shadowing = 0.0f;
+	diffuce_shadowing = fmax(v->lum.ratio - v->lum_am.ratio, 0.0f);
 	result = rgb_multiply(impact->rgb, diffuse_coeff * v->lum.ratio);
 	if (is_shadowing)
 		result = rgb_multiply(result, diffuce_shadowing);
