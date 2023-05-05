@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_sp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 13:59:01 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/04 14:55:53 by julmuntz         ###   ########.fr       */
+/*   Updated: 2023/05/05 11:12:29 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,26 @@ static t_object	*new_elem_sp(char **array_tmp, char **coord, char **rgb)
 	return (new);
 }
 
-static t_object	*init_sp(char **array_tmp)
+static t_object *init_sp(char **array_tmp)
 {
-	char		**rgb;
-	char		**coord;
-	t_object	*tmp;
+    char **rgb;
+    char **coord;
+    t_object *tmp;
 
-	coord = ft_split(array_tmp[1], ',');
-	rgb = ft_split(array_tmp[3], ',');
-	if (!coord || !rgb)
-		return (ft_free2(coord), ft_free2(rgb), NULL);
-	tmp = new_elem_sp(array_tmp, coord, rgb);
-	return (ft_free2(coord), ft_free2(rgb), tmp);
+    coord = ft_split(array_tmp[1], ',');
+    rgb = ft_split(array_tmp[3], ',');
+    if (!coord || !rgb)
+    {
+        if (coord) ft_free2(coord);
+        if (rgb) ft_free2(rgb);
+        return NULL;
+    }
+    tmp = new_elem_sp(array_tmp, coord, rgb);
+    ft_free2(coord);
+    ft_free2(rgb);
+    return tmp;
 }
+
 
 t_object	*check_sp(char *line, int start)
 {

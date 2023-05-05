@@ -3,32 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   check_c.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 12:38:12 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/04 14:55:10 by julmuntz         ###   ########.fr       */
+/*   Updated: 2023/05/05 11:08:48 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static int	init_ca(t_ca *tmp_cam, char **array_tmp)
+static int init_ca(t_ca *tmp_cam, char **array_tmp)
 {
-	char	**coord;
-	char	**vector;
+    char **coord;
+    char **vector;
 
-	coord = ft_split(array_tmp[1], ',');
-	vector = ft_split(array_tmp[2], ',');
-	if (!coord || !vector)
-		return (ft_free2(coord), ft_free2(vector), FAIL);
-	tmp_cam->pv.x = ft_atof(coord[0]);
-	tmp_cam->pv.y = ft_atof(coord[1]);
-	tmp_cam->pv.z = ft_atof(coord[2]);
-	tmp_cam->axe.x = ft_atof(vector[0]);
-	tmp_cam->axe.y = ft_atof(vector[1]);
-	tmp_cam->axe.z = ft_atof(vector[2]);
-	tmp_cam->fov = ft_atoi(array_tmp[3]);
-	return (ft_free2(coord), ft_free2(vector), SUCCESS);
+    coord = ft_split(array_tmp[1], ',');
+    vector = ft_split(array_tmp[2], ',');
+    if (!coord || !vector)
+    {
+        if (coord) ft_free2(coord);
+        if (vector) ft_free2(vector);
+        return (FAIL);
+    }
+    tmp_cam->pv = new_vector(ft_atof(coord[0]), ft_atof(coord[1]), ft_atof(coord[2]));
+    tmp_cam->axe = new_vector(ft_atof(vector[0]), ft_atof(vector[1]), ft_atof(vector[2]));
+    tmp_cam->fov = ft_atoi(array_tmp[3]);
+    ft_free2(coord);
+    ft_free2(vector);
+    return (SUCCESS);
 }
 
 int	check_c(char *line, int start, t_ca *tmp_cam)

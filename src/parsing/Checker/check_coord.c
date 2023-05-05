@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 13:57:55 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/04 10:17:08 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/05 09:32:47 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	check_line_range(char *line)
 	y = 0;
 	while (*line)
 	{
-		if (!ft_isdigit(*line) && *line == ',')
+		if (!ft_isdigit(*line) && *line != ',')
 			return (FAIL);
 		if (*line == '.')
 			y++;

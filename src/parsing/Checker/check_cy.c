@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_cy.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:09:35 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/04 14:54:06 by julmuntz         ###   ########.fr       */
+/*   Updated: 2023/05/05 11:14:12 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,28 @@ static void	recup_cy(char ***coord, char ***vector,
 	*rgb = ft_split(array_tmp[5], ',');
 }
 
-static t_object	*init_cy(char **array_tmp)
+static t_object *init_cy(char **array_tmp)
 {
-	char		**rgb;
-	char		**coord;
-	char		**vector;
-	t_object	*tmp;
+    char **rgb;
+    char **coord;
+    char **vector;
+    t_object *tmp;
 
-	recup_cy(&coord, &vector, &rgb, array_tmp);
-	if (!coord || !rgb || !vector)
-		return (ft_free2(coord), ft_free2(rgb), ft_free2(vector), NULL);
-	tmp = new_elem_cy(vector, coord, rgb, array_tmp);
-	return (ft_free2(coord), ft_free2(rgb), ft_free2(vector), tmp);
+    recup_cy(&coord, &vector, &rgb, array_tmp);
+    if (!coord || !rgb || !vector)
+    {
+        if (coord) ft_free2(coord);
+        if (rgb) ft_free2(rgb);
+        if (vector) ft_free2(vector);
+        return NULL;
+    }
+    tmp = new_elem_cy(vector, coord, rgb, array_tmp);
+    ft_free2(coord);
+    ft_free2(rgb);
+    ft_free2(vector);
+    return tmp;
 }
+
 
 t_object	*check_cy(char *line, int start)
 {
