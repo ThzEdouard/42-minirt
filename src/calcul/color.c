@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:30:15 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/03 17:12:52 by julmuntz         ###   ########.fr       */
+/*   Updated: 2023/05/05 11:56:08 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static t_rgb	color_ambient(t_value *v, t_impact *impact)
 {
-	return (rgb_multiply(impact->rgb, v->lum_am.ratio));
+	return (rgb_multiply(addition_rgb(impact->rgb, v->lum_am.rgb), v->lum_am.ratio));
 }
 
 static t_rgb	color_diffuse(t_value *v, t_impact *impact, bool is_shadowing)
