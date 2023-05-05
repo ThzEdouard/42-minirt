@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 10:33:32 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/05 09:33:09 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/05 13:05:33 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ static int	check_line_rgb(char *line)
 	y = 0;
 	while (*line)
 	{
-		if (!ft_isdigit(*line) && *line != 44)
+		if (!ft_isdigit(*line) && *line == 46)
 			return (FAIL);
 		if (*line == 44)
 			y++;
-		if (*line == 44 && (*(line + 1) == '\0' || !ft_isdigit(*(line + 1))))
+		if (*line == 44 && *(line + 1) && !ft_isdigit(*(line + 1)))
 			return (FAIL);
 		line++;
 	}

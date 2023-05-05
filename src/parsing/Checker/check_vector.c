@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 14:34:17 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/05 09:34:00 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/05 13:05:42 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ static int	check_line_vector(char *line)
 	{
 		if (*line == 44)
 			y++;
-		if (*line == 44 && (*(line + 1) == '\0' || (!ft_isdigit(*(line + 1)) && *(line + 1) != '-')))
+		if (*line == 44 && *(line + 1) && !ft_isdigit(*(line + 1))
+			&& *(line + 1) != '-' )
 			return (FAIL);
 		line++;
 	}
@@ -53,7 +54,6 @@ static int	check_line_vector(char *line)
 		return (FAIL);
 	return (SUCCESS);
 }
-
 
 int	check_vector(char *line)
 {
