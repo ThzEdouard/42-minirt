@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_cy.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:09:35 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/05 11:14:12 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/08 18:13:32 by julmuntz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static t_object	*new_elem_cy(char **vector, char **coord,
 	new = malloc(sizeof(t_object));
 	if (!new)
 		return (NULL);
-	new->center = new_vector(-ft_atof(coord[0]),
+	new->center = new_vector(ft_atof(coord[0]),
 			ft_atof(coord[1]), ft_atof(coord[2]));
 	new->axis = new_vector(ft_atof(vector[0]),
 			ft_atof(vector[1]), ft_atof(vector[2]));

@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 11:33:40 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/03 17:20:53 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/08 13:51:55 by julmuntz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-# define HEIGHT 1080
-# define WIDTH 1920
+# define HEIGHT 850
+# define WIDTH 850
 # define EPSILON 0.0001
 # define ALBEDO 0.003
 # define MAX_DEPTH 3

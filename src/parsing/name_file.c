@@ -6,7 +6,7 @@
 /*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 11:30:11 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/04 15:11:30 by julmuntz         ###   ########.fr       */
+/*   Updated: 2023/05/08 13:20:28 by julmuntz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,10 @@ t_line	*check_name_norm(char	*file, t_value **value)
 
 	len = ft_strlen(file);
 	if (len > 3 && ft_strcmp(file + (len - 3), ".rt"))
-		msg_name("\e[0;91mError\nname for the file or not .rt\e[0m\n");
+		msg_name("\e[0;91mError\nFile is not a .rt\e[0m\n");
 	ld = open(file, O_RDONLY);
 	if (ld == -1)
-		msg_name("\e[0;91mError\nfile is not open\e[0m\n");
+		msg_name("\e[0;91mError\nFile not found.\e[0m\n");
 	line = set_line(ld, &line);
 	if (line && !norm_file(line, value))
 		return (NULL);
