@@ -1,42 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_vector.c                                     :+:      :+:    :+:   */
+/*   check_coord.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/05 14:34:17 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/05 13:05:42 by eflaquet         ###   ########.fr       */
+/*   Created: 2023/04/05 13:57:55 by eflaquet          #+#    #+#             */
+/*   Updated: 2023/05/08 18:56:31 by julmuntz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	check_value(char **array_tmp, int *starts)
+int	check_line_range(char *line)
 {
-	int	x;
-	int	start;
+	int	y;
 
-	start = *starts;
-	while (array_tmp[start])
+	y = 0;
+	while (*line)
 	{
-		x = 0;
-		while (array_tmp[start][x])
-		{
-			if (!ft_isdigit(array_tmp[start][x])
-				&& (array_tmp[start][x] != 45
-				&& array_tmp[start][x] != 44
-				&& array_tmp[start][x] != 46))
-				return (FAIL);
-			x++;
-		}
-		start++;
+		if (!ft_isdigit(*line) && *line == ',')
+			return (FAIL);
+		if (*line == '.')
+			y++;
+		line++;
 	}
-	*starts = start;
+	if (y > 1)
+		return (FAIL);
 	return (SUCCESS);
 }
 
-static int	check_line_vector(char *line)
+static int	check_line_coord(char *line)
 {
 	int	y;
 
@@ -55,12 +49,12 @@ static int	check_line_vector(char *line)
 	return (SUCCESS);
 }
 
-int	check_vector(char *line)
+int	check_coord(char *line)
 {
 	char	**tmp;
 	int		i;
 
-	if (!check_line_vector(line))
+	if (!check_line_coord(line))
 		return (FAIL);
 	tmp = ft_split(line, 44);
 	if (!tmp)
@@ -74,9 +68,7 @@ int	check_vector(char *line)
 	while (tmp[i])
 	{
 		if (!check_int_max_min(tmp[i])
-			|| !check_line_range(tmp[i])
-			|| !check_int_max_min(tmp[i])
-			|| !check_range_double(-1, 1, ft_atof(tmp[i])))
+			|| !check_line_range(tmp[i]))
 			return (ft_free2(tmp), FAIL);
 		i++;
 	}

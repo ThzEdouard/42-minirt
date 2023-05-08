@@ -6,7 +6,7 @@
 /*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 17:17:29 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/03 17:09:09 by julmuntz         ###   ########.fr       */
+/*   Updated: 2023/05/08 19:20:16 by julmuntz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 t_vector	normalize(t_vector a)
 {
+	double		magnitude;
 	t_vector	result;
 
-	result.x = a.x / sqrt(magnitude(a));
-	result.y = a.y / sqrt(magnitude(a));
-	result.z = a.z / sqrt(magnitude(a));
+	magnitude = sqrt(a.x * a.x + a.y * a.y + a.z * a.z);
+	result.x = a.x / magnitude;
+	result.y = a.y / magnitude;
+	result.z = a.z / magnitude;
 	return (result);
 }
 

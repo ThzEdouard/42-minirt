@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 11:20:27 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/04 08:29:16 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/08 19:26:39 by julmuntz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,9 @@ t_vector	rotate(t_vector vector, t_vector angle);
 t_vector	normalize(t_vector a);
 double		magnitude(t_vector a);
 double		dot(t_vector a, t_vector b);
+
+int			check_len(t_line *line, enum s_info info);
+t_object	*get_check(enum s_info t, t_line *l, t_object *v, t_value **tmps);
+int			process_line(t_line *line, t_object **object, t_value **tmps);
 
 #endif

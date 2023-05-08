@@ -9,11 +9,11 @@ RM		= rm -f
 SRC_MINIRT	= src/
 FT_MINIRT	= main
 
-SRC_CHECKER = src/parsing/Checker/
+SRC_CHECKER = src/parsing/checker/
 FT_CHECKER = check_coord check_vector check_range_rgb check_a check_c check_l check_sp check_pl check_cy
 
 SRC_PARSING	= src/parsing/
-FT_PARSING	= name_file norm_file check_id
+FT_PARSING	= filename norm_file check_id check_utils
 
 SRC_CALCUL	= src/calcul/
 FT_CALCUL	= ray plane util sphere cylindre scene color

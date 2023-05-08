@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   norm_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:06:33 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/04 16:02:26 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/08 19:18:23 by julmuntz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,33 @@ static t_info	add_info(char *id)
 	return (NOT);
 }
 
-static int	check_id(t_line *line, int i, int x, int save_i)
+static char	*get_id(char *line)
 {
+	int		i;
+	int		x;
+	int		save_i;
 	char	*id;
 
 	id = NULL;
+	i = 0;
+	while (line[i] && !ft_isalpha(line[i]))
+		i++;
+	x = 0;
+	save_i = i;
+	while (line[i] && ft_isalpha(line[i++]))
+		x++;
+	if (ft_isalpha(line[save_i]))
+		id = ft_substr(line, save_i, x);
+	return (id);
+}
+
+static int	check_id(t_line *line)
+{
+	char	*id;
+
 	while (line)
 	{
-		i = 0;
-		while (line->line[i] && !ft_isalpha(line->line[i]))
-			i++;
-		x = 0;
-		save_i = i;
-		while (line->line[i] && ft_isalpha(line->line[i++]))
-			x++;
-		if (ft_isalpha(line->line[save_i]))
-			id = ft_substr(line->line, save_i, x);
+		id = get_id(line->line);
 		if (id)
 		{
 			line->info = add_info(id);
@@ -82,7 +93,7 @@ int	norm_file(t_line *line, t_value **value)
 			return (clear_line(&line), FAIL);
 		tmp = tmp->next;
 	}
-	if (!check_id(line, 0, 0, 0))
+	if (!check_id(line))
 		return (clear_line(&line), FAIL);
 	if (!check_id_maj(line, value))
 		return (clear_line(&line), FAIL);
