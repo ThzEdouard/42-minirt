@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_vector.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 14:34:17 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/08 18:56:08 by julmuntz         ###   ########.fr       */
+/*   Updated: 2023/05/09 10:35:53 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,13 @@ int	check_vector(char *line)
 	i = 0;
 	while (tmp[i])
 	{
-		if (!check_int_max_min(tmp[i])
-			|| !check_line_range(tmp[i])
+		if (!check_int_max_min(tmp[i]) || !check_line_range(tmp[i])
 			|| !check_int_max_min(tmp[i])
 			|| !check_range_double(-1, 1, ft_atof(tmp[i])))
 			return (ft_free2(tmp), FAIL);
 		i++;
 	}
+	if (atof(tmp[0]) == 0 && atof(tmp[1]) == 0 && atof(tmp[2]) == 0)
+		return (ft_free2(tmp), FAIL);
 	return (ft_free2(tmp), SUCCESS);
 }
