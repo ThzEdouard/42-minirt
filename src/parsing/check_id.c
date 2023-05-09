@@ -6,7 +6,7 @@
 /*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 13:11:56 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/08 19:21:04 by julmuntz         ###   ########.fr       */
+/*   Updated: 2023/05/09 16:31:45 by julmuntz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ int	check_id_min(t_line *line, t_value **tmps)
 	while (line)
 	{
 		if (!process_line(line, &((*tmps)->object), tmps))
-			return (ft_free_object(((*tmps)->object)), FAIL);
+			return (FAIL);
 		line = line->next;
 		if ((*tmps)->object)
 			break ;
 	}
 	if (check_id_min2(line, tmps) == FAIL)
-		return (ft_free_object(((*tmps)->object)), FAIL);
+		return (FAIL);
 	return (SUCCESS);
 }
 

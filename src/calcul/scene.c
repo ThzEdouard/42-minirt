@@ -6,7 +6,7 @@
 /*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 14:39:20 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/09 13:39:13 by julmuntz         ###   ########.fr       */
+/*   Updated: 2023/05/09 16:28:41 by julmuntz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ bool	ray_scene(t_ray *ray, t_object *obj, t_impact *impact)
 	scene = false;
 	while (tmp)
 	{
+		distance = INFINITY;
 		if (tmp->info == SP && intersection_sphere(ray, tmp, &distance))
 			if (rays(ray, tmp, impact, &distance))
 				scene = true;

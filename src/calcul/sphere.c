@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:20:39 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/03 08:32:47 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/09 16:28:25 by julmuntz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ bool	intersection_sphere(t_ray *ray, t_object *sphere, double *distance)
 	double	t0;
 	double	t1;
 
-	*distance = INFINITY;
 	if (!solver_quot(ray, sphere, &t0, &t1))
 		return (false);
 	if (t0 < 0 && t1 < 0)
