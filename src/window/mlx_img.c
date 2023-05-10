@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_img.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:45:08 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/10 13:47:15 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/10 14:11:21 by julmuntz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	mlx_make_img(t_end *end, t_data *img)
 	t_ray		ray;
 	t_impact	impact;
 
-	y = 0;
-	while (y < HEIGHT)
+	y = -1;
+	while (++y < HEIGHT)
 	{
 		x = 0;
 		while (x < WIDTH)
@@ -46,7 +46,6 @@ void	mlx_make_img(t_end *end, t_data *img)
 				create_trgb(0, end->f_color.r, end->f_color.g, end->f_color.b));
 			x++;
 		}
-		y++;
 	}
 	mlx_hook(end->mlx.mlx_win, KeyPress, KeyPressMask, &key_end, end);
 	mlx_hook(end->mlx.mlx_win, ClientMessage, 0, &click_end, end);
