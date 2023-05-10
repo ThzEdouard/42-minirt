@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   norm_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:06:33 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/08 19:18:23 by julmuntz         ###   ########.fr       */
+/*   Updated: 2023/05/10 16:28:04 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	check_strchr(char *line)
 	{
 		if (*line && !ft_isalnum(*line)
 			&& (*line != 46 && *line != 45 && *line != 44 && *line != 32))
-			return (ft_putstr_fd("\e[0;91mError\nvalue add not \e[0m", 0), FAIL);
+			return (ft_putstr_fd(ERROR_SYNTAX, 0), FAIL);
 		line++;
 	}
 	return (SUCCESS);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 19:21:30 by julmuntz          #+#    #+#             */
-/*   Updated: 2023/05/09 16:40:18 by julmuntz         ###   ########.fr       */
+/*   Updated: 2023/05/10 16:21:56 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	check_len(t_line *line, enum s_info info)
 		tmp = tmp->next;
 	}
 	if (nb != 1)
-		return (FAIL);
+		return (ft_putstr_fd(ERROR_SYNTAX, 0), FAIL);
 	return (SUCCESS);
 }
 

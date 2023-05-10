@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_cy.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:09:35 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/08 18:57:38 by julmuntz         ###   ########.fr       */
+/*   Updated: 2023/05/10 16:16:16 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,9 @@ t_object	*check_cy(char *line, int start)
 	if (!check_value(array_line, &start) || start != 6)
 		return (ft_free2(array_line), ft_putstr_fd(ERROR_CYLINDRE, 0), NULL);
 	if (!check_coord(array_line[1]) || !check_vector(array_line[2])
-		|| !check_int_max_min(array_line[3])
-		|| !check_int_max_min(array_line[4]) || !check_rgb(array_line[5]))
+		|| !check_int_max_min(array_line[3]) || ft_atof(array_line[3]) < 0
+		|| !check_int_max_min(array_line[4]) || ft_atof(array_line[4]) < 0
+		|| !check_rgb(array_line[5]))
 		return (ft_free2(array_line), ft_putstr_fd(ERROR_CYLINDRE, 0), NULL);
 	tmp = init_cy(array_line);
 	if (!tmp)

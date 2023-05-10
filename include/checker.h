@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 10:34:05 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/04 15:43:35 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/10 16:59:23 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,9 @@ Malloc Cylindre problem\033[0m\n"
 
 # define ERROR_MLX "\033[1;31mError\n\
 mxl initialization problem\033[0m\n"
+
+# define ERROR_SYNTAX "\033[1;31mError\n\
+Syntax error\033[0m\n"
 
 t_line		*check_name_norm(char	*file, t_value **value);
 int			check_id_maj(t_line *line, t_value **tmp);
