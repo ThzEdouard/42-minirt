@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:11:51 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/09 13:39:39 by julmuntz         ###   ########.fr       */
+/*   Updated: 2023/05/10 13:46:58 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ t_ray	init_ray(t_ca cam, int x, int y)
 	result.y = (1.0 - ((y + 0.5) / HEIGHT) * 2.0) * fov_adjustment;
 	result.z = -1.0;
 	result = normalize(result);
-	rot_rad.x = cam.axe.y;
-	rot_rad.y = cam.axe.x;
-	rot_rad.z = cam.axe.z;
+	rot_rad.x = cam.axe.y * (M_PI / 180);
+	rot_rad.y = cam.axe.x * (M_PI / 180);
+	rot_rad.z = cam.axe.z * (M_PI / 180);
 	result = rotate(result, rot_rad);
-	return (new_ray(cam.pv, result));
+	return (new_ray(cam.pv, normalize(result)));
 }

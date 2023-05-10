@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:45:08 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/03 15:51:35 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/10 13:47:15 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	mlx_make_img(t_end *end, t_data *img)
 		while (x < WIDTH)
 		{
 			ray = init_ray(end->value->cam, x, y);
+			end->f_color = new_rgb(0, 0, 0);
 			if (ray_scene(&ray, end->value->object, &impact))
 				end->f_color = color_pixel(end->value, &impact);
 			my_mlx_pixel_put(img, x, y,
