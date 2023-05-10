@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 14:34:17 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/09 10:35:53 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/05/10 14:59:45 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	check_line_vector(char *line)
 			return (FAIL);
 		line++;
 	}
-	if (y > 3)
+	if (y > 2)
 		return (FAIL);
 	return (SUCCESS);
 }

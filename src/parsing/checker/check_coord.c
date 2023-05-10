@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_coord.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julmuntz <julmuntz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 13:57:55 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/05/08 18:56:31 by julmuntz         ###   ########.fr       */
+/*   Updated: 2023/05/10 15:01:07 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	check_line_coord(char *line)
 			return (FAIL);
 		line++;
 	}
-	if (y > 3)
+	if (y > 2)
 		return (FAIL);
 	return (SUCCESS);
 }
