@@ -72,9 +72,6 @@ clean:
 fclean:		clean
 	$(RM) -f $(NAME)
 
-val:		$(NAME)
-	valgrind --leak-check=full --show-leak-kinds=all ./minirt map.rt
-
 re:		fclean all
 
 .PHONY:		all clean fclean re
